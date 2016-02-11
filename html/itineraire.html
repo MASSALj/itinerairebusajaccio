@@ -2,30 +2,56 @@
 <html>
 <head>
     <title>Place Autocomplete</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<input id="pac-input" class="controls" type="text"
-       placeholder="Enter a location">
-<div id="type-selector" class="controls">
-    <input type="radio" name="type" id="changetype-all" checked="checked">
-    <label for="changetype-all">All</label>
+<header><nav></nav></header>
+<div id="lecontenu">
 
-    <input type="radio" name="type" id="changetype-establishment">
-    <label for="changetype-establishment">Establishments</label>
 
-    <input type="radio" name="type" id="changetype-address">
-    <label for="changetype-address">Addresses</label>
 
-    <input type="radio" name="type" id="changetype-geocode">
-    <label for="changetype-geocode">Geocodes</label>
+    <input id="pac-input" class="controls" type="text" placeholder="Rechercher dans Google Maps">
+
+    <div id="type-selector" class="controls">
+        <input type="radio" name="type" id="changetype-all" checked="checked">
+        <label for="changetype-all">Tous</label>
+
+        <input type="radio" name="type" id="changetype-establishment">
+        <label for="changetype-establishment">Etablissements</label>
+
+        <input type="radio" name="type" id="changetype-address">
+        <label for="changetype-address">Adresses</label>
+
+        <!--<input type="radio" name="type" id="changetype-geocode">-->
+        <!--<label for="changetype-geocode">Geocodes</label>-->
+    </div>
+    <form>
+        <input type="text" id="dep">
+        <input type="text" id="dest">
+        <input type="button" value="Valider" onsubmit="initMap();">
+    </form>
+
+    <div id="map">
+
+    </div>
+
+
 </div>
-<div id="map"></div>
 
 <script src="../js/functions.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&signed_in=true&libraries=places&callback=initMap"
         async defer></script>
+
+<div id="resultat">
+
+</div>
+
+<footer class="page-footer"></footer>
 </body>
 </html>

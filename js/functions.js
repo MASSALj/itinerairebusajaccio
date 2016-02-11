@@ -10,13 +10,39 @@ function initMap() {
     var input = /** @type {!HTMLInputElement} */(
         document.getElementById('pac-input'));
 
+    var dep = /** @type {!HTMLInputElement} */(
+        document.getElementById('dep'));
+
+    var dest = /** @type {!HTMLInputElement} */(
+        document.getElementById('dest'));
+
+
+    var options = {
+        types: ['(cities)'],
+        componentRestrictions: {country: 'fr'}
+    };
+
+
+
     var types = document.getElementById('type-selector');
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
     autocomplete.bindTo('bounds', map);
 
+    var autocomplete2 = new google.maps.places.Autocomplete(dep, options);
+    autocomplete2.bindTo('bounds', map);
+
+    var autocomplete3 = new google.maps.places.Autocomplete(dest, options);
+    autocomplete3.bindTo('bounds', map);
+
+
+
+
+    //var infowindow = new google.maps.InfoWindow({
+    //    content: '<div id="depart" onclick="alert(\'départ\');">Partir d\'ici</div>'
+    //});
     var infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
         map: map,
@@ -59,7 +85,86 @@ function initMap() {
             ].join(' ');
         }
 
-        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address + '</div><a>Partir de cet endroit</a>');
+        infowindow.setContent('<strong>' + place.name + '</strong><br />' + address + '<br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point de départ : ' + place.name + '\');">Point de départ</a><br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point d\'arrivée : ' + place.name + '\');">Point de destination</a>');
+        infowindow.open(map, marker);
+    });
+
+    autocomplete2.addListener('place_changed', function() {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete2.getPlace();
+        if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+        }
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+        }));
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+        //marker.set
+
+        var address = '';
+        if (place.address_components) {
+            address = [
+                (place.address_components[0] && place.address_components[0].short_name || ''),
+                (place.address_components[1] && place.address_components[1].short_name || ''),
+                (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+        }
+
+        infowindow.setContent('<strong>' + place.name + '</strong><br />' + address + '<br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point de départ : ' + place.name + '\');">Partir de cet endroit</a>');
+        infowindow.open(map, marker);
+    });
+    autocomplete3.addListener('place_changed', function() {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete3.getPlace();
+        if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+        }
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+        }));
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+        //marker.set
+
+        var address = '';
+        if (place.address_components) {
+            address = [
+                (place.address_components[0] && place.address_components[0].short_name || ''),
+                (place.address_components[1] && place.address_components[1].short_name || ''),
+                (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+        }
+
+        infowindow.setContent('<strong>' + place.name + '</strong><br />' + address + '<br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point de départ : ' + place.name + '\');">Partir de cet endroit</a>');
         infowindow.open(map, marker);
     });
 
