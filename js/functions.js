@@ -30,11 +30,6 @@ function initMap() {
 
 
 
-
-
-
-
-
     //_________________Place le marqueur sur la carte pour le lieu de départ______________
 
     var markers = [];
@@ -100,7 +95,12 @@ function initMap() {
             var request = {
                 destination: arrivee,
                 origin: depart,
-                travelMode: google.maps.TravelMode.TRANSIT
+                travelMode: google.maps.TravelMode.TRANSIT,
+                transitOptions: {
+                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure
+                    modes: [google.maps.TransitMode.BUS],
+                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+                }
             };
 
             // Pass the directions request to the directions service.
