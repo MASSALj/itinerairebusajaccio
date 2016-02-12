@@ -1,210 +1,235 @@
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+var lieu = [];  //contiendra la latitude/longitide de la position de départ et de destination
 
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 41.9231855, lng: 8.7407447},
-        zoom: 13
+
+    var map = new google.maps.Map(document.getElementById('map'), {         //instancie la google map
+        center: {lat: 41.9257502, lng: 8.7399893},  //centrée sur Ajaccio
+        zoom: 15
+
     });
-    var input = /** @type {!HTMLInputElement} */(
-        document.getElementById('pac-input'));
 
-    var dep = /** @type {!HTMLInputElement} */(
-        document.getElementById('dep'));
-
-    var dest = /** @type {!HTMLInputElement} */(
-        document.getElementById('dest'));
-
+    var depart = document.getElementById('depart');
+    var arrivee = document.getElementById('arrivee');
 
     var options = {
-        types: ['(cities)'],
-        componentRestrictions: {country: 'fr'}
+        //componentRestrictions: {country: 'fr'} //Restriction sur la france, mais ne marche pas sur les searchbox....
+        bounds: map.getBounds()
     };
 
+    var searchBoxDepart = new google.maps.places.SearchBox(depart, options);   // -->  intialise les input text en seachbox, permettant l'autocomplétion
+    var searchBoxArrivee = new google.maps.places.SearchBox(arrivee, options); //  ↗
 
 
-    var types = document.getElementById('type-selector');
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
-    autocomplete.bindTo('bounds', map);
-
-    var autocomplete2 = new google.maps.places.Autocomplete(dep, options);
-    autocomplete2.bindTo('bounds', map);
-
-    var autocomplete3 = new google.maps.places.Autocomplete(dest, options);
-    autocomplete3.bindTo('bounds', map);
-
-
-
-
-    //var infowindow = new google.maps.InfoWindow({
-    //    content: '<div id="depart" onclick="alert(\'départ\');">Partir d\'ici</div>'
-    //});
-    var infowindow = new google.maps.InfoWindow();
-    var marker = new google.maps.Marker({
-        map: map,
-        anchorPoint: new google.maps.Point(0, -29)
+    map.addListener('bounds_changed', function() {         // Listener sur l'input text pour la position de départ
+        searchBoxDepart.setBounds(map.getBounds());
     });
 
-    autocomplete.addListener('place_changed', function() {
-        infowindow.close();
-        marker.setVisible(false);
-        var place = autocomplete.getPlace();
-        if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
+    map.addListener('bounds_changed', function() {         // Listener sur l'input text pour la position de arrivée
+        searchBoxArrivee.setBounds(map.getBounds());
+    });
+
+
+
+
+
+
+
+
+    //_________________Place le marqueur sur la carte pour le lieu de départ______________
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBoxDepart.addListener('places_changed', function() {
+        var places = searchBoxDepart.getPlaces();
+
+        if (places.length == 0) {
             return;
         }
 
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-        }
-        marker.setIcon(/** @type {google.maps.Icon} */({
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
-        }));
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-        //marker.set
-
-        var address = '';
-        if (place.address_components) {
-            address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-        }
-
-        infowindow.setContent('<strong>' + place.name + '</strong><br />' + address + '<br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point de départ : ' + place.name + '\');">Point de départ</a><br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point d\'arrivée : ' + place.name + '\');">Point de destination</a>');
-        infowindow.open(map, marker);
-    });
-
-    autocomplete2.addListener('place_changed', function() {
-        infowindow.close();
-        marker.setVisible(false);
-        var place = autocomplete2.getPlace();
-        if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-            return;
-        }
-
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-        }
-        marker.setIcon(/** @type {google.maps.Icon} */({
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
-        }));
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-        //marker.set
-
-        var address = '';
-        if (place.address_components) {
-            address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-        }
-
-        infowindow.setContent('<strong>' + place.name + '</strong><br />' + address + '<br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point de départ : ' + place.name + '\');">Partir de cet endroit</a>');
-        infowindow.open(map, marker);
-    });
-    autocomplete3.addListener('place_changed', function() {
-        infowindow.close();
-        marker.setVisible(false);
-        var place = autocomplete3.getPlace();
-        if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-            return;
-        }
-
-        // If the place has a geometry, then present it on a map.
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-        }
-        marker.setIcon(/** @type {google.maps.Icon} */({
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
-        }));
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-        //marker.set
-
-        var address = '';
-        if (place.address_components) {
-            address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-        }
-
-        infowindow.setContent('<strong>' + place.name + '</strong><br />' + address + '<br /><a style="text-decoration: underline; color : blue;" onclick="alert(\'Point de départ : ' + place.name + '\');">Partir de cet endroit</a>');
-        infowindow.open(map, marker);
-    });
-
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-    function setupClickListener(id, types) {
-        var radioButton = document.getElementById(id);
-        radioButton.addEventListener('click', function() {
-            autocomplete.setTypes(types);
+        // Clear out the old markers.
+        markers.forEach(function(marker) {
+            marker.setMap(null);
         });
-    }
+        markers = [];
 
-    setupClickListener('changetype-all', []);
-    setupClickListener('changetype-address', ['address']);
-    setupClickListener('changetype-establishment', ['establishment']);
-    setupClickListener('changetype-geocode', ['geocode']);
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            lieu['long1'] = place.geometry.location.lng();
+            lieu['lat1'] = place.geometry.location.lat();
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
 
 
 
-    var depart = {lat: 41.919969, lng: 8.737142};
-    var arrivee = {lat: 41.929380, lng: 8.740230};
+        //_______________Affiche la trajectoire en bus____________________
+        if (lieu["lat1"] != undefined && lieu["lat2"] != undefined && lieu["long1"] != undefined && lieu["long2"] != undefined){
 
+            var depart = {lat: lieu['lat1'], lng: lieu['long1']};
+            var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
 
-    var directionsDisplay = new google.maps.DirectionsRenderer({
-        map: map
-    });
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            });
 
-    // Set destination, origin and travel mode.
-    var request = {
-        destination: depart,
-        origin: arrivee,
-        travelMode: google.maps.TravelMode.TRANSIT
-    };
+            // Set destination, origin and travel mode.
+            var request = {
+                destination: arrivee,
+                origin: depart,
+                travelMode: google.maps.TravelMode.TRANSIT
+            };
 
-    // Pass the directions request to the directions service.
-    var directionsService = new google.maps.DirectionsService();
-    directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            // Display the route on the map.
-            directionsDisplay.setDirections(response);
+            // Pass the directions request to the directions service.
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // Display the route on the map.
+                    directionsDisplay.setDirections(response);
+                }
+            });
         }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //_________________Place le marqueur sur la carte pour le lieu d'arrivée______________
+
+    var Amarkers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBoxArrivee.addListener('places_changed', function() {
+        var places = searchBoxArrivee.getPlaces();
+
+        //console.log(searchBoxArrivee.getPlaces())
+
+        if (places.length == 0) {
+            return;
+        }
+
+        // Clear out the old markers.
+        Amarkers.forEach(function(marker) {
+            marker.setMap(null);
+        });
+        Amarkers = [];
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            Amarkers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            lieu['long2'] = place.geometry.location.lng();
+            lieu['lat2'] = place.geometry.location.lat();
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+
+
+        //console.log(lieu);
+        //console.log(lieu.length);
+
+        //_______________Affiche la trajectoire en bus____________________
+        if (lieu["lat1"] != undefined && lieu["lat2"] != undefined &&lieu["long1"] != undefined && lieu["long2"] != undefined){
+
+            var depart = {lat: lieu['lat1'], lng: lieu['long2']};
+            var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
+
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            });
+
+            // Set destination, origin and travel mode.
+            var request = {
+                destination: arrivee,
+                origin: depart,
+                travelMode: google.maps.TravelMode.TRANSIT
+            };
+
+            // Pass the directions request to the directions service.
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // Display the route on the map.
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+    });
+
 }
