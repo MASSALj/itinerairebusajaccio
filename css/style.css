@@ -13,6 +13,41 @@ html, body
 .routeForm
 {
 	position: absolute;
+    z-index:1;
+    margin-left:10px;
+    margin-top:80px;
+
+}
+
+.titre-form{
+    margin-bottom: 30px;
+    color: #D1B606;
+}
+
+.inputsubmit{
+    background-color:#6094c9;
+    margin-bottom: 0px;
+}
+
+.no-bottom{
+    margin-bottom: 0px;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #D1B606;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #6094c9;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #6094c9;
+    box-shadow: 0 1px 0 0 #6094c9;
+}
+
+.input1,.input2{
+    background-color: white;
 }
 
 .bloc { 
@@ -24,15 +59,10 @@ html, body
     z-index:1;
     background-color:#FFFFFF;
     top:400px;
-    border-width:1px dotted black;
+    border-width:1px;
 }
-#map
-{
+#map {
     height: 83.6%;
-=======
-#map
-{
-	width: 100%;
 }
 
 #logo
@@ -41,10 +71,6 @@ html, body
     width : 12%;
 
 }
-
-
-
-
 
 /*Modifications Materialize*/
 nav
