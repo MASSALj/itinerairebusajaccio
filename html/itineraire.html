@@ -10,15 +10,17 @@
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
+    <script type="text/javascript" src="../js/site.js"></script>
 </head>
 <body>
-    <header>
+    <header class="page-header">
         <nav>
             <div class="nav-wrapper blue lighten-1">
-                <a href="" class="brand-logo">Logo</a>
+                <a href="" class="brand-logo"><img id="logo" src="../img/logo-capa.jpg" alt="CAPA"></a>
             </div>
         </nav>
     </header>
+<<<<<<< HEAD
 
 
     <!--LE FORMULAIRE A METTRE EN POSITION ABSOLUTE-->
@@ -34,6 +36,19 @@
 
                 <div id="map">                
 		</div>
+=======
+    <section>
+        <aside>
+            <div class="card-panel teal blue lighten-1 routeForm">
+                <p><input type="text" id="depart" placeholder="Départ" on><br /></p>
+                <p><input type="text" id="arrivee" placeholder="Arrivée"></p>
+                <p><input class="btn waves-effect waves-light" type="button" value="Valider" onclick="initMap()"></p>
+            </div>
+            <div id="map"></div>
+        </aside>
+    </section>
+  
+>>>>>>> 8f78512659a5329008d4c25ab736506bfa4c7817
 
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
