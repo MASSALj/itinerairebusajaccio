@@ -22,6 +22,7 @@
     </header>
     
     <section>
+
         <aside>
             <div class="card-panel teal blue lighten-1 routeForm">
                 <p><input type="text" id="depart" placeholder="Départ"><br /></p>
@@ -29,10 +30,14 @@
                 <p><input class="btn waves-effect waves-light" type="button" value="Valider" onclick="initMap()"></p>
             </div>
         </aside>
-        <div class="bloc"></div>
+
+        <div class="bloc">
+		   			&nbsp;<img src="../img/icone_car.png" width="15" height="16"> Itinéraire «Départ» vers «Destination»
+			    </div>
 
         <div id="map"></div>
     </section>
+
   
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
