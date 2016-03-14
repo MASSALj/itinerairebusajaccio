@@ -1,15 +1,15 @@
 var lieu = [];  //contiendra la latitude/longitide de la position de départ et de destination
 
+
 function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), {         //instancie la google map
         center: {lat: 41.9257502, lng: 8.7399893},  //centrée sur Ajaccio
-        zoom: 15,
-        scaleControl: true,
-        zoomControl: true,
-        scrollwheel: true,
+        zoom: 15
+
 
     });
+
 
     //Enable the map to stay centered while resizing the window
     google.maps.event.addDomListener(window, "resize", function() {
@@ -18,9 +18,9 @@ function initMap() {
         map.setCenter(center);
     });
 
-    google.maps.event.addListener(map, 'click', function(event){
-        this.setOptions({scrollwheel:true});
-    });
+
+
+
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');

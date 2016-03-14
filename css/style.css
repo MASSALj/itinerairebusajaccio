@@ -61,15 +61,17 @@ html, body
     top:400px;
     border-width:1px;
 }
-#map {
-    height: 83.6%;
+
+#map
+{
+	width: 100%;
 }
+
 
 #logo
 {
-    height : 12%;
-    width : 12%;
-
+    height : 100%;
+    width : auto;
 }
 
 /*Modifications Materialize*/
@@ -90,5 +92,17 @@ footer.page-footer
 
 .container
 {
+	color: white;
 	height: 100%;
+}
+
+.nav-wrapper
+{
+	box-shadow: 0px 0px 10px black;
+	z-index: 99;
+}
+
+.page-footer
+{
+	background-color: #6094c9 !important;
 }
