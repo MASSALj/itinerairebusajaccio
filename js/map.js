@@ -4,8 +4,22 @@ function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), {         //instancie la google map
         center: {lat: 41.9257502, lng: 8.7399893},  //centrée sur Ajaccio
-        zoom: 15
+        zoom: 15,
+        scaleControl: true,
+        zoomControl: true,
+        scrollwheel: true,
 
+    });
+
+    //Enable the map to stay centered while resizing the window
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    });
+
+    google.maps.event.addListener(map, 'click', function(event){
+        this.setOptions({scrollwheel:true});
     });
 
     var depart = document.getElementById('depart');

@@ -8,3 +8,9 @@ html, body
 {
     height: 83.6%;
 }
+
+#logo
+{
+    height : 12%;
+    width : 12%;
+}
