@@ -7,10 +7,6 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
-    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/map.js"></script>
-    <script type="text/javascript" src="../js/site.js"></script>
 </head>
 <body>
     <header class="page-header">
@@ -20,14 +16,30 @@
             </div>
         </nav>
     </header>
-    
+
     <section>
 
         <aside>
-            <div class="card-panel teal blue lighten-1 routeForm">
-                <p><input type="text" id="depart" placeholder="Départ"><br /></p>
-                <p><input type="text" id="arrivee" placeholder="Arrivée"></p>
-                <p><input class="btn waves-effect waves-light" type="button" value="Valider" onclick="initMap()"></p>
+            <div class="card-panel routeForm">
+
+                <h5 class="titre-form"> Rechercher un trajet</h5>
+
+                <form action="" method="post">
+                    <div class="input-field input1">
+                        <input id="depart" type="text" class="validate" placeholder="point de départ">
+                        <label for="depart">Départ</label>
+                    </div>
+                    <div class="input-field input2">
+                        <input id="arrivee" type="text" class="validate" placeholder="destination">
+                        <label for="arrivee">Arrivée</label>
+                    </div >
+                    <div class="row no-bottom">
+                    <div class="col s2 offset-s2">
+                        <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="initMap()">Submit</button>
+                    </div>
+                        </div>
+                </form>
+
             </div>
         </aside>
 
@@ -38,11 +50,6 @@
         <div id="map"></div>
     </section>
 
-  
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
-    </script>
-
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">
@@ -50,5 +57,13 @@
             </div>
         </div>
     </footer>
+
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../js/map.js"></script>
+    <script type="text/javascript" src="../js/site.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
+    </script>
 </body>
 </html>

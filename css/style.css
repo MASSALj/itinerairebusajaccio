@@ -15,21 +15,43 @@ html, body
 .routeForm
 {
 	position: absolute;
+    z-index:1;
+    margin-left:1%;
+    margin-top:80px;
+
 }
 
-/*.bloc { 
-    position:absolute;
-    height:150px;
-    width:800px;
-    margin-left:100px;
-    margin-right:500px;
-    z-index:1;
-    background-color:#FFFFFF;
-    top:370px;
-	border: 1px solid black;
-	box-shadow: 3px 3px 0px;
-	background-color: #DCDCDC;
-}*/
+.titre-form{
+    margin-bottom: 30px;
+    color: #D1B606;
+}
+
+.inputsubmit{
+    background-color:#6094c9;
+    margin-bottom: 0px;
+}
+
+.no-bottom{
+    margin-bottom: 0px;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color: #D1B606;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #6094c9;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #6094c9;
+    box-shadow: 0 1px 0 0 #6094c9;
+}
+
+.input1,.input2{
+    background-color: white;
+}
+
 
 #map
 {
@@ -48,11 +70,10 @@ html, body
 	position:absolute;
 	opacity: 0.9;
 	padding: 10px;
-	left: 10%;
+	left: 1%;
 	width: 80%;
 	z-index: 99;
 }
-
 
 /*Modifications Materialize*/
 nav

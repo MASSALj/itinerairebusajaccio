@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$(footer).css('height', 0.1*displayHeight+'px');
 	$(map).css('height', 0.8*displayHeight+'px');
 	$(resultSearch).css('height', 0.25*displayHeight+'px');
-	$(resultSearch).css('bottom', 0.1*displayHeight+'px');
+	$(resultSearch).css('bottom', 0.115*displayHeight+'px');
 
 	$(logo).css({height: $(header).height()-10+'px', marginTop: '5px', marginBottom: '5px'});
 	$(footerText).css('line-height', $(footer).height()+'px');
@@ -17,7 +17,7 @@ $(document).ready(function(){
 		$(footer).css('height', 0.1*displayHeight+'px');
 		$(map).css('height', 0.8*displayHeight+'px');
 		$(resultSearch).css('height', 0.25*displayHeight+'px');
-		$(resultSearch).css('bottom', 0.1*displayHeight+'px');
+		$(resultSearch).css('bottom', 0.115*displayHeight+'px');
 
 		$(logo).css({height: $(header).height()-10+'px', marginTop: '5px', marginBottom: '5px'});
 		$(footerText).css('line-height', $(footer).height()+'px');
