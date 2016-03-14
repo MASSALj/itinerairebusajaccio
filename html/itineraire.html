@@ -5,11 +5,12 @@
         html, body { height: 100%; margin: 0; padding: 0; }
         #map { height: 100%; }
     </style>
-    <title>Calcul d'itinéraire</title>
+    <!--<title>Calcul d'itinéraire</title>-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/functions.js"></script>
@@ -22,21 +23,17 @@
             </div>
         </nav>
     </header>
-    <!--<table style="width: 100%; height: 100%">-->
-        <!--<tr>-->
-            <!--<td style="width: 20%; height: 100%; margin-right: 80%;" id="criteres">-->
+
+    
+    <!--LE FORMULAIRE A METTRE EN POSITION ABSOLUTE-->
                 <!--<div class="card-panel teal blue lighten-1">-->
                 <!--<p><input type="text" id="depart" placeholder="Départ" on><br /></p>-->
                 <!--<p><input type="text" id="arrivee" placeholder="Arrivée"></p>-->
                 <!--<p><input class="btn waves-effect waves-light" type="button" value="Valider" onclick="initMap()"></p>-->
                 <!--</div>-->
-            <!--</td>-->
-            <!--<td style="width: 80%; height: auto; margin-left: 20%" id="map">-->
 
-                <div style="height: 83%;" id="map"></div>
-            <!--</td>-->
-        <!--</tr>-->
-    <!--</table>-->
+                <div id="map"></div>
+
 
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
