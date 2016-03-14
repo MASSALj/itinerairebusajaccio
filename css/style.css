@@ -6,3 +6,15 @@ body
 {
 	
 }
+
+.bloc { 
+    position:absolute;
+    height:200px;
+    width:300px;
+    margin-left:100px;
+    margin-right:500px;
+    z-index:1;
+    background-color:#FFFFFF;
+    top:300px;
+    border-width:1px dotted black;
+}
