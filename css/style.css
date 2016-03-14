@@ -27,10 +27,7 @@ html, body
 	border: 1px solid black;
 	box-shadow: 3px 3px 0px;
 }
-#map
-{
-    height: 83.6%;
-=======
+
 #map
 {
 	width: 100%;
