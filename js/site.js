@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$(footer).css('height', 0.1*displayHeight+'px');
 	$(map).css('height', 0.8*displayHeight+'px');
 
-	$(logo).css('line-height', $(header).height()+'px');
+	$(logo).css({height: $(header).height()-10+'px', marginTop: '5px', marginBottom: '5px'});
 	$(footerText).css('line-height', $(footer).height()+'px');
 
 	$(window).resize(function(){
@@ -15,7 +15,7 @@ $(document).ready(function(){
 		$(footer).css('height', 0.1*displayHeight+'px');
 		$(map).css('height', 0.8*displayHeight+'px');
 
-		$(logo).css('line-height', $(header).height()+'px');
+		$(logo).css({height: $(header).height()-10+'px', marginTop: '5px', marginBottom: '5px'});
 		$(footerText).css('line-height', $(footer).height()+'px');
 	});
 });
