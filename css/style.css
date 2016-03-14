@@ -6,6 +6,8 @@ html, body
 { 
 	height: 100%; 
 	margin: 0; 
+	min-width: 1024px;
+	min-height: 768px;
 	padding: 0; 
 	width: 100%;
 }
@@ -15,7 +17,7 @@ html, body
 	position: absolute;
 }
 
-.bloc { 
+/*.bloc { 
     position:absolute;
     height:150px;
     width:800px;
@@ -27,7 +29,7 @@ html, body
 	border: 1px solid black;
 	box-shadow: 3px 3px 0px;
 	background-color: #DCDCDC;
-}
+}*/
 
 #map
 {
@@ -39,7 +41,16 @@ html, body
 {
     height : 100%;
     width : auto;
+}
 
+.resultSearch
+{
+	position:absolute;
+	opacity: 0.9;
+	padding: 10px;
+	left: 10%;
+	width: 80%;
+	z-index: 99;
 }
 
 
