@@ -15,7 +15,6 @@ html, body
 	position: absolute;
 }
 
-<<<<<<< HEAD
 .bloc { 
     position:absolute;
     height:150px;
@@ -66,5 +65,4 @@ footer.page-footer
 .container
 {
 	height: 100%;
->>>>>>> 8f78512659a5329008d4c25ab736506bfa4c7817
 }
