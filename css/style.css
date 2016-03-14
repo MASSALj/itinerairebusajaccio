@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 /*************************************************************Main style of the application************************************************************/
 
 /*personal modifications*/
-#map {
-    
-}
 
 html, body 
 { 
@@ -24,8 +20,18 @@ html, body
 	width: 100%;
 }
 
+#logo
+{
+    height : 12%;
+    width : 12%;
 
-/*Modifications Bootstrap*/
+}
+
+
+
+
+
+/*Modifications Materialize*/
 nav
 {
 	height: 100%;
