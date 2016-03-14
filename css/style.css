@@ -1,20 +1,22 @@
-#map {
-    height: 83%;
-}
-
-body 
+html, body
 {
-	
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .bloc { 
     position:absolute;
-    height:200px;
-    width:300px;
+    height:150px;
+    width:800px;
     margin-left:100px;
     margin-right:500px;
     z-index:1;
     background-color:#FFFFFF;
-    top:300px;
+    top:400px;
     border-width:1px dotted black;
+}
+#map
+{
+    height: 83.6%;
 }
