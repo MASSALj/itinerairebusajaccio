@@ -24,7 +24,8 @@ html, body
     z-index:1;
     background-color:#FFFFFF;
     top:400px;
-    border-width:1px dotted black;
+	border: 1px solid black;
+	box-shadow: 3px 3px 0px;
 }
 #map
 {
@@ -41,9 +42,6 @@ html, body
     width : 12%;
 
 }
-
-
-
 
 
 /*Modifications Materialize*/
