@@ -23,9 +23,10 @@ html, body
     margin-right:500px;
     z-index:1;
     background-color:#FFFFFF;
-    top:400px;
+    top:570px;
 	border: 1px solid black;
 	box-shadow: 3px 3px 0px;
+	background-color: #DCDCDC;
 }
 #map
 {
