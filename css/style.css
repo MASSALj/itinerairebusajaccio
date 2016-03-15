@@ -12,8 +12,12 @@ html, body
 	width: 100%;
 }
 
-
-/* Formulaire*/
+h1
+{
+	font-size: 30px;
+	height: 100%;
+	margin: 0;
+}
 
 .routeForm
 {
@@ -88,7 +92,7 @@ html, body
 /*Modifications Materialize*/
 .brand-logo
 {
-	    margin-left: 1%;
+	margin-left: 1%;
 }
 
 nav
