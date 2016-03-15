@@ -71,6 +71,7 @@ $('.datepicker').pickadate({
     max: [1,00]
 });*/
 
+
 //Ids des input text et erreurs a afficher
 /*var textErrors={
     'titre_insert' : 'Entre un titre',
