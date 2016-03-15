@@ -12,6 +12,9 @@ html, body
 	width: 100%;
 }
 
+
+/* Formulaire*/
+
 .routeForm
 {
 	position: absolute;
@@ -21,35 +24,42 @@ html, body
 
 }
 
-.titre-form{
+.titre-form
+{
     margin-bottom: 30px;
     color: #D1B606;
 }
 
-.inputsubmit{
-    background-color:#6094c9;
-    margin-bottom: 0px;
+.input1,.input2{
+    background-color: white;
 }
 
-.no-bottom{
-    margin-bottom: 0px;
-}
-
-.btn:hover, .btn-large:hover {
-    background-color: #D1B606;
-}
 /* label focus color */
-.input-field input[type=text]:focus + label {
+.input-field input[type=text]:focus + label
+{
     color: #6094c9;
 }
 /* label underline focus color */
-.input-field input[type=text]:focus {
+.input-field input[type=text]:focus
+{
     border-bottom: 1px solid #6094c9;
     box-shadow: 0 1px 0 0 #6094c9;
 }
 
-.input1,.input2{
-    background-color: white;
+.inputsubmit
+{
+    background-color:#6094c9;
+    margin-bottom: 0px;
+}
+
+.no-bottom
+{
+    margin-bottom: 0px;
+}
+
+.btn:hover, .btn-large:hover
+{
+    background-color: #D1B606;
 }
 
 
@@ -57,7 +67,6 @@ html, body
 {
 	width: 100%;
 }
-
 
 #logo
 {
@@ -87,6 +96,12 @@ nav
 	height: 100%;
 }
 
+.nav-wrapper
+{
+    box-shadow: 0px 0px 10px black;
+    z-index: 99;
+}
+
 .footer-copyright
 {
 	height: 100% !important;
@@ -98,16 +113,14 @@ nav
 	height: 100%;
 }
 
-.nav-wrapper
-{
-	box-shadow: 0px 0px 10px black;
-	z-index: 99;
-}
-
 .page-footer
 {
 	background-color: #6094c9 !important;
 	box-shadow: -10px 0px 10px black;
 	padding: 0 !important;
 	z-index: 9999;
+}
+
+nav .brand-logo{
+	color: #EEB805;
 }
