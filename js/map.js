@@ -36,9 +36,9 @@ function initMap() {
     var arrivee = document.getElementById('arrivee');
 
     var options = {
-        //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
-        //bounds: map.getBounds()
-        bounds: defaultBounds
+        componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
+        bounds: map.getBounds(),
+        //bounds: defaultBounds
         //type: 'transit_station'
     };
 
@@ -247,7 +247,15 @@ function initMap() {
             var request = {
                 destination: arrivee,
                 origin: depart,
-                travelMode: google.maps.TravelMode.TRANSIT
+                travelMode: google.maps.TravelMode.TRANSIT,
+                transitOptions: {
+                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
+                    // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
+                    modes: [google.maps.TransitMode.BUS],
+                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+
+                },
+                provideRouteAlternatives: false
             };
 
             // Pass the directions request to the directions service.
@@ -257,8 +265,13 @@ function initMap() {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
 
+                    console.log(response);
+
                     var route = response.routes[0];
-                    var summaryPanel = document.getElementsByClassName('resultSearch');
+                    console.log(route.legs);
+
+                    var summaryPanel = document.getElementById('lesresultats');
+
                     summaryPanel.innerHTML = '';
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
