@@ -12,7 +12,7 @@
     <header class="page-header">
         <nav>
             <div class="nav-wrapper white">
-                <a href="#" class="brand-logo center">Recherche d'itinéraire</a>
+                <a href="#" class="brand-logo center"><h1>Recherche d'itinéraire</h1></a>
                 <a href="" class="brand-logo"><img id="logo" src="../img/logo-capa.jpg" alt="CAPA"></a>
             </div>
         </nav>
@@ -55,11 +55,11 @@
                         <label for="marche">Le moins de marche à pieds possible</label>
                     </div>
 
-                    <div class="input-field input4">
-                        <div class="row no-bottom">
-                            <div class="col s2 offset-s2">
-                                <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="initMap()">Submit</button>
-                            </div>
+
+                    <div class="row no-bottom">
+                        <div class="col s2 offset-s2">
+                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>
+
                         </div>
                     </div>
                 </form>
@@ -67,9 +67,10 @@
             </div>
         </aside>
 
-        <!--<div class="card white resultSearch">
-		   			&nbsp;<img src="../img/icone_car.png" width="15" height="16"> Itinéraire «Départ» vers «Destination»
-			    </div>-->
+
+        <div class="card white resultSearch">
+            &nbsp;<img src="../img/icone_car.png" width="15" height="16"> Itinéraire «Départ» vers «Destination»<br />
+        </div>
 
         <div id="map"></div>
     </section>

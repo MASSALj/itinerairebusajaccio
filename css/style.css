@@ -12,8 +12,12 @@ html, body
 	width: 100%;
 }
 
-
-/* Formulaire*/
+h1
+{
+	font-size: 30px;
+	height: 100%;
+	margin: 0;
+}
 
 .routeForm
 {
@@ -80,6 +84,7 @@ html, body
 
 .resultSearch
 {
+	display: none;
 	position:absolute;
 	opacity: 0.9;
 	padding: 10px;
@@ -89,6 +94,11 @@ html, body
 }
 
 /*Modifications Materialize*/
+.brand-logo
+{
+	margin-left: 1%;
+}
+
 nav
 {
 	height: 100%;
@@ -105,11 +115,6 @@ nav
 	height: 100% !important;
 }
 
-footer.page-footer
-{
-	padding: 0;
-}
-
 .container
 {
 	color: white;
@@ -119,6 +124,9 @@ footer.page-footer
 .page-footer
 {
 	background-color: #6094c9 !important;
+	box-shadow: -10px 0px 10px black;
+	padding: 0 !important;
+	z-index: 9999;
 }
 
 nav .brand-logo{

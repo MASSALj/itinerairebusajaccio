@@ -20,23 +20,36 @@ function initMap() {
 
 
 
+    var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(41.9284581, 8.7320577),
+        new google.maps.LatLng(41.9308846, 8.7545883)
+    );
+
+    map.fitBounds(defaultBounds);
+
+
+
+
 
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
-        //componentRestrictions: {country: 'fr'} //Restriction sur la france, mais ne marche pas sur les searchbox....
-        bounds: map.getBounds()
+        //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
+        //bounds: map.getBounds()
+        bounds: defaultBounds
+        //type: 'transit_station'
     };
 
-    var searchBoxDepart = new google.maps.places.SearchBox(depart, options);   // -->  intialise les input text en seachbox, permettant l'autocomplétion
+    var searchBoxDepart = new google.maps.places.SearchBox(depart, options);   // -->  intialise les input text en searchbox, permettant l'autocomplétion
     var searchBoxArrivee = new google.maps.places.SearchBox(arrivee, options); //  ↗
 
 
     map.addListener('bounds_changed', function() {         // Listener sur l'input text pour la position de départ
         searchBoxDepart.setBounds(map.getBounds());
     });
+
 
     map.addListener('bounds_changed', function() {         // Listener sur l'input text pour la position de arrivée
         searchBoxArrivee.setBounds(map.getBounds());
@@ -111,9 +124,11 @@ function initMap() {
                 origin: depart,
                 travelMode: google.maps.TravelMode.TRANSIT,
                 transitOptions: {
-                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure
+                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
+                    // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
                     modes: [google.maps.TransitMode.BUS],
                     routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+
                 }
             };
 
@@ -241,7 +256,23 @@ function initMap() {
                 if (status == google.maps.DirectionsStatus.OK) {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
+
+                    var route = response.routes[0];
+                    var summaryPanel = document.getElementsByClassName('resultSearch');
+                    summaryPanel.innerHTML = '';
+                    // For each route, display summary information.
+                    for (var i = 0; i < route.legs.length; i++) {
+                        var routeSegment = i + 1;
+                        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                            '</b><br>';
+                        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+                        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+                    }
+                } else {
+                    window.alert('La requête de direction a échoué pour la raison suivante : ' + status);
                 }
+
             });
         }
     });
