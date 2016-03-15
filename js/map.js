@@ -19,26 +19,21 @@ function initMap() {
     });
 
 
-
     var defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(41.9284581, 8.7320577),
-        new google.maps.LatLng(41.9308846, 8.7545883)
-    );
+		new google.maps.LatLng(41.972243, 8.581899), 
+		new google.maps.LatLng(41.898944, 8.828748)
+	);
 
     map.fitBounds(defaultBounds);
-
-
-
-
-
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
-        //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
+        //componentRestrictions: {country: 'fr'} //Restriction sur la france, mais ne marche pas sur les searchbox....
+		types: 'address',
+	    bounds: defaultBounds
         //bounds: map.getBounds()
-        bounds: defaultBounds
         //type: 'transit_station'
     };
 
@@ -235,11 +230,13 @@ function initMap() {
 
         //_______________Affiche la trajectoire en bus____________________
         if (lieu["lat1"] != undefined && lieu["lat2"] != undefined &&lieu["long1"] != undefined && lieu["long2"] != undefined){
-            var resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
+            var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
             resultSearch.fadeIn(500);
             routeForm.fadeOut(500);
             modifSearchButton.click(function(){
                 routeForm.fadeIn(500);
+                resultSearch.fadeOut(500);
+                summaryPanel.html('');
             });       
 
             var depart = {lat: lieu['lat1'], lng: lieu['long2']};
@@ -264,8 +261,7 @@ function initMap() {
                     directionsDisplay.setDirections(response);
 
                     var route = response.routes[0];
-                    console.log(route);
-                    var summaryPanel = $('.results');
+                   
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
                         var routeSegment = i + 1;
