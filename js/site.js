@@ -1,3 +1,8 @@
+// function that activates the select of Materielize, DON'T REMOVE PLEASE
+$(document).ready(function() {
+	$('select').material_select();
+});
+
 //Dynamic height of the map
 //Handle the dynamic height of elements of the application
 $(document).ready(function(){
@@ -55,4 +60,37 @@ $('.datepicker').pickadate({
     today: 'aujourd\'hui',
     clear: 'effacer',
     close: 'Fermer'
+
 });
+
+
+$('.timepicker').pickatime({
+
+});
+
+//Ids des input text et erreurs a afficher
+/*var textErrors={
+    'titre_insert' : 'Entre un titre',
+    'auteur_insert' : 'Entre un auteur'
+};*/
+
+//vérification formulaire
+
+/*$(function(){
+    $('#itineraire').click(function(){
+        var errors="";
+        $("input[type='text']").each(function(){
+            //Si le input est vide
+            if($(this).val()===""){
+                //on recupere le text erreur
+                errors=textErrors[$(this).attr('id')];
+                //on affiche l'erreur a cote
+                $(this).next(".erreur").show().text(errors);
+                //si le input n'est pas vide
+            }else{
+                //on cache l'erreur
+                $(this).next(".erreur").hide();
+            }
+        });
+    });
+});*/
