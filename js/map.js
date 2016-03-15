@@ -19,18 +19,12 @@ function initMap() {
     });
 
 
-
     var defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(41.9284581, 8.7320577),
-        new google.maps.LatLng(41.9308846, 8.7545883)
-    );
+		new google.maps.LatLng(41.972243, 8.581899), 
+		new google.maps.LatLng(41.898944, 8.828748)
+	);
 
     map.fitBounds(defaultBounds);
-
-
-
-
-
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
@@ -39,6 +33,7 @@ function initMap() {
         componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
         bounds: map.getBounds(),
         //bounds: defaultBounds
+
         //type: 'transit_station'
     };
 

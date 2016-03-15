@@ -25,28 +25,36 @@
                 <h5 class="titre-form"> Rechercher un trajet</h5>
 
                 <form action="" method="post">
-                    <div class="input-field input1">
+                    <div class="input-field inputgeneral">
                         <input id="depart" type="text" class="validate" placeholder="point de départ">
                         <label for="depart">Départ</label>
                     </div>
-                    <div class="input-field input2">
-                        <input id="arrivee" type="text" class="validate" placeholder="destination">
-                        <label for="arrivee">Arrivée</label>
-                    </div >
-                    <div class="input-field input3">
-                        <input class="with-gap" name="group1" type="checkbox" id="test3"  />
-                        <label for="test3">Le moins de correspondance</label>
+                    <div class="input-field inputgeneral">
+                        <input  id="arrivee" type="text" class="validate" placeholder="destination">
+                        <label for="arrivee" class="active">Arrivée</label>
                     </div>
-                    <div class="input-field col s12">
-                        <select>
-                            <option value="" disabled selected>00</option>
-                            <option value="1">12</option>
-                            <option value="2">15</option>
-                            <option value="3">18</option>
-                        </select>
-                        <label>Heure</label>
+
+                    <div>
+
+                        <input class="datepicker inputgeneral" id="date1" type="date">
+                        <label for="date1" class="active">date</label>
                     </div>
-                    <div class="input-field input4">
+
+                    <div>
+                        <input  class="timepicker inputgeneral" id="time1" type="time" >
+                        <label for="time1">heure</label>
+                    </div>
+
+                    <div class="input-field inputgeneral">
+                        <input class="with-gap" name="correspondance" type="checkbox" id="correspondance"  />
+                        <label for="correspondance">Le moins de correspondance</label>
+                    </div>
+
+                    <div class="input-field inputgeneral">
+                        <input class="with-gap" name="marche" type="checkbox" id="marche"  />
+                        <label for="marche">Le moins de marche à pieds possible</label>
+                    </div>
+
 
                     <div class="row no-bottom">
                         <div class="col s2 offset-s2">
@@ -60,6 +68,7 @@
         </aside>
 
         <div id="lesresultats"></div>
+
 
         <div class="card white resultSearch">
             &nbsp;<img src="../img/icone_car.png" width="15" height="16"> Itinéraire «Départ» vers «Destination»<br />
