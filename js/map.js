@@ -30,10 +30,10 @@ function initMap() {
     var arrivee = document.getElementById('arrivee');
 
     var options = {
-        //componentRestrictions: {country: 'fr'} //Restriction sur la france, mais ne marche pas sur les searchbox....
-		types: 'address',
-	    bounds: defaultBounds
-        //bounds: map.getBounds()
+        componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
+       // bounds: map.getBounds()
+        bounds: defaultBounds
+
         //type: 'transit_station'
     };
 
@@ -250,7 +250,15 @@ function initMap() {
             var request = {
                 destination: arrivee,
                 origin: depart,
-                travelMode: google.maps.TravelMode.TRANSIT
+                travelMode: google.maps.TravelMode.TRANSIT,
+                transitOptions: {
+                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
+                    // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
+                    modes: [google.maps.TransitMode.BUS],
+                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+
+                },
+                provideRouteAlternatives: false
             };
 
             // Pass the directions request to the directions service.
@@ -260,13 +268,16 @@ function initMap() {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
 
+                    console.log(response);
+
                     var route = response.routes[0];
-                   
+                    console.log(route.legs);
+
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
                         var routeSegment = i + 1;
                         summaryPanel.append('<b>Route Segment: ' + routeSegment +'</b><br>');
-                        summaryPanel.append( route.legs[i].start_address + ' to ');
+                        summaryPanel.append(route.legs[i].start_address + ' to ');
                         summaryPanel.append(route.legs[i].end_address + '<br>');
                         summaryPanel.append(route.legs[i].distance.text + '<br><br>');
                     }

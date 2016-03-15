@@ -29,9 +29,10 @@ h2
 
 .headerResultSearch
 {
+	height: 20%;
 	background-color: #6094c9;
 	margin: -10px -10px 1% -10px;
-	padding: 5px;
+	padding: 0 5px 0 5px;
 }
 
 .headerRouteForm
@@ -58,7 +59,8 @@ h2
 .results 
 {
 	max-height: 100%;
-	overflow-y : scroll;
+	height: 100%;
+	overflow-y : auto;
 }
 
 .inputgeneral{
@@ -121,6 +123,11 @@ h2
 	z-index: 99;
 }
 
+.resultSearch .row
+{
+	height: 80%;
+}
+
 /*Modifications Materialize*/
 .brand-logo
 {
@@ -161,7 +168,7 @@ nav
 }
 
 nav .brand-logo{
-	color: #EEB805;
+	color: #B29807;
 }
 
 .btn
