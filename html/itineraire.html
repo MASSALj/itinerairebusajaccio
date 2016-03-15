@@ -12,13 +12,13 @@
     <header class="page-header">
         <nav>
             <div class="nav-wrapper white">
+                <a href="#" class="brand-logo center">Recherche d'itinéraire</a>
                 <a href="" class="brand-logo"><img id="logo" src="../img/logo-capa.jpg" alt="CAPA"></a>
             </div>
         </nav>
     </header>
 
     <section>
-
         <aside>
             <div class="card-panel routeForm">
 
@@ -33,9 +33,24 @@
                         <input id="arrivee" type="text" class="validate" placeholder="destination">
                         <label for="arrivee">Arrivée</label>
                     </div >
-                    <div class="row no-bottom">
-                        <div class="col s2 offset-s2">
-                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="initMap()">Submit</button>
+                    <div class="input-field input3">
+                        <input class="with-gap" name="group1" type="checkbox" id="test3"  />
+                        <label for="test3">Le moins de correspondance</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <select>
+                            <option value="" disabled selected>00</option>
+                            <option value="1">12</option>
+                            <option value="2">15</option>
+                            <option value="3">18</option>
+                        </select>
+                        <label>Heure</label>
+                    </div>
+                    <div class="input-field input4">
+                        <div class="row no-bottom">
+                            <div class="col s2 offset-s2">
+                                <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="initMap()">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </form>
