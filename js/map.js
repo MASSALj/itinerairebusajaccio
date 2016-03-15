@@ -1,5 +1,13 @@
 var lieu = [];  //contiendra la latitude/longitide de la position de départ et de destination
 
+routeForm = $('.routeForm');
+resultSearch = $('.resultSearch');
+newSearchButton = $('.newSearchButton');
+newSearchButton.click(function(){
+    resultSearch.fadeOut(500);
+    routeForm.fadeIn(500);
+});
+
 
 function initMap() {
 
@@ -19,20 +27,20 @@ function initMap() {
     });
 
 
-    var defaultBounds = new google.maps.LatLngBounds(
-		new google.maps.LatLng(41.972243, 8.581899), 
-		new google.maps.LatLng(41.898944, 8.828748)
-	);
+    //var defaultBounds = new google.maps.LatLngBounds(
+	//	new google.maps.LatLng(41.972243, 8.581899),
+	//	new google.maps.LatLng(41.898944, 8.828748)
+	//);
 
-    map.fitBounds(defaultBounds);
+    //map.fitBounds(defaultBounds);
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
         componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
-       // bounds: map.getBounds()
-        bounds: defaultBounds
+        bounds: map.getBounds()
+        //bounds: defaultBounds
 
         //type: 'transit_station'
     };
@@ -268,19 +276,30 @@ function initMap() {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
 
-                    console.log(response);
+                    //console.log(response);
 
                     var route = response.routes[0];
                     console.log(route.legs);
 
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
-                        var routeSegment = i + 1;
-                        summaryPanel.append('<b>Route Segment: ' + routeSegment +'</b><br>');
-                        summaryPanel.append(route.legs[i].start_address + ' to ');
-                        summaryPanel.append(route.legs[i].end_address + '<br>');
-                        summaryPanel.append(route.legs[i].distance.text + '<br><br>');
+                        summaryPanel.append('Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
+                        summaryPanel.append('Lieu de départ : ' + route.legs[i].start_address + '<br>');
+                        summaryPanel.append('Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
+                        summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>');
+                        summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
+
+                        summaryPanel.append('<b>Instructions : </b><br />');
+                        for (var j = 0; i < route.legs[i].steps.length; j++) {
+                            if (route.legs[i].steps[j].travel_mode !== undefined && route.legs[i].steps[j].travel_mode == 'TRANSIT'){
+                                summaryPanel.append('Prendre ' + route.legs[i].steps[j].instructions + route.legs[i].steps[j]);
+                            }
+                            summaryPanel.append(route.legs[i].steps[j].instructions + ', Durée : ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>');
+                        }
+
+
                     }
+
                 } else {
                     window.alert('La requête de direction a échoué pour la raison suivante : ' + status);
                 }
