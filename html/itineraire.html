@@ -29,71 +29,93 @@
                 <form action="" method="post">
 
                     <div class="col s12">
-                        <p class="input-field">
+                        <div class="input-field">
                             <input id="depart" type="text" class="validate" placeholder="point de départ">
                             <label for="depart">Départ</label>
-                        </p>
+                        </div>
 
-                        <p class="input-field">
+                        <div class="input-field">
                             <input  id="arrivee" type="text" class="validate" placeholder="destination">
                             <label for="arrivee">Arrivée</label>
-                        </p>
-                        <p>
+                        </div>
+                        <div>
                             <label for="date1" class="input-field">Date</label>
                             <input id="date1" type="date" class="validate datepicker col s12">
-                        </p>
+                        </div>
 
-                        <p>
+                        <!--<div>
                             <label for="time1" class="input-field">Date</label>
-                            <input id="time1" type="time" class=" timepicker validate col s12">
-                           <!-- <select id="selecthour" class="input-field col s12">
-                                <option value="" disabled selected>Choisir une horaire</option>
-                                <option value="1">5h00</option>
-                                <option value="2">6h00</option>
-                                <option value="3">7h00</option>
-                                <option value="3">8h00</option>
-                                <option value="3">9h00</option>
-                                <option value="3">10h00</option>
-                                <option value="3">11h00</option>
-                                <option value="3">12h00</option>
-                                <option value="3">13h00</option>
-                                <option value="3">14h00</option>
-                                <option value="3">15h00</option>
-                                <option value="3">16h00</option>
-                                <option value="3">17h00</option>
-                                <option value="3">16h00</option>
-                                <option value="3">19h00</option>
-                                <option value="3">20h00</option>
-                                <option value="3">21h00</option>
-                                <option value="3">22h00</option>
-                                <option value="3">23h00</option>
-                                <option value="3">00h00</option>
-                                <option value="3">1h00</option>
-                           </select>
-                           <label class="input-field" for="selecthour">Materialize Select</label> -->
-                        </p>
+                            <input id="time1" type="text" class="validate timepicker col s12">
+                        </div> -->
 
-                    </div>
+                        <div>
+                            <!-- <label class="input-field" for="selecthour">Horaire</label>-->
+                             <select id="selecthour" class="input-field col s4">
+                                  <option value="" disabled selected>Heure</option>
+                                  <option value="1">5</option>
+                                  <option value="2">6</option>
+                                  <option value="3">7</option>
+                                  <option value="3">8</option>
+                                  <option value="3">9</option>
+                                  <option value="3">10</option>
+                                  <option value="3">11</option>
+                                  <option value="3">12</option>
+                                  <option value="3">13</option>
+                                  <option value="3">14</option>
+                                  <option value="3">15</option>
+                                  <option value="3">16</option>
+                                  <option value="3">17</option>
+                                  <option value="3">16</option>
+                                  <option value="3">19</option>
+                                  <option value="3">20</option>
+                                  <option value="3">21</option>
+                                  <option value="3">22</option>
+                                  <option value="3">23</option>
+                                  <option value="3">00</option>
+                                  <option value="3">1</option>
+                             </select>
+                          </div>
+                        <div class="col s1 heure">h</div>
+                          <div>
+                              <!--<label class="input-field" for="selectminute">Horaire</label>-->
+                            <select id="selectminute" class="input-field col s4">
+                                <option value="" disabled selected>Minutes</option>
+                                <option value="1">00</option>
+                                <option value="2">05</option>
+                                <option value="3">10</option>
+                                <option value="3">15</option>
+                                <option value="3">20</option>
+                                <option value="3">25</option>
+                                <option value="3">30</option>
+                                <option value="3">35</option>
+                                <option value="3">40</option>
+                                <option value="3">45</option>
+                                <option value="3">50</option>
+                                <option value="3">55</option>
+                            </select>
+                        </div>
+                        <div class="col s1 minute">min</div>
 
-                    <div class="input-field col s12">
+
+                    <div class="input-field col s12 check1">
                         <input class="with-gap" name="correspondance" type="checkbox" id="correspondance"  />
                         <label for="correspondance">Le moins de correspondance</label>
                     </div>
 
-                    <div class="input-field col s12">
+                    <div class="input-field col s12 check2">
                         <input class="with-gap" name="marche" type="checkbox" id="marche"  />
                         <label for="marche">Le moins de marche à pieds </label>
                     </div>
 
-                    <div class="col s2 offset-s3 no-bottom">
+                   <!-- <div class="col s2 offset-s2 no-bottom">
                       <button class="btn waves-effect waves-light inputsubmit" id="submit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>
-
+                    -->
 
                     <!--<div class="row no-bottom">
                         <div class="col s2 offset-s2">
                             <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>-->
 
-                        </div>
+                    </div>
                 </form>
             </div>
         </aside>
@@ -132,9 +154,9 @@
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
-    <script type="text/javascript" src="../js/site.js"></script>
     <script type="text/javascript" src="../js/picker.time.js"></script>
     <script type="text/javascript" src="../js/picker.js"></script>
+    <script type="text/javascript" src="../js/site.js"></script>
 
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">

@@ -61,10 +61,14 @@ $('.datepicker').pickadate({
 
 });
 
+/*$('.timepicker').pickatime({
 
-$('.timepicker').pickatime({
+    closeOnSelect: true,
+    closeOnClear: true,
 
-});
+    min: [5,00],
+    max: [1,00]
+});*/
 
 //Ids des input text et erreurs a afficher
 /*var textErrors={
