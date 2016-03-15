@@ -31,8 +31,8 @@ function initMap() {
 
     var options = {
         componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
-        bounds: map.getBounds(),
-        //bounds: defaultBounds
+       // bounds: map.getBounds()
+        bounds: defaultBounds
 
         //type: 'transit_station'
     };
