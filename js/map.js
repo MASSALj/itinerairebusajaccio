@@ -18,16 +18,14 @@ function initMap() {
         map.setCenter(center);
     });
 
-
-
-
-
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
         //componentRestrictions: {country: 'fr'} //Restriction sur la france, mais ne marche pas sur les searchbox....
-        bounds: map.getBounds()
+		types: 'address',
+	    bounds: new google.maps.LatLngBounds(new google.maps.LatLng(41.972243, 8.581899), 
+	    									 new google.maps.LatLng(41.898944, 8.828748))
     };
 
     var searchBoxDepart = new google.maps.places.SearchBox(depart, options);   // -->  intialise les input text en seachbox, permettant l'autocomplétion
