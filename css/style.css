@@ -1,6 +1,6 @@
 /*************************************************************Main style of the application************************************************************/
 
-/*personal modifications*/
+/*personal modifications*/                                    
 
 html, body 
 { 
@@ -14,9 +14,32 @@ html, body
 
 h1
 {
+	color: #b39907;
 	font-size: 30px;
 	height: 100%;
 	margin: 0;
+}
+
+h2
+{
+	color: white;
+	font-size: 20px;
+	margin: 0;
+}
+
+.headerResultSearch
+{
+	height: 20%;
+	background-color: #6094c9;
+	margin: -10px -10px 1% -10px;
+	padding: 0 5px 0 5px;
+}
+
+.headerRouteForm
+{
+	background-color: #6094c9;
+	margin: -20px -20px 1% -20px;
+	padding: 5px;
 }
 
 .routeForm
@@ -30,8 +53,15 @@ h1
 
 .titre-form
 {
-    margin-bottom: 30px;
-    color: #EEB805;
+    color: #6094c9;
+    text-align: center;
+}
+
+.results 
+{
+	max-height: 100%;
+	height: 100%;
+	overflow-y : auto;
 }
 
 .inputgeneral{
@@ -77,7 +107,7 @@ h1
 
 .btn:hover, .btn-large:hover
 {
-    background-color: #D1B606;
+    background-color: #b39907;
 }
 
 
@@ -99,8 +129,13 @@ h1
 	opacity: 0.9;
 	padding: 10px;
 	left: 1%;
-	width: 80%;
+	width: 95%;
 	z-index: 99;
+}
+
+.resultSearch .row
+{
+	height: 80%;
 }
 
 /*Modifications Materialize*/
@@ -122,28 +157,34 @@ nav
 
 .footer-copyright
 {
+	background-color: white !important;
 	height: 100% !important;
 }
 
 .container
 {
-	color: white;
+	background-color: white !important;
+	color: black;
 	height: 100%;
+	text-align: center;
+	width: 100%;
 }
 
 .page-footer
 {
-	background-color: #6094c9 !important;
 	box-shadow: -10px 0px 10px black;
 	padding: 0 !important;
 	z-index: 9999;
 }
 
 nav .brand-logo{
-	color: #EEB805;
+	color: #B29807;
 }
 
-/*pickerdate properties*/
+.btn
+{
+	background-color: #6094c9;
+}
 
 .picker__frame {
     min-width: 27%;
@@ -187,5 +228,3 @@ nav .brand-logo{
 /* Today */
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted { background-color: #ffb74d; }
 .picker__day.picker__day--today { color: #6094c9; }
-
-

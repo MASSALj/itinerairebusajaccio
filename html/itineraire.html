@@ -7,6 +7,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header class="page-header">
@@ -20,17 +21,18 @@
 
     <section>
         <aside>
+
             <div class="row card-panel routeForm">
 
                 <h5 class=" col s12 titre-form"> Rechercher un trajet</h5>
 
-                <form class="col s12" id="itineraire" action="" method="post">
+                <form action="" method="post">
 
                     <div class="col s12">
-                        <div class="input-field">
+                        <p class="input-field">
                             <input id="depart" type="text" class="validate" placeholder="point de départ">
                             <label for="depart">Départ</label>
-                        </div>
+                        </p>
 
                         <p class="input-field">
                             <input  id="arrivee" type="text" class="validate" placeholder="destination">
@@ -85,15 +87,35 @@
 
                     <div class="col s2 offset-s3 no-bottom">
                       <button class="btn waves-effect waves-light inputsubmit" id="submit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>
-                    </div>
 
+
+                    <!--<div class="row no-bottom">
+                        <div class="col s2 offset-s2">
+                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>-->
+
+                        </div>
                 </form>
             </div>
         </aside>
 
+        <div id="lesresultats"></div>
 
         <div class="card white resultSearch">
-            &nbsp;<img src="../img/icone_car.png" width="15" height="16"> Itinéraire «Départ» vers «Destination»<br />
+            <div class="headerResultSearch">
+                <h2>Résultat de la recherche</h2>
+            </div>
+             <div class="row">
+                <div class="col s9 results">
+                </div>
+                <div class="col s3 ">
+                    <div class="row">
+                        <a class="waves-effect waves-light btn col s12 newSearchButton"><i class="material-icons left">search</i>Nouvelle recherche</a><br /><br />
+                    </div>
+                    <div class="row">
+                        <a class="waves-effect waves-light btn col s12 modifSearchButton"><i class="material-icons left">create</i>Modifier recherche</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="map"></div>

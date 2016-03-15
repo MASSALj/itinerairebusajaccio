@@ -19,26 +19,21 @@ function initMap() {
     });
 
 
-
     var defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(41.9284581, 8.7320577),
-        new google.maps.LatLng(41.9308846, 8.7545883)
-    );
+		new google.maps.LatLng(41.972243, 8.581899), 
+		new google.maps.LatLng(41.898944, 8.828748)
+	);
 
     map.fitBounds(defaultBounds);
-
-
-
-
-
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
-        //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
-        //bounds: map.getBounds()
+        componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
+       // bounds: map.getBounds()
         bounds: defaultBounds
+
         //type: 'transit_station'
     };
 
@@ -235,6 +230,14 @@ function initMap() {
 
         //_______________Affiche la trajectoire en bus____________________
         if (lieu["lat1"] != undefined && lieu["lat2"] != undefined &&lieu["long1"] != undefined && lieu["long2"] != undefined){
+            var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
+            resultSearch.fadeIn(500);
+            routeForm.fadeOut(500);
+            modifSearchButton.click(function(){
+                routeForm.fadeIn(500);
+                resultSearch.fadeOut(500);
+                summaryPanel.html('');
+            });       
 
             var depart = {lat: lieu['lat1'], lng: lieu['long2']};
             var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
@@ -247,7 +250,15 @@ function initMap() {
             var request = {
                 destination: arrivee,
                 origin: depart,
-                travelMode: google.maps.TravelMode.TRANSIT
+                travelMode: google.maps.TravelMode.TRANSIT,
+                transitOptions: {
+                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
+                    // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
+                    modes: [google.maps.TransitMode.BUS],
+                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+
+                },
+                provideRouteAlternatives: false
             };
 
             // Pass the directions request to the directions service.
@@ -257,17 +268,18 @@ function initMap() {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
 
+                    console.log(response);
+
                     var route = response.routes[0];
-                    var summaryPanel = document.getElementsByClassName('resultSearch');
-                    summaryPanel.innerHTML = '';
+                    console.log(route.legs);
+
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
                         var routeSegment = i + 1;
-                        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                            '</b><br>';
-                        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-                        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+                        summaryPanel.append('<b>Route Segment: ' + routeSegment +'</b><br>');
+                        summaryPanel.append(route.legs[i].start_address + ' to ');
+                        summaryPanel.append(route.legs[i].end_address + '<br>');
+                        summaryPanel.append(route.legs[i].distance.text + '<br><br>');
                     }
                 } else {
                     window.alert('La requête de direction a échoué pour la raison suivante : ' + status);
