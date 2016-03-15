@@ -23,3 +23,25 @@ $(document).ready(function(){
 		$(footerText).css('line-height', $(footer).height()+'px');
 	});
 });
+
+//datepicker materielize options
+
+$('.datepicker').pickadate({
+
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year
+    firstDay: true, // first day of the week, True = Monday False= Sunday
+
+    labelMonthNext: 'mois suivant',
+    labelMonthPrev: 'mois précédent',
+    labelMonthSelect: 'Choisir un mois',
+    labelYearSelect: 'Choisir une année',
+    monthsFull: [ 'Janiver', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+    monthsShort: [ 'Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Au', 'Sep', 'Oct', 'Nov', 'Dec' ],
+    weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi','Samedi' ],
+    weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+    weekdaysLetter: [ 'D', 'L', 'Ma', 'Me', 'J', 'V', 'S' ],
+    today: 'aujourd\'hui',
+    clear: 'effacer',
+    close: 'Fermer'
+});
