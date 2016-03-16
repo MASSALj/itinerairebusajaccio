@@ -1,22 +1,53 @@
 /*************************************************************Main style of the application************************************************************/
 
-/*personal modifications*/
+/*personal modifications*/                                    
 
 html, body 
 { 
-	height: 100%; 
 	margin: 0; 
-	min-width: 1024px;
-	min-height: 768px;
 	padding: 0; 
 	width: 100%;
 }
 
+#page
+{
+	min-width: 1024px;
+	display: none;
+}
+
 h1
 {
+	color: #b39907;
 	font-size: 30px;
 	height: 100%;
 	margin: 0;
+}
+
+h2
+{
+	color: white;
+	font-size: 20px;
+	margin: 0;
+}
+
+.loader
+{
+	position: absolute;
+}
+
+.headerResultSearch
+{
+	height: 20%;
+	background-color: #6094c9;
+	margin: -10px -10px 1% -10px;
+	padding: 0 5px 0 5px;
+}
+
+.headerRouteForm
+{
+	background-color: #6094c9;
+	margin: -20px -20px 1% -20px;
+	padding: 5px;
 }
 
 .routeForm
@@ -25,16 +56,24 @@ h1
     z-index:1;
     margin-left:1%;
     margin-top:80px;
+    width: 23%;
 }
 
 .titre-form
 {
-    margin-bottom: 30px;
-    color: #EEB805;
+    color: #6094c9;
+    text-align: center;
+}
+
+.results 
+{
+	max-height: 100%;
+	height: 100%;
+	overflow-y : auto;
 }
 
 .inputgeneral{
-    background-color: white;
+    display: block;
 }
 
 /* label focus color */
@@ -47,6 +86,14 @@ h1
 {
     border-bottom: 1px solid #6094c9;
     box-shadow: 0 1px 0 0 #6094c9;
+}
+
+.input-field label {
+    left: 0rem;
+}
+
+#date1{
+    padding: 0;
 }
 
 [type="checkbox"]:checked + label::before {
@@ -62,12 +109,22 @@ h1
 
 .no-bottom
 {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.check1, .check2{
+
+    padding: 0px !important;
+}
+
+.heure, .minute{
+    margin-top: 35px;
 }
 
 .btn:hover, .btn-large:hover
 {
-    background-color: #D1B606;
+    background-color: #b39907;
 }
 
 
@@ -89,8 +146,13 @@ h1
 	opacity: 0.9;
 	padding: 10px;
 	left: 1%;
-	width: 80%;
+	width: 95%;
 	z-index: 99;
+}
+
+.resultSearch .row
+{
+	height: 80%;
 }
 
 /*Modifications Materialize*/
@@ -112,29 +174,38 @@ nav
 
 .footer-copyright
 {
+	background-color: white !important;
 	height: 100% !important;
 }
 
 .container
 {
-	color: white;
+	background-color: white !important;
+	color: black;
 	height: 100%;
+	text-align: center;
+	width: 100%;
 }
 
 .page-footer
 {
-	background-color: #6094c9 !important;
 	box-shadow: -10px 0px 10px black;
 	padding: 0 !important;
 	z-index: 9999;
 }
 
 nav .brand-logo{
-	color: #EEB805;
+	color: #B29807;
 }
 
-/*pickerdate properties*/
+.btn
+{
+	background-color: #6094c9;
+}
 
+.picker__frame {
+    min-width: 27%;
+}
 .picker { outline: none; } /* Optional feature */
 /* Header - Day of the week */
 .picker__weekday-display { background-color: #6094c9; }
@@ -175,4 +246,12 @@ nav .brand-logo{
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted { background-color: #ffb74d; }
 .picker__day.picker__day--today { color: #6094c9; }
 
+.progress .indeterminate
+{
+	background-color: #b39907;
+}
 
+.progress
+{
+	background-color: rgba(240, 240, 240, 1);
+}
