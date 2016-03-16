@@ -4,6 +4,8 @@
 
 html, body 
 { 
+	min-width: 1024px;
+	min-height: 768px !important;
 	margin: 0; 
 	padding: 0; 
 	width: 100%;
@@ -11,7 +13,7 @@ html, body
 
 #page
 {
-	min-width: 1024px;
+
 	display: none;
 }
 
@@ -56,7 +58,14 @@ h2
     z-index:1;
     margin-left:1%;
     margin-top:80px;
+    min-height: 500px;
+    min-width: 200px;
     width: 23%;
+}
+
+.routeForm input
+{
+
 }
 
 .titre-form
