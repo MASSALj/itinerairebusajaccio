@@ -1,10 +1,14 @@
+// function that activates the select of Materielize, DON'T REMOVE PLEASE
+$(document).ready(function() {
+	$('select').material_select();
+});
+
 //Dynamic height of the map
 //Handle the dynamic height of elements of the application
 
 $(document).ready(function(){
 	var loader = $('.loader'), displayWidth= $(window).width(), displayHeight = $(window).height();
 	loader.css({width: 0.5*displayWidth, height: 0.005*displayWidth, left:0.25*displayWidth, top: 0.4975*displayHeight});
-	
 
 	$(window).load(function(){
 		var page = $('#page'), headerResultSearch = $('.headerResultSearch h2'), h1 = $('h1'), resultSearch = $('.resultSearch'), logo = $('.brand-logo'), header = $('.page-header'), footer = $('.page-footer'), footerText = $('.page-footer .container'), map = $('#map'), displayHeight = $(window).height();
