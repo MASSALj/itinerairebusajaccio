@@ -230,6 +230,14 @@ function initMap() {
 
         //_______________Affiche la trajectoire en bus____________________
         if (lieu["lat1"] != undefined && lieu["lat2"] != undefined &&lieu["long1"] != undefined && lieu["long2"] != undefined){
+            var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
+            resultSearch.fadeIn(500);
+            routeForm.fadeOut(500);
+            modifSearchButton.click(function(){
+                routeForm.fadeIn(500);
+                resultSearch.fadeOut(500);
+                summaryPanel.html('');
+            });       
 
             var depart = {lat: lieu['lat1'], lng: lieu['long2']};
             var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
@@ -260,17 +268,14 @@ function initMap() {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
 
-                    console.log(response);
+                    //console.log(response);
 
                     var route = response.routes[0];
-                    console.log(route.legs);
+                    //console.log(route.legs);
 
-                    var summaryPanel = document.getElementById('lesresultats');
-
-                    summaryPanel.innerHTML = '';
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
-                        summaryPanel.innerHTML += 'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
+                        summaryPanel.append('Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
                         summaryPanel.innerHTML += 'Lieu de départ : ' + route.legs[i].start_address + '<br>';
                         summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
                         summaryPanel.innerHTML += 'Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>';
@@ -283,7 +288,6 @@ function initMap() {
                             }
                             summaryPanel.innerHTML += route.legs[i].steps[j].instructions + ', Durée : ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>';
                         }
-
 
                     }
                 } else {
