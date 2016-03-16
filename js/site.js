@@ -6,6 +6,7 @@ $(document).ready(function() {
 //Dynamic height of the map
 //Handle the dynamic height of elements of the application
 $(document).ready(function(){
+
 	var headerResultSearch = $('.headerResultSearch h2'), h1 = $('h1'), resultSearch = $('.resultSearch'), logo = $('.brand-logo'), header = $('.page-header'), footer = $('.page-footer'), footerText = $('.page-footer .container'), map = $('#map'), displayHeight = $(window).height();
 	
 	header.css('height', 0.1*displayHeight+'px');

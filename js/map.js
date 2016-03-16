@@ -1,5 +1,13 @@
 var lieu = [];  //contiendra la latitude/longitide de la position de départ et de destination
 
+routeForm = $('.routeForm');
+resultSearch = $('.resultSearch');
+newSearchButton = $('.newSearchButton');
+newSearchButton.click(function(){
+    resultSearch.fadeOut(500);
+    routeForm.fadeIn(500);
+});
+
 
 function initMap() {
 
@@ -271,25 +279,27 @@ function initMap() {
                     //console.log(response);
 
                     var route = response.routes[0];
-                    //console.log(route.legs);
+                    console.log(route.legs);
 
                     // For each route, display summary information.
                     for (var i = 0; i < route.legs.length; i++) {
                         summaryPanel.append('Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
-                        summaryPanel.innerHTML += 'Lieu de départ : ' + route.legs[i].start_address + '<br>';
-                        summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-                        summaryPanel.innerHTML += 'Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>';
-                        summaryPanel.innerHTML += 'Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>';
+                        summaryPanel.append('Lieu de départ : ' + route.legs[i].start_address + '<br>');
+                        summaryPanel.append('Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
+                        summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>');
+                        summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
-                        summaryPanel.innerHTML += '<b>Instructions : </b><br />';
+                        summaryPanel.append('<b>Instructions : </b><br />');
                         for (var j = 0; i < route.legs[i].steps.length; j++) {
-                            if (route.legs[i].steps[j].travel_mode == 'TRANSIT'){
-                                summaryPanel.innerHTML += 'Prendre ';
+                            if (route.legs[i].steps[j].travel_mode !== undefined && route.legs[i].steps[j].travel_mode == 'TRANSIT'){
+                                summaryPanel.append('Prendre ' + route.legs[i].steps[j].instructions + route.legs[i].steps[j]);
                             }
-                            summaryPanel.innerHTML += route.legs[i].steps[j].instructions + ', Durée : ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>';
+                            summaryPanel.append(route.legs[i].steps[j].instructions + ', Durée : ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>');
                         }
 
+
                     }
+
                 } else {
                     window.alert('La requête de direction a échoué pour la raison suivante : ' + status);
                 }
