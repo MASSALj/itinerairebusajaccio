@@ -1,4 +1,4 @@
-# itinerairebusajaccio
+# Module de calcul d'itinéraire pour SmartTraffic
 
 La Communauté d’agglomération du Pays Ajaccien déploie actuellement une série de capteurs permettant de mesurer en temps réel les conditions de circulation des principaux axes routiers du territoire.
 
