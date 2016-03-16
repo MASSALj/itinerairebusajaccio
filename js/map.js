@@ -1,12 +1,49 @@
 var lieu = [];  //contiendra la latitude/longitide de la position de départ et de destination
 
+
+
+
+
+//Enable search reinitialisation
 routeForm = $('.routeForm');
 resultSearch = $('.resultSearch');
 newSearchButton = $('.newSearchButton');
 newSearchButton.click(function(){
     resultSearch.fadeOut(500);
     routeForm.fadeIn(500);
+
+    document.getElementById('arrivee').value = '';
+    document.getElementById('depart').value = '';
+    lieu = [];
+    initMap();
 });
+
+
+//Enable research modification
+modifSearchButton = $('.modifSearchButton');
+modifSearchButton.click(function(){
+    initMap();
+    routeForm.fadeIn(500);
+    resultSearch.fadeOut(500);
+    summaryPanel.html('');
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function initMap() {
@@ -114,6 +151,17 @@ function initMap() {
         //_______________Affiche la trajectoire en bus____________________
         if (lieu["lat1"] != undefined && lieu["lat2"] != undefined && lieu["long1"] != undefined && lieu["long2"] != undefined){
 
+            var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
+            resultSearch.fadeIn(500);
+            routeForm.fadeOut(500);
+            modifSearchButton.click(function(){
+                google.maps.event.trigger(map, 'resize');
+                routeForm.fadeIn(500);
+                resultSearch.fadeOut(500);
+                summaryPanel.html('');
+            });
+
+
             var depart = {lat: lieu['lat1'], lng: lieu['long1']};
             var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
 
@@ -141,6 +189,47 @@ function initMap() {
                 if (status == google.maps.DirectionsStatus.OK) {
                     // Display the route on the map.
                     directionsDisplay.setDirections(response);
+
+                    //console.log(response);
+
+                    var route = response.routes[0];
+                    console.log(route.legs);
+
+                    // For each route, display summary information.
+                    for (var i = 0; i <= route.legs.length; i++) {
+                        if (route.legs[i].departure_time) { summaryPanel.append('Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); } //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
+                        summaryPanel.append('Lieu de départ : ' + route.legs[i].start_address + '<br>');
+                        summaryPanel.append('Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
+
+                        summaryPanel.append('<b>Instructions : </b><br />');
+
+                        for (var j = 0; i <= route.legs[i].steps.length-1; j++) {
+
+                            if (route.legs[i].steps[j].travel_mode == 'TRANSIT'){
+
+                                console.log('bus');
+                                summaryPanel.append('Prendre ' + route.legs[i].steps[j].instructions + ', ligne => ', + route.legs[i].steps[j].transit.line.short_name + ', ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>');
+
+                            }else if (route.legs[i].steps[j].travel_mode == 'WALKING'){
+
+
+                                for (var k = 0; k <= route.legs[i].steps[j].steps.length-1; k++) {
+                                    console.log('à pied ' + k + 'fois');
+                                    summaryPanel.append(route.legs[i].steps[j].steps[k].instructions + ', Durée : ' + route.legs[i].steps[j].steps[k].duration.text + ', Distance : ' + route.legs[i].steps[j].steps[k].distance.text + '<br>');
+                                }
+                                summaryPanel.append('<br>');
+
+                            }
+
+                        }
+
+
+
+                        if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
+                        summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
+
+
+                    }
                 }
             });
         }
@@ -242,10 +331,11 @@ function initMap() {
             resultSearch.fadeIn(500);
             routeForm.fadeOut(500);
             modifSearchButton.click(function(){
+                google.maps.event.trigger(map, 'resize');
                 routeForm.fadeIn(500);
                 resultSearch.fadeOut(500);
                 summaryPanel.html('');
-            });       
+            });
 
             var depart = {lat: lieu['lat1'], lng: lieu['long2']};
             var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
@@ -282,20 +372,39 @@ function initMap() {
                     console.log(route.legs);
 
                     // For each route, display summary information.
-                    for (var i = 0; i < route.legs.length; i++) {
-                        summaryPanel.append('Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
+                    for (var i = 0; i <= route.legs.length; i++) {
+                        if (route.legs[i].departure_time) { summaryPanel.append('Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); } //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
                         summaryPanel.append('Lieu de départ : ' + route.legs[i].start_address + '<br>');
                         summaryPanel.append('Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
-                        summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>');
+                        if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
                         summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
                         summaryPanel.append('<b>Instructions : </b><br />');
-                        for (var j = 0; i < route.legs[i].steps.length; j++) {
-                            if (route.legs[i].steps[j].travel_mode !== undefined && route.legs[i].steps[j].travel_mode == 'TRANSIT'){
-                                summaryPanel.append('Prendre ' + route.legs[i].steps[j].instructions + route.legs[i].steps[j]);
+
+                        for (var j = 0; i <= route.legs[i].steps.length-1; j++) {
+
+                            if (route.legs[i].steps[j].travel_mode == 'TRANSIT'){
+
+                                console.log('bus');
+                                summaryPanel.append('Prendre ' + route.legs[i].steps[j].instructions + ', ligne => ', + route.legs[i].steps[j].transit.line.short_name + ', ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>');
+
+                            }else if (route.legs[i].steps[j].travel_mode == 'WALKING'){
+
+
+                                for (var k = 0; k <= route.legs[i].steps[j].steps.length-1; k++) {
+                                    console.log('à pied ' + k + 'fois');
+                                    summaryPanel.append(route.legs[i].steps[j].steps[k].instructions + ', Durée : ' + route.legs[i].steps[j].steps[k].duration.text + ', Distance : ' + route.legs[i].steps[j].steps[k].distance.text + '<br>');
+                                }
+                                summaryPanel.append('<br>');
+
                             }
-                            summaryPanel.append(route.legs[i].steps[j].instructions + ', Durée : ' + route.legs[i].steps[j].duration.text + ', Distance : ' + route.legs[i].steps[j].distance.text + '<br>');
+
                         }
+
+
+
+                        if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
+                        summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
 
                     }
