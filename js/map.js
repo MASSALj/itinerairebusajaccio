@@ -7,6 +7,11 @@ newSearchButton.click(function(){
     resultSearch.fadeOut(500);
     routeForm.fadeIn(500);
 
+    document.getElementById('arrivee').value = '';
+    document.getElementById('depart').value = '';
+    lieu = [];
+    initMap();
+
 
 
 
