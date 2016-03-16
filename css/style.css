@@ -48,11 +48,12 @@ h2
     z-index:1;
     margin-left:1%;
     margin-top:80px;
+    width: 30%;
 }
 
 .titre-form
 {
-    color: white;
+    color: #6094c9;
     text-align: center;
 }
 
@@ -64,7 +65,7 @@ h2
 }
 
 .inputgeneral{
-    background-color: white;
+    display: block;
 }
 
 /* label focus color */
@@ -77,6 +78,14 @@ h2
 {
     border-bottom: 1px solid #6094c9;
     box-shadow: 0 1px 0 0 #6094c9;
+}
+
+.input-field label {
+    left: 0rem;
+}
+
+#date1{
+    padding: 0;
 }
 
 [type="checkbox"]:checked + label::before {
@@ -92,7 +101,8 @@ h2
 
 .no-bottom
 {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .btn:hover, .btn-large:hover
@@ -176,6 +186,9 @@ nav .brand-logo{
 	background-color: #6094c9;
 }
 
+.picker__frame {
+    min-width: 27%;
+}
 .picker { outline: none; } /* Optional feature */
 /* Header - Day of the week */
 .picker__weekday-display { background-color: #6094c9; }

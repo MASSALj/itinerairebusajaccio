@@ -21,40 +21,72 @@
 
     <section>
         <aside>
-            <div class="card-panel routeForm">
-                <div class="headerRouteForm">
-                    <h2 class="titre-form"> Rechercher un trajet</h2>
-                </div>
+
+            <div class="row card-panel routeForm">
+
+                <h5 class=" col s12 titre-form"> Rechercher un trajet</h5>
+
                 <form action="" method="post">
-                    <div class="input-field inputgeneral">
-                        <input id="depart" type="text" class="validate" placeholder="point de départ">
-                        <label for="depart">Départ</label>
-                    </div>
-                    <div class="input-field inputgeneral">
-                        <input  id="arrivee" type="text" class="validate" placeholder="destination">
-                        <label for="arrivee" class="active">Arrivée</label>
+
+                    <div class="col s12">
+                        <p class="input-field">
+                            <input id="depart" type="text" class="validate" placeholder="point de départ">
+                            <label for="depart">Départ</label>
+                        </p>
+
+                        <p class="input-field">
+                            <input  id="arrivee" type="text" class="validate" placeholder="destination">
+                            <label for="arrivee">Arrivée</label>
+                        </p>
+                        <p>
+                            <label for="date1" class="input-field">Date</label>
+                            <input id="date1" type="date" class="validate datepicker col s12">
+                        </p>
+
+                        <p>
+                            <label for="time1" class="input-field">Date</label>
+                            <input id="time1" type="time" class=" timepicker validate col s12">
+                           <!-- <select id="selecthour" class="input-field col s12">
+                                <option value="" disabled selected>Choisir une horaire</option>
+                                <option value="1">5h00</option>
+                                <option value="2">6h00</option>
+                                <option value="3">7h00</option>
+                                <option value="3">8h00</option>
+                                <option value="3">9h00</option>
+                                <option value="3">10h00</option>
+                                <option value="3">11h00</option>
+                                <option value="3">12h00</option>
+                                <option value="3">13h00</option>
+                                <option value="3">14h00</option>
+                                <option value="3">15h00</option>
+                                <option value="3">16h00</option>
+                                <option value="3">17h00</option>
+                                <option value="3">16h00</option>
+                                <option value="3">19h00</option>
+                                <option value="3">20h00</option>
+                                <option value="3">21h00</option>
+                                <option value="3">22h00</option>
+                                <option value="3">23h00</option>
+                                <option value="3">00h00</option>
+                                <option value="3">1h00</option>
+                           </select>
+                           <label class="input-field" for="selecthour">Materialize Select</label> -->
+                        </p>
+
                     </div>
 
-                    <div>
-
-                        <input class="datepicker inputgeneral" id="date1" type="date">
-                        <label for="date1" class="active">date</label>
-                    </div>
-
-                    <div>
-                        <input  class="timepicker inputgeneral" id="time1" type="time" >
-                        <label for="time1">heure</label>
-                    </div>
-
-                    <div class="input-field inputgeneral">
+                    <div class="input-field col s12">
                         <input class="with-gap" name="correspondance" type="checkbox" id="correspondance"  />
                         <label for="correspondance">Le moins de correspondance</label>
                     </div>
 
-                    <div class="input-field inputgeneral">
+                    <div class="input-field col s12">
                         <input class="with-gap" name="marche" type="checkbox" id="marche"  />
-                        <label for="marche">Le moins de marche à pieds possible</label>
+                        <label for="marche">Le moins de marche à pieds </label>
                     </div>
+
+                    <div class="col s2 offset-s3 no-bottom">
+                      <button class="btn waves-effect waves-light inputsubmit" id="submit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>
 
 
                     <!--<div class="row no-bottom">
@@ -62,14 +94,11 @@
                             <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>-->
 
                         </div>
-                    </div>
                 </form>
-
             </div>
         </aside>
 
         <div id="lesresultats"></div>
-
 
         <div class="card white resultSearch">
             <div class="headerResultSearch">
@@ -104,6 +133,9 @@
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
     <script type="text/javascript" src="../js/site.js"></script>
+    <script type="text/javascript" src="../js/picker.time.js"></script>
+    <script type="text/javascript" src="../js/picker.js"></script>
+
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
     </script>
