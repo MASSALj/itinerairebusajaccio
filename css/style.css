@@ -4,12 +4,15 @@
 
 html, body 
 { 
-	height: 100%; 
 	margin: 0; 
-	min-width: 1024px;
-	min-height: 768px;
 	padding: 0; 
 	width: 100%;
+}
+
+#page
+{
+	min-width: 1024px;
+	display: none;
 }
 
 h1
@@ -25,6 +28,11 @@ h2
 	color: white;
 	font-size: 20px;
 	margin: 0;
+}
+
+.loader
+{
+	position: absolute;
 }
 
 .headerResultSearch
@@ -215,3 +223,13 @@ nav .brand-logo{
 /* Today */
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted { background-color: #ffb74d; }
 .picker__day.picker__day--today { color: #6094c9; }
+
+.progress .indeterminate
+{
+	background-color: #b39907;
+}
+
+.progress
+{
+	background-color: rgba(240, 240, 240, 1);
+}
