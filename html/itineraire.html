@@ -26,53 +26,52 @@
 
                 <h5 class=" col s12 titre-form"> Rechercher un trajet</h5>
 
-                <form action="" method="post">
+                <form id="formRecherche" action="" method="post">
 
                     <div class="col s12">
                         <div class="input-field">
-                            <input id="depart" type="text" class="validate" placeholder="point de départ">
+                            <input id="depart" type="text" class="validate" placeholder="point de départ" required>
                             <label for="depart">Départ</label>
                         </div>
 
                         <div class="input-field">
-                            <input  id="arrivee" type="text" class="validate" placeholder="destination">
+                            <input  id="arrivee" type="text" class="validate" placeholder="destination" required>
                             <label for="arrivee">Arrivée</label>
                         </div>
                         <div>
                             <label for="date1" class="input-field">Date</label>
-                            <input id="date1" type="date" class="validate datepicker col s12">
+                            <input id="date1" type="date" class="validate datepicker col s12" required>
                         </div>
 
                         <!--<div>
                             <label for="time1" class="input-field">Date</label>
                             <input id="time1" type="text" class="validate timepicker col s12">
                         </div> -->
-
                         <div>
                             <!-- <label class="input-field" for="selecthour">Horaire</label>-->
-                             <select id="selecthour" class="input-field col s4">
+                             <select id="selecthour" class="input-field col s4" form="formRecherche">
                                   <option value="" disabled selected>Heure</option>
-                                  <option value="1">5</option>
-                                  <option value="2">6</option>
-                                  <option value="3">7</option>
-                                  <option value="3">8</option>
-                                  <option value="3">9</option>
-                                  <option value="3">10</option>
-                                  <option value="3">11</option>
-                                  <option value="3">12</option>
-                                  <option value="3">13</option>
-                                  <option value="3">14</option>
-                                  <option value="3">15</option>
-                                  <option value="3">16</option>
-                                  <option value="3">17</option>
-                                  <option value="3">16</option>
-                                  <option value="3">19</option>
-                                  <option value="3">20</option>
-                                  <option value="3">21</option>
-                                  <option value="3">22</option>
-                                  <option value="3">23</option>
-                                  <option value="3">00</option>
-                                  <option value="3">1</option>
+                                  <option value="05">5</option>
+                                  <option value="06">6</option>
+                                  <option value="07">7</option>
+                                  <option value="08">8</option>
+                                  <option value="09">9</option>
+                                  <option value="10">10</option>
+                                  <option value="11">11</option>
+                                  <option value="12">12</option>
+                                  <option value="13">13</option>
+                                  <option value="14">14</option>
+                                  <option value="15">15</option>
+                                  <option value="16">16</option>
+                                  <option value="17">17</option>
+                                  <option value="18">18</option>
+                                  <option value="19">19</option>
+                                  <option value="20">20</option>
+                                  <option value="21">21</option>
+                                  <option value="22">22</option>
+                                  <option value="23">23</option>
+                                  <option value="00">00</option>
+                                  <option value="01">1</option>
                              </select>
                           </div>
 
@@ -80,20 +79,20 @@
 
                           <div>
                               <!--<label class="input-field" for="selectminute">Horaire</label>-->
-                            <select id="selectminute" class="input-field col s4">
+                            <select id="selectminute" class="input-field col s4" form="formRecherche">
                                 <option value="" disabled selected>Minutes</option>
-                                <option value="1">00</option>
-                                <option value="2">05</option>
-                                <option value="3">10</option>
-                                <option value="3">15</option>
-                                <option value="3">20</option>
-                                <option value="3">25</option>
-                                <option value="3">30</option>
-                                <option value="3">35</option>
-                                <option value="3">40</option>
-                                <option value="3">45</option>
-                                <option value="3">50</option>
-                                <option value="3">55</option>
+                                <option value="00">00</option>
+                                <option value="05">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>
                             </select>
                         </div>
 
@@ -110,15 +109,14 @@
                         <label for="marche">Le moins de marche à pieds </label>
                     </div>
 
-                   <!-- <div class="col s2 offset-s2 no-bottom">
+                   <div class="col s2 offset-s2 no-bottom">
                       <button class="btn waves-effect waves-light inputsubmit" id="submit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>
-                    -->
+                   </div>
 
                     <!--<div class="row no-bottom">
                         <div class="col s2 offset-s2">
                             <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>-->
-
-                    </div>
+                </div>
                 </form>
             </div>
         </aside>

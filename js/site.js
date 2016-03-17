@@ -1,4 +1,4 @@
-// function that activates the select of Materielize, DON'T REMOVE PLEASE
+// function that activates the select of Materielize, DON'T REMOVE
 $(document).ready(function() {
 	$('select').material_select();
 });
@@ -71,30 +71,51 @@ $('.datepicker').pickadate({
     max: [1,00]
 });*/
 
-
-//Ids des input text et erreurs a afficher
-/*var textErrors={
-    'titre_insert' : 'Entre un titre',
-    'auteur_insert' : 'Entre un auteur'
-};*/
-
 //vérification formulaire
 
-/*$(function(){
-    $('#itineraire').click(function(){
-        var errors="";
-        $("input[type='text']").each(function(){
-            //Si le input est vide
-            if($(this).val()===""){
-                //on recupere le text erreur
-                errors=textErrors[$(this).attr('id')];
-                //on affiche l'erreur a cote
-                $(this).next(".erreur").show().text(errors);
-                //si le input n'est pas vide
-            }else{
-                //on cache l'erreur
-                $(this).next(".erreur").hide();
-            }
-        });
-    });
+/*$('#formRecherche').validate({
+	rules: {
+		depart: {
+			required: true,
+		},
+		arrivee: {
+			required: true,
+		},
+		date1: {
+			required: true,
+		},
+		selecthour: {
+			required: true,
+		},
+		selectMinute: {
+			required: true,
+		},
+	},
+	//For custom messages
+	messages: {
+		depart:{
+			required: "Enter a depart",
+		},
+	},
+	errorElement : 'div',
+	errorPlacement: function(error, element) {
+		var placement = $(element).data('error');
+		if (placement) {
+			$(placement).append(error)
+		} else {
+			error.insertAfter(element);
+		}
+	}
 });*/
+
+function addDepart() {
+	var depart = document.getElementById('selecthour');
+	for (var i = 0; i < 24; i++) {
+		for (var j = 0; j < 60; j += 15) {
+			var x = i < 10 ? '0' + i : i;
+			var y = j < 10 ? '0' + j : j;
+			depart.innerHTML += '<option>' + x + ':' + y + '</option>';
+		}
+	}
+}
+

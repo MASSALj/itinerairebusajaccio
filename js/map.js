@@ -1,4 +1,24 @@
 var lieu = [];  //contiendra la latitude/longitide de la position de départ et de destination
+var departuredate = document.getElementById('date1').value;
+var departure1 = document.getElementById('selecthour').value;
+
+var select = document.getElementById("selecthour");
+var valeur = select.options[select.selectedIndex].value;
+
+var departure2 = document.getElementById('selectminute').value;
+var now = new Date();
+var tzOffset = (now.getTimezoneOffset() + 60) * 60 * 1000;
+
+var time = new Date();
+time.setHours(departure1);
+time.setMinutes(departure2);
+
+var ms = time.getTime() - tzOffset;
+if (ms < now.getTime()) {
+    ms += 24 * 60 * 60 * 1000;
+}
+
+var departureTime = new Date(ms);
 
 routeForm = $('.routeForm');
 resultSearch = $('.resultSearch');
@@ -14,8 +34,6 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {         //instancie la google map
         center: {lat: 41.9257502, lng: 8.7399893},  //centrée sur Ajaccio
         zoom: 15
-
-
     });
 
 
@@ -57,7 +75,6 @@ function initMap() {
     map.addListener('bounds_changed', function() {         // Listener sur l'input text pour la position de arrivée
         searchBoxArrivee.setBounds(map.getBounds());
     });
-
 
 
     //_________________Place le marqueur sur la carte pour le lieu de départ______________
@@ -121,16 +138,36 @@ function initMap() {
                 map: map
             });
 
+            /*var departure = document.getElementById('selecthour').value;
+            var departure2 = document.getElementById('selectminutes').value;
+            var now = new Date();
+            var tzOffset = (now.getTimezoneOffset() + 60) * 60 * 1000;
+
+            var time = new Date();
+            time.setHours(departure);
+            time.setMinutes(departure2);
+
+            var ms = time.getTime() - tzOffset;
+            if (ms < now.getTime()) {
+                ms += 24 * 60 * 60 * 1000;
+            }
+
+            var departureTime = new Date(ms);*/
+
+
             // Set destination, origin and travel mode.
             var request = {
                 destination: arrivee,
                 origin: depart,
                 travelMode: google.maps.TravelMode.TRANSIT,
                 transitOptions: {
-                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
+
+                    departureTime: departureTime,          // Foutre les critères de date et heure de depart
                     // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
                     modes: [google.maps.TransitMode.BUS],
-                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS, // le moins de correspondances
+                    //routingPreference: google.maps.TransitRoutePreference.LESS_WALKING, // le moins de marche possible
+                    optimizeWaypoints : true //chemin le moins long
 
                 }
             };
@@ -147,41 +184,7 @@ function initMap() {
     });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //_________________Place le marqueur sur la carte pour le lieu d'arrivée______________
+//_________________Place le marqueur sur la carte pour le lieu d'arrivée______________
 
     var Amarkers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
@@ -245,7 +248,8 @@ function initMap() {
                 routeForm.fadeIn(500);
                 resultSearch.fadeOut(500);
                 summaryPanel.html('');
-            });       
+            });
+            console.log(departure2);
 
             var depart = {lat: lieu['lat1'], lng: lieu['long2']};
             var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
@@ -260,8 +264,8 @@ function initMap() {
                 origin: depart,
                 travelMode: google.maps.TravelMode.TRANSIT,
                 transitOptions: {
-                    //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
-                    // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
+                    //departureTime: Date,          // Foutre les critères de date et heure de depart
+                    //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
                     modes: [google.maps.TransitMode.BUS],
                     routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
 

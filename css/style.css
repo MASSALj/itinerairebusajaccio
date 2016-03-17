@@ -1,6 +1,14 @@
 /*************************************************************Main style of the application************************************************************/
 
-/*personal modifications*/                                    
+/*personal modifications*/
+
+
+@media screen and (max-width: 640px) {
+    .bloc {
+        display:block;
+        clear:both;
+    }
+}
 
 html, body 
 { 
@@ -47,7 +55,7 @@ h2
 	position: absolute;
     z-index:1;
     margin-left:1%;
-    margin-top:80px;
+    margin-top:6.5%;
     width: 23%;
 }
 
