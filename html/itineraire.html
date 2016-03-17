@@ -10,11 +10,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <div class="progress loader">
+        <div class="indeterminate"></div>
+    </div>
+<div id="site">
+    <div id="page">
     <header class="page-header">
         <nav>
             <div class="nav-wrapper white">
                 <a href="#" class="brand-logo center"><h1>Recherche d'itinéraire</h1></a>
-                <a href="" class="brand-logo"><img id="logo" src="../img/logo-capa.jpg" alt="CAPA"></a>
+                <a href="" class="brand-logo left"><img id="logo" src="../img/logo-capa.jpg" alt="CAPA"></a>
             </div>
         </nav>
     </header>
@@ -24,7 +29,7 @@
 
             <div class="row card-panel routeForm">
 
-                <h5 class=" col s12 titre-form"> Rechercher un trajet</h5>
+                <h2 class=" col s12 titre-form"> Rechercher un trajet</h2>
 
                 <form id="formRecherche" action="" method="post">
 
@@ -109,16 +114,15 @@
                         <label for="marche">Le moins de marche à pieds </label>
                     </div>
 
-                   <div class="col s2 offset-s2 no-bottom">
-                      <button class="btn waves-effect waves-light inputsubmit" id="submit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>
-                   </div>
-
+                </div>
                     <!--<div class="row no-bottom">
                         <div class="col s2 offset-s2">
                             <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>-->
-                </div>
+                    <p></p><br /><br />
                 </form>
+
             </div>
+
         </aside>
 
         <div id="lesresultats"></div>
@@ -151,16 +155,13 @@
             </div>
         </div>
     </footer>
-
+</div>
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
     <script type="text/javascript" src="../js/picker.time.js"></script>
     <script type="text/javascript" src="../js/picker.js"></script>
     <script type="text/javascript" src="../js/site.js"></script>
-
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap">
-    </script>
+    </div>
 </body>
 </html>

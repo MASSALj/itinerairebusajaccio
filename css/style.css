@@ -12,12 +12,17 @@
 
 html, body 
 { 
-	height: 100%; 
-	margin: 0; 
 	min-width: 1024px;
-	min-height: 768px;
+	min-height: 768px !important;
+	margin: 0; 
 	padding: 0; 
 	width: 100%;
+}
+
+#page
+{
+
+	display: none;
 }
 
 h1
@@ -33,6 +38,11 @@ h2
 	color: white;
 	font-size: 20px;
 	margin: 0;
+}
+
+.loader
+{
+	position: absolute;
 }
 
 .headerResultSearch
@@ -55,8 +65,19 @@ h2
 	position: absolute;
     z-index:1;
     margin-left:1%;
+<<<<<<< HEAD
     margin-top:6.5%;
+=======
+    margin-top:80px;
+    min-height: 500px;
+    min-width: 200px;
+>>>>>>> 1c9661beec0ac942b4b7c63201648aa7b957a2e4
     width: 23%;
+}
+
+.routeForm input
+{
+
 }
 
 .titre-form
@@ -245,3 +266,13 @@ nav .brand-logo{
 /* Today */
 .picker__day.picker__day--infocus.picker__day--today.picker__day--selected.picker__day--highlighted { background-color: #ffb74d; }
 .picker__day.picker__day--today { color: #6094c9; }
+
+.progress .indeterminate
+{
+	background-color: #b39907;
+}
+
+.progress
+{
+	background-color: rgba(240, 240, 240, 1);
+}
