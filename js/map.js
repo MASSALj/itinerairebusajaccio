@@ -23,6 +23,14 @@ var departureTime = new Date(ms);
 
 
 
+var coord_set = false;
+
+
+
+
+
+
+
 //Enable search reinitialisation
 routeForm = $('.routeForm');
 resultSearch = $('.resultSearch');
@@ -49,31 +57,41 @@ modifSearchButton.click(function(){
 });
 
 
+/**
+ * Add starting point
+ * @param google_window The opened infoWindow
+ * @param google_element the div element containing the name and the position
+ */
+function addDepart(google_window, google_element){
 
-//Listener on the links of the infoWindows
-infodepart1 = $('#infodepart1');
-infodepart1.click(function(){
-    alert('eyo');
-    var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
+    var x = google_element.previousSibling.innerHTML.split(",");
     document.getElementById("depart").value = x[0];
     lieu['long1'] = x[1];
     lieu['lat1'] = x[2];
+    google_window.fadeOut(500);
+    coord_set = true;
 
-});
+}
 
-infodestination1 = $('#infodestination1');
-infodestination1.click(function(){
-    var x = document.getElementById("infodestination1").previousSibling.previousSibling.previousSibling.innerHTML.split(",");
+
+/**
+ * Add starting point
+ * @param google_window The opened infoWindow
+ * @param google_element the div element containing the name and the position
+ */
+function addDestination(google_window, google_element){
+
+    var x = google_element.previousSibling.previousSibling.previousSibling.innerHTML.split(",");
     document.getElementById("arrivee").value = x[0];
     lieu['long2'] = x[1];
     lieu['lat2'] = x[2];
-
-});
-
-
+    google_window.fadeOut(500);
+}
 
 
-
+/**
+ * Displays the google map
+ */
 function initMap() {
 
 
@@ -96,16 +114,16 @@ function initMap() {
 		new google.maps.LatLng(41.898944, 8.828748)
     );
     //
-    //map.fitBounds(defaultBounds);
+    map.fitBounds(defaultBounds);
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
         //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
-        //bounds: map.getBounds()
+        bounds: map.getBounds()
         //componentRestrictions: {country: 'fr', state: 'Corse', city: 'Ajaccio'},
-        bounds: defaultBounds
+        //bounds: defaultBounds
 
         //type: 'transit_station'
     };
@@ -137,7 +155,7 @@ function initMap() {
     searchBoxDepart.addListener('places_changed', function() {
         var places = searchBoxDepart.getPlaces();
 
-        console.log(places);
+        //console.log(places);
 
 ;        if (places.length == 0) {
             return;
@@ -153,7 +171,7 @@ function initMap() {
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
 
-            console.log('les places de départ : \n' + place.name);
+            console.log('les endroits trouvés : \n' + place.name);
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
@@ -178,15 +196,15 @@ function initMap() {
             var longitude = place.geometry.location.lng();
             var latitude = place.geometry.location.lat();
 
-            var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>"+ nom + "," + longitude + "," + latitude + "</div><a id='infodepart1'>Définir comme point de départ</a><br /><a id='infodestination1'>Définir comme point de destination</a></p>";
+            var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>"+ nom + "," + longitude + "," + latitude + "</div><a id='infodepart1' onclick='addDepart($(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
 
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
 
-            lemark.addListener('click', function() {
-                //alert(place.name);
 
+
+            lemark.addListener('click', function() {
                 map.setZoom(16);
                 map.setCenter(lemark.getPosition());
                 infowindow.open(map, lemark);
@@ -194,19 +212,21 @@ function initMap() {
 
 
 
+            if (!coord_set){
 
-            lieu['long1'] = place.geometry.location.lng();
-            lieu['lat1'] = place.geometry.location.lat();
+                lieu['long1'] = place.geometry.location.lng();
+                lieu['lat1'] = place.geometry.location.lat();
+            }
 
-            infodepart1 = $('#infodepart1');
-            infodepart1.click(function(){
-                alert('eyo');
-                var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
-                document.getElementById("depart").value = x[0];
-                lieu['long1'] = x[1];
-                lieu['lat1'] = x[2];
-
-            });
+            //infodepart1 = $('#infodepart1');
+            //infodepart1.click(function(){
+            //    alert('eyo');
+            //    var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
+            //    document.getElementById("depart").value = x[0];
+            //    lieu['long1'] = x[1];
+            //    lieu['lat1'] = x[2];
+            //
+            //});
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
@@ -363,12 +383,41 @@ function initMap() {
             };
 
             // Create a marker for each place.
-            Amarkers.push(new google.maps.Marker({
+            //Amarkers.push(new google.maps.Marker({
+            //    map: map,
+            //    icon: icon,
+            //    title: place.name,
+            //    position: place.geometry.location
+            //}));
+
+            var lemarkd;
+
+            lemarkd = new google.maps.Marker({
                 map: map,
                 icon: icon,
                 title: place.name,
                 position: place.geometry.location
-            }));
+            });
+
+            Amarkers.push(lemarkd);
+
+            var nom2 = place.name;
+            var longitude2 = place.geometry.location.lng();
+            var latitude2 = place.geometry.location.lat();
+
+            var contentString2 = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>"+ nom2 + "," + longitude2 + "," + latitude2 + "</div><a id='infodepart2' onclick='addDepart($(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
+
+            var infowindow2 = new google.maps.InfoWindow({
+                content: contentString2
+            });
+
+
+
+            lemarkd.addListener('click', function() {
+                map.setZoom(16);
+                map.setCenter(lemarkd.getPosition());
+                infowindow2.open(map, lemarkd);
+            });
 
             lieu['long2'] = place.geometry.location.lng();
             lieu['lat2'] = place.geometry.location.lat();
@@ -398,7 +447,7 @@ function initMap() {
                 summaryPanel.html('');
             });
 
-            var depart = {lat: lieu['lat1'], lng: lieu['long2']};
+            var depart = {lat: lieu['lat1'], lng: lieu['long1']};
             var arrivee = {lat: lieu['lat2'], lng: lieu['long2']};
 
             var directionsDisplay = new google.maps.DirectionsRenderer({
