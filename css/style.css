@@ -1,9 +1,19 @@
 /*************************************************************Main style of the application************************************************************/
 
-/*personal modifications*/                                    
+/*personal modifications*/
+
+
+@media screen and (max-width: 640px) {
+    .bloc {
+        display:block;
+        clear:both;
+    }
+}
 
 html, body 
 { 
+	min-width: 1024px;
+	min-height: 768px !important;
 	margin: 0; 
 	padding: 0; 
 	width: 100%;
@@ -11,7 +21,7 @@ html, body
 
 #page
 {
-	min-width: 1024px;
+
 	display: none;
 }
 
@@ -55,8 +65,19 @@ h2
 	position: absolute;
     z-index:1;
     margin-left:1%;
+<<<<<<< HEAD
+    margin-top:6.5%;
+=======
     margin-top:80px;
+    min-height: 500px;
+    min-width: 200px;
+>>>>>>> 1c9661beec0ac942b4b7c63201648aa7b957a2e4
     width: 23%;
+}
+
+.routeForm input
+{
+
 }
 
 .titre-form
