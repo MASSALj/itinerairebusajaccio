@@ -50,16 +50,16 @@ modifSearchButton.click(function(){
 
 
 
+//Listener on the links of the infoWindows
 infodepart1 = $('#infodepart1');
 infodepart1.click(function(){
     alert('eyo');
-    //var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
-    //document.getElementById("depart").value = x[0];
-    //lieu['long1'] = x[1];
-    //lieu['lat1'] = x[2];
+    var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
+    document.getElementById("depart").value = x[0];
+    lieu['long1'] = x[1];
+    lieu['lat1'] = x[2];
 
 });
-
 
 infodestination1 = $('#infodestination1');
 infodestination1.click(function(){
@@ -71,9 +71,10 @@ infodestination1.click(function(){
 });
 
 
+
+
+
 function initMap() {
-
-
 
 
     var map = new google.maps.Map(document.getElementById('map'), {         //instancie la google map
@@ -109,22 +110,11 @@ function initMap() {
         //type: 'transit_station'
     };
 
+
+
+
     var searchBoxDepart = new google.maps.places.SearchBox(depart, options);   // -->  intialise les input text en searchbox, permettant l'autocomplétion
-    //var searchBoxArrivee = new google.maps.places.SearchBox(arrivee, options); //  ↗
-
-    //var searchBoxDepart = new google.maps.places.Autocomplete(depart, options);   // -->  intialise les input text en searchbox, permettant l'autocomplétion
     var searchBoxArrivee = new google.maps.places.SearchBox(arrivee, options); //  ↗
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -184,13 +174,6 @@ function initMap() {
 
             markers.push(lemark);
 
-            // Create a marker for each place.
-            //markers.push(new google.maps.Marker({
-            //    map: map,
-            //    icon: icon,
-            //    title: place.name,
-            //    position: place.geometry.location
-            //}));
             var nom = place.name;
             var longitude = place.geometry.location.lng();
             var latitude = place.geometry.location.lat();
@@ -285,7 +268,7 @@ function initMap() {
                     departureTime: departureTime,          // Foutre les critères de date et heure de depart
                     // arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
                     modes: [google.maps.TransitMode.BUS],
-                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS, // le moins de correspondances
+                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS // le moins de correspondances
                     //routingPreference: google.maps.TransitRoutePreference.LESS_WALKING, // le moins de marche possible
 
                 },
