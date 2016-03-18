@@ -102,9 +102,9 @@ function initMap() {
 
     var options = {
         //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
-        bounds: map.getBounds()
+        //bounds: map.getBounds()
         //componentRestrictions: {country: 'fr', state: 'Corse', city: 'Ajaccio'},
-        //bounds: defaultBounds
+        bounds: defaultBounds
 
         //type: 'transit_station'
     };
@@ -232,7 +232,7 @@ function initMap() {
                 bounds.extend(place.geometry.location);
             }
         });
-        map.fitBounds(defaultBounds);
+        map.fitBounds(bounds);
 
 
 
@@ -287,7 +287,6 @@ function initMap() {
                     modes: [google.maps.TransitMode.BUS],
                     routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS, // le moins de correspondances
                     //routingPreference: google.maps.TransitRoutePreference.LESS_WALKING, // le moins de marche possible
-                    optimizeWaypoints : true //chemin le moins long
 
                 },
                 optimizeWaypoints: true
@@ -398,7 +397,7 @@ function initMap() {
                 bounds.extend(place.geometry.location);
             }
         });
-        map.fitBounds(defaultBounds);
+        map.fitBounds(bounds);
 
 
         //console.log(lieu);
