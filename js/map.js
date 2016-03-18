@@ -23,7 +23,8 @@ var departureTime = new Date(ms);
 
 
 
-var coord_set = false;
+var coord_set1 = false;
+var coord_set2 = false;
 
 
 
@@ -69,7 +70,9 @@ function addDepart(google_window, google_element){
     lieu['long1'] = x[1];
     lieu['lat1'] = x[2];
     google_window.fadeOut(500);
-    coord_set = true;
+    coord_set1 = true;
+
+    console.log(lieu);
 
 }
 
@@ -86,6 +89,8 @@ function addDestination(google_window, google_element){
     lieu['long2'] = x[1];
     lieu['lat2'] = x[2];
     google_window.fadeOut(500);
+
+    console.log(lieu);
 }
 
 
@@ -212,10 +217,12 @@ function initMap() {
 
 
 
-            if (!coord_set){
+            if (!coord_set1){
 
                 lieu['long1'] = place.geometry.location.lng();
                 lieu['lat1'] = place.geometry.location.lat();
+            }else{
+                return false;
             }
 
             //infodepart1 = $('#infodepart1');
@@ -399,6 +406,8 @@ function initMap() {
                 position: place.geometry.location
             });
 
+
+
             Amarkers.push(lemarkd);
 
             var nom2 = place.name;
@@ -419,8 +428,12 @@ function initMap() {
                 infowindow2.open(map, lemarkd);
             });
 
-            lieu['long2'] = place.geometry.location.lng();
-            lieu['lat2'] = place.geometry.location.lat();
+            if (!coord_set2){
+                lieu['long2'] = place.geometry.location.lng();
+                lieu['lat2'] = place.geometry.location.lat();
+            }else{
+                return false;
+            }
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
@@ -462,8 +475,8 @@ function initMap() {
                 transitOptions: {
                     //departureTime: Date,          // Foutre les critères de date et heure de depart
                     //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
-                    modes: [google.maps.TransitMode.BUS],
-                    routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+                    modes: [google.maps.TransitMode.BUS]
+                    //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
 
                 },
                 optimizeWaypoints: true
