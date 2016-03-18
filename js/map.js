@@ -3,7 +3,6 @@ var lieu = [];  //contiendra la latitude/longitide de la position de départ et 
 
 
 
-
 //Enable search reinitialisation
 routeForm = $('.routeForm');
 resultSearch = $('.resultSearch');
@@ -25,28 +24,37 @@ modifSearchButton.click(function(){
     initMap();
     routeForm.fadeIn(500);
     resultSearch.fadeOut(500);
-    summaryPanel.html('');
+    //resultSearch.html('');
 
 });
 
 
 
+infodepart1 = $('#infodepart1');
+infodepart1.click(function(){
+    alert('eyo');
+    //var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
+    //document.getElementById("depart").value = x[0];
+    //lieu['long1'] = x[1];
+    //lieu['lat1'] = x[2];
+
+});
 
 
+infodestination1 = $('#infodestination1');
+infodestination1.click(function(){
+    var x = document.getElementById("infodestination1").previousSibling.previousSibling.previousSibling.innerHTML.split(",");
+    document.getElementById("arrivee").value = x[0];
+    lieu['long2'] = x[1];
+    lieu['lat2'] = x[2];
 
-
-
-
-
-
-
-
-
-
-
+});
 
 
 function initMap() {
+
+
+
 
     var map = new google.maps.Map(document.getElementById('map'), {         //instancie la google map
         center: {lat: 41.9257502, lng: 8.7399893},  //centrée sur Ajaccio
@@ -64,26 +72,43 @@ function initMap() {
     });
 
 
-    //var defaultBounds = new google.maps.LatLngBounds(
-	//	new google.maps.LatLng(41.972243, 8.581899),
-	//	new google.maps.LatLng(41.898944, 8.828748)
-	//);
-
+    var defaultBounds = new google.maps.LatLngBounds(
+		new google.maps.LatLng(41.972243, 8.581899),
+		new google.maps.LatLng(41.898944, 8.828748)
+    );
+    //
     //map.fitBounds(defaultBounds);
 
     var depart = document.getElementById('depart');
     var arrivee = document.getElementById('arrivee');
 
     var options = {
-        componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
+        //componentRestrictions: {country: 'France', state: 'Corse', city: 'Ajaccio'}, //Restriction sur la france, mais ne marche pas....
         bounds: map.getBounds()
+        //componentRestrictions: {country: 'fr', state: 'Corse', city: 'Ajaccio'},
         //bounds: defaultBounds
 
         //type: 'transit_station'
     };
 
     var searchBoxDepart = new google.maps.places.SearchBox(depart, options);   // -->  intialise les input text en searchbox, permettant l'autocomplétion
+    //var searchBoxArrivee = new google.maps.places.SearchBox(arrivee, options); //  ↗
+
+    //var searchBoxDepart = new google.maps.places.Autocomplete(depart, options);   // -->  intialise les input text en searchbox, permettant l'autocomplétion
     var searchBoxArrivee = new google.maps.places.SearchBox(arrivee, options); //  ↗
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     map.addListener('bounds_changed', function() {         // Listener sur l'input text pour la position de départ
@@ -105,7 +130,9 @@ function initMap() {
     searchBoxDepart.addListener('places_changed', function() {
         var places = searchBoxDepart.getPlaces();
 
-        if (places.length == 0) {
+        console.log(places);
+
+;        if (places.length == 0) {
             return;
         }
 
@@ -118,6 +145,8 @@ function initMap() {
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function(place) {
+
+            console.log('les places de départ : \n' + place.name);
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
@@ -126,16 +155,58 @@ function initMap() {
                 scaledSize: new google.maps.Size(25, 25)
             };
 
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+
+            var lemark;
+
+            lemark = new google.maps.Marker({
                 map: map,
                 icon: icon,
                 title: place.name,
                 position: place.geometry.location
-            }));
+            });
+
+            markers.push(lemark);
+
+            // Create a marker for each place.
+            //markers.push(new google.maps.Marker({
+            //    map: map,
+            //    icon: icon,
+            //    title: place.name,
+            //    position: place.geometry.location
+            //}));
+            var nom = place.name;
+            var longitude = place.geometry.location.lng();
+            var latitude = place.geometry.location.lat();
+
+            var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>"+ nom + "," + longitude + "," + latitude + "</div><a id='infodepart1'>Définir comme point de départ</a><br /><a id='infodestination1'>Définir comme point de destination</a></p>";
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            lemark.addListener('click', function() {
+                //alert(place.name);
+
+                map.setZoom(16);
+                map.setCenter(lemark.getPosition());
+                infowindow.open(map, lemark);
+            });
+
+
+
 
             lieu['long1'] = place.geometry.location.lng();
             lieu['lat1'] = place.geometry.location.lat();
+
+            infodepart1 = $('#infodepart1');
+            infodepart1.click(function(){
+                alert('eyo');
+                var x = document.getElementById("infodepart1").previousSibling.innerHTML.split(",");
+                document.getElementById("depart").value = x[0];
+                lieu['long1'] = x[1];
+                lieu['lat1'] = x[2];
+
+            });
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.
@@ -144,7 +215,8 @@ function initMap() {
                 bounds.extend(place.geometry.location);
             }
         });
-        map.fitBounds(bounds);
+        map.fitBounds(defaultBounds);
+
 
 
 
@@ -171,8 +243,8 @@ function initMap() {
 
             // Set destination, origin and travel mode.
             var request = {
-                destination: arrivee,
                 origin: depart,
+                destination: arrivee,
                 travelMode: google.maps.TravelMode.TRANSIT,
                 transitOptions: {
                     //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
@@ -180,7 +252,8 @@ function initMap() {
                     modes: [google.maps.TransitMode.BUS],
                     routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
 
-                }
+                },
+                optimizeWaypoints: true
             };
 
             // Pass the directions request to the directions service.
@@ -225,12 +298,15 @@ function initMap() {
 
 
 
-                        if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
+                        if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
                         summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
 
                     }
+                }else {
+                    window.alert('La requête de direction a échoué pour la raison suivante : ' + status);
                 }
+
             });
         }
     });
@@ -319,7 +395,7 @@ function initMap() {
                 bounds.extend(place.geometry.location);
             }
         });
-        map.fitBounds(bounds);
+        map.fitBounds(defaultBounds);
 
 
         //console.log(lieu);
@@ -346,8 +422,8 @@ function initMap() {
 
             // Set destination, origin and travel mode.
             var request = {
-                destination: arrivee,
                 origin: depart,
+                destination: arrivee,
                 travelMode: google.maps.TravelMode.TRANSIT,
                 transitOptions: {
                     //departureTime: new Date(1337675679473),          // Foutre les critères de date et heure de depart
@@ -356,7 +432,8 @@ function initMap() {
                     routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
 
                 },
-                provideRouteAlternatives: false
+                optimizeWaypoints: true
+
             };
 
             // Pass the directions request to the directions service.
