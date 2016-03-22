@@ -89,19 +89,23 @@ modifSearchButton.click(function(){
 /**
  * Add starting point
  * @param google_window The opened infoWindow
- * @param google_element the div element containing the name and the position
+ * @param google_element the div element containing the name, the position, and the index of the place
  */
 function addDepart(google_window, google_element){
 
-    //var x = google_element.previousSibling.innerHTML.split(",");
-//    document.getElementById("depart").value = x[0];
-    //lieu['long1'] = x[1];
-    //lieu['lat1'] = x[2];
-    setDirection(searchBoxArrivee.getPlaces()[0].geeometry.location, 'depart');
-    google_window.fadeOut(500);
-    //coord_set1 = true;
+    var x = google_element.previousSibling.innerHTML.split(",");
+    document.getElementById("depart").value = x[0];
 
-    //console.log(lieu);
+    if (x[4] == 'searchBoxDepart'){ var laplace =  searchBoxDepart.getPlaces(); } else { var laplace =  searchBoxArrivee.getPlaces(); }
+
+    //var laplace =  searchBoxDepart.getPlaces();
+
+    laplace.forEach(function(place, j) {
+        if (j == x[3]){
+            setDirection(place.geometry.location, 'depart');
+            google_window.fadeOut(500);
+        }
+    });
 
 }
 
@@ -121,18 +125,22 @@ function addDepart(google_window, google_element){
 /**
  * Add ending point
  * @param google_window The opened infoWindow
- * @param google_element the div element containing the name and the position
+ * @param google_element the div element containing the name, the position, and the index of the place
  */
 function addDestination(google_window, google_element){
 
     var x = google_element.previousSibling.previousSibling.previousSibling.innerHTML.split(",");
     document.getElementById("arrivee").value = x[0];
-    //lieu['long2'] = x[1];
-    //lieu['lat2'] = x[2];
-    setDirection(parseInt(x[1]), parseInt(x[2]), 'arrivee');
-    google_window.fadeOut(500);
 
-    console.log(lieu);
+    if (x[4] == 'searchBoxDepart'){ var laplace =  searchBoxDepart.getPlaces(); } else { var laplace =  searchBoxArrivee.getPlaces(); }
+    //var laplace =  searchBoxArrivee.getPlaces();
+
+    laplace.forEach(function(place, j) {
+        if (j == x[3]){
+            setDirection(place.geometry.location, 'arrivee');
+            google_window.fadeOut(500);
+        }
+    });
 }
 
 
@@ -200,9 +208,9 @@ function initMap() {
         }else if (places.length == 1){ // one place
             console.log(places[0].geometry.location.lng());
             setDirection(places[0].geometry.location, 'depart');
-            setMarkers(places); //puts the marker on the place
+            setMarkers(places, 'searchBoxDepart'); //puts the marker on the place
         }else{
-            setMarkers(places); // puts the markers on every places found, the user will have to choose the wanted place
+            setMarkers(places, 'searchBoxDepart'); // puts the markers on every places found, the user will have to choose the wanted place
         }
     });
 
@@ -217,9 +225,9 @@ function initMap() {
         }else if (places.length == 1){ // one place
             console.log(places[0].geometry.location);
             setDirection(places[0].geometry.location, 'arrivee');  //we put the place directly as the starting point
-            setMarkers(places); //puts the marker on the place
+            setMarkers(places,  'searchBoxArrivee'); //puts the marker on the place
         }else{
-            setMarkers(places);  // puts the markers on every places found, the user will have to choose the wanted place
+            setMarkers(places, 'searchBoxArrivee');  // puts the markers on every places found, the user will have to choose the wanted place
         }
     });
 
@@ -272,7 +280,7 @@ function setDirection(location, str){
  *
  * @param theplaces
  */
-function setMarkers(theplaces){
+function setMarkers(theplaces, elem){
 
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
@@ -287,7 +295,7 @@ function setMarkers(theplaces){
 
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
-        theplaces.forEach(function(place) {
+        theplaces.forEach(function(place, k) {
 
             console.log('les endroits trouvés : \n' + place.name);
             var icon = {
@@ -314,13 +322,9 @@ function setMarkers(theplaces){
             var nom = place.name;
             var longitude = place.geometry.location.lng();
             var latitude = place.geometry.location.lat();
-            theposition = place.geometry.location;
 
             //var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>" + nom + "," + longitude + "," + latitude + "</div><a id='infodepart1' onclick='addDepart($(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
-            //var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>" + nom + "," + longitude + "," + latitude + "</div><a id='infodepart1' onclick='addDepart(place.geometry.location, $(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
-            var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>" + nom + "," + longitude + "," + latitude;
-            contentString += "</div><a id='infodepart1'";
-            contentString += " onclick='addDepart(place.geometry.location, $(this).parent().parent().parent().parent(), place.geometry.location)' >Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
+            var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>" + nom + "," + longitude + "," + latitude + "," + k + "," + elem + "</div><a id='infodepart1' onclick='addDepart($(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
 
 
 
