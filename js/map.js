@@ -458,7 +458,7 @@ function drawDirection(){
  * Get the date and the time specified by the user in the form
  */
 function getDateTimeUser(){
-    var date = document.getElementById('date1').value;
+    var date = document.getElementsByName('date1_submit')[0].value;
     var currDate = new Date();
 
     var time = new Date(date);
