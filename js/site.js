@@ -63,9 +63,8 @@ $(document).ready(function(){
 	    selectMonths: true, // Creates a dropdown to control month
 	    selectYears: 15, // Creates a dropdown of 15 years to control year
 	    firstDay: true, // first day of the week, True = Monday False= Sunday
-        format: 'yyyy-mm-dd',
-        formatSubmit: 'yyyy/mm/dd',
-        hiddenName: true,
+        format: 'dddd, dd mmmm, yyyy',
+        formatSubmit: 'yyyy-mm-dd',
 
 	    labelMonthNext: 'mois suivant',
 	    labelMonthPrev: 'mois précédent',

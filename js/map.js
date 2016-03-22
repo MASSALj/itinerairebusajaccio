@@ -11,10 +11,6 @@ button_less_waypoints.click(function(){
 });
 
 
-
-
-
-
 //HANDLES THE 'FEWER WALKING' OPTION
 button_less_walking = $('#radio_marche');
 button_less_walking.click(function(){
@@ -35,10 +31,6 @@ button_less_walking.click(function(){
 var map;  //The Google Map
 var depart; //Variable that will hold the starting point location
 var arrivee; //Variable that will hold the ending point location
-
-
-
-
 
 
 //the searchbox that are going to be used
@@ -388,7 +380,9 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
+
             departureTime: getDateTimeUser(),          // Foutre les critères de date et heure de depart
+
             //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
             modes: [google.maps.TransitMode.BUS],
             routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
