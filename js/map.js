@@ -1,5 +1,4 @@
 // HANDLES THE FEWER TRANSFERS OPTION
-var less_waypoints = false;
 button_less_waypoints = $('#correspondance');
 button_less_waypoints.click(function(){
     if ($(this).is(':not(:checked)')){
@@ -14,27 +13,6 @@ button_less_waypoints.click(function(){
 var map;
 var depart;
 var arrivee;
-
-/*var submitForm = document.getElementById('formRecherche');
-submitForm.addEventListener('submit', function() {*/
-
-    var date = document.getElementById('date1').value;
-    alert(date);
-    var dateheure = document.getElementById('selecthour').value;
-    var dateminutes = document.getElementById('selectminute').value;
-
-    var time = new Date(date);
-    time.setHours(dateheure);
-    time.setMinutes(dateminutes);
-
-    var ms = time.getTime() / 1000;
-    if (ms < time.getTime()) {
-        ms += 24 * 60 * 60 * 1000;
-    }
-
-    var departuretime = new Date(ms);
-
-/*});*/
 
 
 //the searchbox that are going to be used
@@ -325,20 +303,20 @@ function drawDirection(){
         map: map
     });
 
-    /*var date = document.getElementById('date1').value;
+    var date = document.getElementsByName('date1_submit')[0].value;
     var dateheure = document.getElementById('selecthour').value;
     var dateminutes = document.getElementById('selectminute').value;
 
     var time = new Date(date);
+    console.log("var time = " + time);
     time.setHours(dateheure);
     time.setMinutes(dateminutes);
 
-    var ms = time.getTime() / 1000;
-    if (ms < time.getTime()) {
-        ms += 24 * 60 * 60 * 1000;
-    }
+    var ms = time.getTime();
+    console.log("var ms = " + ms);
 
-    var departuretime = new Date(ms);*/
+    var departuretime = new Date(ms);
+    console.log("var departuretime = " + departuretime);
 
     // Set destination, origin and travel mode.
     var request = {
@@ -346,7 +324,7 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
-            departureTime: departuretime,          // Foutre les critères de date et heure de depart
+            departureTime: new Date(departuretime),          // Foutre les critères de date et heure de depart
             //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
             modes: [google.maps.TransitMode.BUS]
             //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
