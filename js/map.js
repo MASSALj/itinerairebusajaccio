@@ -1,29 +1,4 @@
-var departuredate = document.getElementById('date1').value;
-var departure1 = document.getElementById('selecthour').value;
-
-var select = document.getElementById("selecthour");
-var valeur = select.options[select.selectedIndex].value;
-
-var departure2 = document.getElementById('selectminute').value;
-var now = new Date();
-var tzOffset = (now.getTimezoneOffset() + 60) * 60 * 1000;
-
-var time = new Date();
-time.setHours(departure1);
-time.setMinutes(departure2);
-
-var ms = time.getTime() - tzOffset;
-if (ms < now.getTime()) {
-    ms += 24 * 60 * 60 * 1000;
-}
-
-var departureTime = new Date(ms);
-
-
-
-
-// HANDLES THE FEWER TRANSFERS OPTION
-var less = [google.maps.TransitRoutePreference.FEWER_TRANSFERS];
+// HANDLES THE 'FEWER TRANSFERS' OPTION
 button_less_waypoints = $('#radio_correspondance');
 button_less_waypoints.click(function(){
     if ($(this).is(':not(:checked)')){
@@ -36,6 +11,11 @@ button_less_waypoints.click(function(){
 });
 
 
+
+
+
+
+//HANDLES THE 'FEWER WALKING' OPTION
 button_less_walking = $('#radio_marche');
 button_less_walking.click(function(){
     if ($(this).is(':not(:checked)')){
@@ -50,14 +30,24 @@ button_less_walking.click(function(){
 
 
 
-var map;
-var depart;
-var arrivee;
+
+
+var map;  //The Google Map
+var depart; //Variable that will hold the starting point location
+var arrivee; //Variable that will hold the ending point location
+
+
+
+
 
 
 //the searchbox that are going to be used
 var searchBoxDepart;
 var searchBoxArrivee;
+
+
+
+
 
 
 //Enable search reinitialisation
@@ -75,6 +65,10 @@ newSearchButton.click(function(){
 });
 
 
+
+
+
+
 //Enable research modification
 modifSearchButton = $('.modifSearchButton');
 modifSearchButton.click(function(){
@@ -90,8 +84,20 @@ modifSearchButton.click(function(){
 
 
 
+//Enable direction details printing
+var button_print = $('#impression');
+document.getElementById('impression').addEventListener('click', function(){
+    alert("Script loaded but not necessarily executed.");
+}, false);
 
+button_print.click(function() {
+    alert("Script loaded but not necessarily executed.");
+    $.getScript("../lib/jspdf.js", function () {
 
+        alert("Script loaded but not necessarily executed.");
+
+    });
+});
 
 
 
@@ -127,13 +133,6 @@ function addDepart(google_window, google_element){
 
 
 
-
-
-
-
-
-
-
 /**
  * Add ending point
  * @param google_window The opened infoWindow
@@ -154,6 +153,8 @@ function addDestination(google_window, google_element){
         }
     });
 }
+
+
 
 
 
@@ -252,11 +253,6 @@ function initMap() {
 
 
 
-
-
-
-
-
 /**
  * Set starting or ending point
  *
@@ -268,14 +264,6 @@ function setDirection(location, str){
     if (str == 'depart') { depart = location; } else { arrivee = location; }
 
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -365,33 +353,13 @@ function setMarkers(theplaces, elem){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Draw the direction
  *
  */
 function drawDirection(){
+
+
     if (!depart || !arrivee){
         alert('Renseigner un lieu de départ et d\'arrivée ');
         return false;
@@ -408,9 +376,11 @@ function drawDirection(){
 
     }
 
+
     var directionsDisplay = new google.maps.DirectionsRenderer({
         map: map
     });
+
 
     // Set destination, origin and travel mode.
     var request = {
@@ -418,7 +388,7 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
-            //departureTime: Date,          // Foutre les critères de date et heure de depart
+            departureTime: getDateTimeUser(),          // Foutre les critères de date et heure de depart
             //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
             modes: [google.maps.TransitMode.BUS],
             routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
@@ -428,7 +398,7 @@ function drawDirection(){
         optimizeWaypoints: true
 
     };
-    console.log(request);
+
 
     // Pass the directions request to the directions service.
     var directionsService = new google.maps.DirectionsService();
@@ -476,7 +446,6 @@ function drawDirection(){
                 if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
                 summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
-
             }
 
         } else {
@@ -487,16 +456,41 @@ function drawDirection(){
 }
 
 
-var button_print = $('#impression');
-document.getElementById('impression').addEventListener('click', function(){
-    alert("Script loaded but not necessarily executed.");
-}, false);
 
-button_print.click(function() {
-    alert("Script loaded but not necessarily executed.");
-    $.getScript("../lib/jspdf.js", function () {
 
-        alert("Script loaded but not necessarily executed.");
 
-    });
-});
+
+/**
+ * Get the date and the time specified by the user in the form
+ */
+function getDateTimeUser(){
+    var date = document.getElementById('date1').value;
+    var currDate = new Date();
+
+    var time = new Date(date);
+    time.setHours(document.getElementById('selecthour').value);
+    time.setMinutes(document.getElementById('selectminute').value);
+
+    //if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old dates
+    //
+    //
+    ////handles old time
+    //if (time.getHours() < currDate.getHours()) {
+    //    time.setHours(currDate.getHours());
+    //
+    //    if (time.getMinutes() < currDate.getMinutes()) {
+    //        time.setMinutes(currDate.getMinutes());
+    //    }
+    //}
+
+
+    //handles hours below 6:30
+    if (time.getHours() < 6 || (time.getHours() == 6 && time.getMinutes() < 30 )){
+        time.setHours(6);
+        time.setMinutes(30);
+    }
+
+    console.log(time.toDateString());
+
+    return new Date(time.getTime());
+}
