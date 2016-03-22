@@ -1,27 +1,3 @@
-var departuredate = document.getElementById('date1').value;
-var departure1 = document.getElementById('selecthour').value;
-
-var select = document.getElementById("selecthour");
-var valeur = select.options[select.selectedIndex].value;
-
-var departure2 = document.getElementById('selectminute').value;
-var now = new Date();
-var tzOffset = (now.getTimezoneOffset() + 60) * 60 * 1000;
-
-var time = new Date();
-time.setHours(departure1);
-time.setMinutes(departure2);
-
-var ms = time.getTime() - tzOffset;
-if (ms < now.getTime()) {
-    ms += 24 * 60 * 60 * 1000;
-}
-
-var departureTime = new Date(ms);
-
-
-
-
 // HANDLES THE FEWER TRANSFERS OPTION
 var less_waypoints = false;
 button_less_waypoints = $('#correspondance');
@@ -35,18 +11,35 @@ button_less_waypoints.click(function(){
     }
 });
 
-
-
-
 var map;
 var depart;
 var arrivee;
+
+/*var submitForm = document.getElementById('formRecherche');
+submitForm.addEventListener('submit', function() {*/
+
+    var date = document.getElementById('date1').value;
+    alert(date);
+    var dateheure = document.getElementById('selecthour').value;
+    var dateminutes = document.getElementById('selectminute').value;
+
+    var time = new Date(date);
+    time.setHours(dateheure);
+    time.setMinutes(dateminutes);
+
+    var ms = time.getTime() / 1000;
+    if (ms < time.getTime()) {
+        ms += 24 * 60 * 60 * 1000;
+    }
+
+    var departuretime = new Date(ms);
+
+/*});*/
 
 
 //the searchbox that are going to be used
 var searchBoxDepart;
 var searchBoxArrivee;
-
 
 //Enable search reinitialisation
 routeForm = $('.routeForm');
@@ -62,7 +55,6 @@ newSearchButton.click(function(){
     initMap();
 });
 
-
 //Enable research modification
 modifSearchButton = $('.modifSearchButton');
 modifSearchButton.click(function(){
@@ -72,18 +64,6 @@ modifSearchButton.click(function(){
     //resultSearch.html('');
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -104,18 +84,6 @@ function addDepart(google_window, google_element){
     //console.log(lieu);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -226,15 +194,6 @@ function initMap() {
 }
 
 
-
-
-
-
-
-
-
-
-
 /**
  * Set starting or ending point
  *
@@ -248,22 +207,9 @@ function setDirection(location, str){
     //if (str == 'depart') { depart = location; } else { arrivee = location; }
 
 
-
     if (str == 'depart') { depart = location; } else { arrivee = location; }
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -349,32 +295,6 @@ function setMarkers(theplaces){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Draw the direction
  *
@@ -396,9 +316,25 @@ function drawDirection(){
 
     }
 
+
     var directionsDisplay = new google.maps.DirectionsRenderer({
         map: map
     });
+
+    /*var date = document.getElementById('date1').value;
+    var dateheure = document.getElementById('selecthour').value;
+    var dateminutes = document.getElementById('selectminute').value;
+
+    var time = new Date(date);
+    time.setHours(dateheure);
+    time.setMinutes(dateminutes);
+
+    var ms = time.getTime() / 1000;
+    if (ms < time.getTime()) {
+        ms += 24 * 60 * 60 * 1000;
+    }
+
+    var departuretime = new Date(ms);*/
 
     // Set destination, origin and travel mode.
     var request = {
@@ -406,7 +342,7 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
-            //departureTime: Date,          // Foutre les critères de date et heure de depart
+            departureTime: departuretime,          // Foutre les critères de date et heure de depart
             //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
             modes: [google.maps.TransitMode.BUS]
             //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
