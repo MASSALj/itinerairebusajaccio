@@ -23,15 +23,27 @@ var departureTime = new Date(ms);
 
 
 // HANDLES THE FEWER TRANSFERS OPTION
-var less_waypoints = false;
-button_less_waypoints = $('#correspondance');
+var less = [google.maps.TransitRoutePreference.FEWER_TRANSFERS];
+button_less_waypoints = $('#radio_correspondance');
 button_less_waypoints.click(function(){
     if ($(this).is(':not(:checked)')){
-        alert('sans le moins de correspondance');
-        var less_waypoints = false;
+        alert('fewer walking');
+        less = google.maps.TransitRoutePreference.LESS_WALKING;
     }else{
-        alert('avec le moins de correspondance');
-        var less_waypoints = true;
+        alert('less transfers');
+        less = google.maps.TransitRoutePreference.FEWER_TRANSFERS;
+    }
+});
+
+
+button_less_walking = $('#radio_marche');
+button_less_walking.click(function(){
+    if ($(this).is(':not(:checked)')){
+        alert('fewer tansfers');
+        less = google.maps.TransitRoutePreference.FEWER_TRANSFERS;
+    }else{
+        alert('less walking');
+        less = google.maps.TransitRoutePreference.LESS_WALKING;
     }
 });
 
@@ -144,15 +156,17 @@ function addDestination(google_window, google_element){
 }
 
 
+
+
 /**
- * Displays the google map and turns the two inputs to Google maps SearchBoxes
+ * Displays the google map and turns the two inputs into Google maps SearchBoxes
  */
 function initMap() {
 
 
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
-        zoom: 15
+        zoom: 18
     });
 
 
@@ -251,14 +265,7 @@ function initMap() {
  */
 function setDirection(location, str){
 
-
-    //var location = new google.maps.LatLng(parseInt(lat), parseInt(lng));
-    //if (str == 'depart') { depart = location; } else { arrivee = location; }
-
-
-
     if (str == 'depart') { depart = location; } else { arrivee = location; }
-
 
 }
 
@@ -279,6 +286,7 @@ function setDirection(location, str){
  * Puts the markers on the places
  *
  * @param theplaces
+ * @param elem The input text which made the search
  */
 function setMarkers(theplaces, elem){
 
@@ -412,13 +420,15 @@ function drawDirection(){
         transitOptions: {
             //departureTime: Date,          // Foutre les critères de date et heure de depart
             //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
-            modes: [google.maps.TransitMode.BUS]
-            //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+            modes: [google.maps.TransitMode.BUS],
+            routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+
 
         },
         optimizeWaypoints: true
 
     };
+    console.log(request);
 
     // Pass the directions request to the directions service.
     var directionsService = new google.maps.DirectionsService();
@@ -463,7 +473,7 @@ function drawDirection(){
 
 
 
-                if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
+                if (route.legs[i].arrival_time) {summaryPanel.append('Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
                 summaryPanel.append('Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
 
@@ -475,3 +485,18 @@ function drawDirection(){
 
     });
 }
+
+
+var button_print = $('#impression');
+document.getElementById('impression').addEventListener('click', function(){
+    alert("Script loaded but not necessarily executed.");
+}, false);
+
+button_print.click(function() {
+    alert("Script loaded but not necessarily executed.");
+    $.getScript("../lib/jspdf.js", function () {
+
+        alert("Script loaded but not necessarily executed.");
+
+    });
+});

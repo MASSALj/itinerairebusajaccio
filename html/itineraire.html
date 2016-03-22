@@ -106,13 +106,13 @@
 
 
                     <div class="input-field col s12 check1">
-                        <input class="with-gap" name="correspondance" type="checkbox" id="correspondance"  />
-                        <label for="correspondance">Le moins de correspondance</label>
+                        <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked"/>
+                        <label for="radio_correspondance">Le moins de correspondance</label>
                     </div>
 
                     <div class="input-field col s12 check2">
-                        <input class="with-gap" name="marche" type="checkbox" id="marche"  />
-                        <label for="marche">Le moins de marche à pieds </label>
+                        <input class="with-gap" name="radio_form" type="radio" id="radio_marche"  />
+                        <label for="radio_marche">Le moins de marche à pieds </label>
                     </div>
 
                 </div>
@@ -120,7 +120,7 @@
                 <div class="input-field col">
                     <p>
                         <div class="col s2 offset-s2">
-                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="drawDirection(); return false;//initMap()">Submit</button>
+                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Submit</button>
                         </div>
                     </p>
                 </div>
@@ -136,6 +136,7 @@
         <div class="card white resultSearch">
             <div class="headerResultSearch">
                 <h2>Résultat de la recherche</h2>
+                <i id="impression" class="material-icons">print</i>
             </div>
              <div class="row">
                 <div class="col s9 results">
@@ -163,6 +164,7 @@
     </footer>
 </div>
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../lib/jsPDF/jspdf.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
     <script type="text/javascript" src="../js/picker.time.js"></script>
