@@ -32,7 +32,7 @@
 
                 <h2 class=" col s12 titre-form"> Rechercher un trajet</h2>
 
-                <form id="formRecherche" action="" method="post">
+                <p id="formRecherche" action="" method="post">
 
                     <div class="col s12">
                         <div class="input-field">
@@ -116,10 +116,15 @@
                     </div>
 
                 </div>
-                    <!--<div class="row no-bottom">
+
+                <div class="input-field col">
+                    <p>
                         <div class="col s2 offset-s2">
-                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="return false;//initMap()">Submit</button>-->
-                    <p></p><br /><br />
+                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="drawDirection(); return false;//initMap()">Submit</button>
+                        </div>
+                    </p>
+                </div>
+                            <p></p><br /><br />
                 </form>
 
             </div>
@@ -132,15 +137,15 @@
             <div class="headerResultSearch">
                 <h2>Résultat de la recherche</h2>
             </div>
-             <div class="row">
+             <div class="row resultContent">
                 <div class="col s9 results">
                 </div>
-                <div class="col s3 ">
-                    <div class="row">
-                        <a class="waves-effect waves-light btn col s12 newSearchButton"><i class="material-icons left">search</i>Nouvelle recherche</a><br /><br />
+                <div class="col s3 buttonContent">
+                    <div class="row buttonRow">
+                        <a class="waves-effect waves-light btn col s12 newSearchButton resultButton"><i class="material-icons left">search</i>Nouvelle recherche</a><br /><br />
                     </div>
-                    <div class="row">
-                        <a class="waves-effect waves-light btn col s12 modifSearchButton"><i class="material-icons left">create</i>Modifier recherche</a>
+                    <div class="row buttonRow">
+                        <a class="waves-effect waves-light btn col s12 modifSearchButton resultButton"><i class="material-icons left">create</i>Modifier recherche</a>
                     </div>
                 </div>
             </div>
