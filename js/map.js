@@ -78,9 +78,9 @@ modifSearchButton.click(function(){
 
 //Enable direction details printing
 var button_print = $('#impression');
-document.getElementById('impression').addEventListener('click', function(){
-    alert("Script loaded but not necessarily executed.");
-}, false);
+//document.getElementById('impression').addEventListener('click', function(){
+//    alert("Script loaded but not necessarily executed.");
+//}, false);
 
 button_print.click(function() {
     alert("Script loaded but not necessarily executed.");
