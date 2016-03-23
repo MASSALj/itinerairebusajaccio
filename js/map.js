@@ -156,7 +156,6 @@ function addDestination(google_window, google_element){
  */
 function initMap() {
 
-
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
         zoom: 18
@@ -462,8 +461,15 @@ function getDateTimeUser(){
     var currDate = new Date();
 
     var time = new Date(date);
-    time.setHours(document.getElementById('selecthour').value);
-    time.setMinutes(document.getElementById('selectminute').value);
+//    console.log($("#timepicker").val());
+    var heureChoisie = $("#timepicker").val().split(":");
+    var heure = heureChoisie[0];
+    var minutes = heureChoisie[1];
+
+    time.setHours(heure);
+    time.setMinutes(minutes);
+//    time.setHours(document.getElementById('selecthour').value);
+//    time.setMinutes(document.getElementById('selectminute').value);
 
     //if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old dates
     //
@@ -485,6 +491,6 @@ function getDateTimeUser(){
     }
 
     console.log(time.toDateString());
-
+    
     return new Date(time.getTime());
 }
