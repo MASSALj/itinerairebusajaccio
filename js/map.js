@@ -54,29 +54,12 @@ modifSearchButton.click(function(){
 var button_print = $('.impression');
 button_print.click(function() {
 
-    //var jstopdf = new jsPDF();
-    //jstopdf.setFontSize(20);
-    //var thehtml = $('.results').html().replace('<br>', '\n');
-    //console.log(thehtml);
-    //jstopdf.text(17, 12, 'Départ : ' + document.getElementById('depart').value + '\nArrivée : ' + document.getElementById('arrivee').value + '\n' + thehtml);
-    //jstopdf.save('itineraire.pdf');
-
     var win = window.open();
     win.document.write($('.results').html());
     win.print();
     win.close();
 
 });
-
-
-
-function encode_utf8(s) {
-    return encodeURIComponent(s);
-}
-
-function decode_utf8(s) {
-    return decodeURIComponent(s);
-}
 
 
 
@@ -122,8 +105,8 @@ function addDestination(google_window, google_element){
     var x = google_element.previousSibling.previousSibling.previousSibling.innerHTML.split(",");
     document.getElementById("arrivee").value = x[0];
 
-    if (x[4] == 'searchBoxDepart'){ var laplace =  searchBoxDepart.getPlaces(); } else { var laplace =  searchBoxArrivee.getPlaces(); }
-    //var laplace =  searchBoxArrivee.getPlaces();
+    var laplace;
+    if (x[4] == 'searchBoxDepart'){ laplace =  searchBoxDepart.getPlaces(); } else { laplace =  searchBoxArrivee.getPlaces(); }
 
     laplace.forEach(function(place, j) {
         if (j == x[3]){
@@ -142,7 +125,6 @@ function addDestination(google_window, google_element){
  * Displays the google map and turns the two inputs into Google maps SearchBoxes
  */
 function initMap() {
-
 
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
@@ -180,7 +162,6 @@ function initMap() {
 
 
 
-
     map.addListener('bounds_changed', function () { // Listener on the input which will give autocompletion based on the map's bounds
         searchBoxDepart.setBounds(map.getBounds());
     });
@@ -189,7 +170,6 @@ function initMap() {
     map.addListener('bounds_changed', function () { // Listener on the input which will give autocompletion based on the map's bounds
         searchBoxArrivee.setBounds(map.getBounds());
     });
-
 
 
 
@@ -452,8 +432,15 @@ function getDateTimeUser(){
     var currDate = new Date();
 
     var time = new Date(date);
-    time.setHours(document.getElementById('selecthour').value);
-    time.setMinutes(document.getElementById('selectminute').value);
+//    console.log($("#timepicker").val());
+    var heureChoisie = $("#timepicker").val().split(":");
+    var heure = heureChoisie[0];
+    var minutes = heureChoisie[1];
+
+    time.setHours(heure);
+    time.setMinutes(minutes);
+//    time.setHours(document.getElementById('selecthour').value);
+//    time.setMinutes(document.getElementById('selectminute').value);
 
     if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old date
     if (time.getTime() < currDate.getTime()){ time.setTime(currDate.getTime()); } // handles old time
