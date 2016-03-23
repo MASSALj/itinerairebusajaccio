@@ -79,6 +79,12 @@ $(document).ready(function(){
 	    clear: 'effacer',
 	    close: 'Fermer'
 	});
+	
+	//timepicker options "http://trentrichardson.com/examples/timepicker/"
+	$("#timepicker").timepicker(
+		$.timepicker.regional['fr'],
+		{addSliderAccess: true, sliderAccessArgs: { touchonly: false }}
+	);
 });
 
 /*$('.timepicker').pickatime({
