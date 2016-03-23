@@ -32,7 +32,7 @@
 
                 <h2 class=" col s12 titre-form"> Rechercher un trajet</h2>
 
-                <p id="formRecherche" action="" method="post">
+                <form id="formRecherche" action="" method="post">
 
                     <div class="col s12">
                         <div class="input-field">
@@ -45,8 +45,8 @@
                             <label for="arrivee">Arrivée</label>
                         </div>
                         <div>
-                            <label for="date1" class="input-field">Date</label>
-                            <input id="date1" name="date1" type="text" class="validate datepicker col s12" required>
+                            <label for="date1" class="input-field validate">Date</label>
+                            <input id="date1" name="date1" type="date" class="datepicker col s12">
                         </div>
 
 
@@ -105,10 +105,10 @@
 
                         <div class="col s1 minute">min</div>
 
-
                     <div class="input-field col s12 check1">
                         <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked"/>
                         <label for="radio_correspondance">Le moins de correspondance</label>
+
                     </div>
 
                     <div class="input-field col s12 check2">
@@ -120,8 +120,8 @@
 
                 <div class="input-field col">
                     <p>
-                        <div class="col s2 offset-s2">
-                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Submit</button>
+                        <div class="col s2 offset-s3">
+                            <button id="submit" class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Submit</button>
                         </div>
                     </p>
                 </div>

@@ -273,3 +273,54 @@ nav .brand-logo{
 {
 	background-color: rgba(240, 240, 240, 1);
 }
+
+.picker__clear {
+	color: #6094c9;
+	padding: 0px;
+}
+
+#toast-container {
+    max-width: 86%;
+    right: 20%;
+    top: 40%;
+}
+
+.toast{
+    background-color: #fdeaea !important;
+    color: #ca6f74 !important;
+    border: 1px solid #f27b81 !important;
+}
+
+button.close {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    filter: alpha(opacity=20);
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .4;
+    filter: alpha(opacity=40);
+}
+
+.alert .close {
+    position: relative;
+    right: -14px;
+    top: 2px;
+    line-height: 20px;
+}

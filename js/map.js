@@ -2,10 +2,8 @@
 button_less_waypoints = $('#radio_correspondance');
 button_less_waypoints.click(function(){
     if ($(this).is(':not(:checked)')){
-        alert('fewer walking');
         less = google.maps.TransitRoutePreference.LESS_WALKING;
     }else{
-        alert('less transfers');
         less = google.maps.TransitRoutePreference.FEWER_TRANSFERS;
     }
 });
@@ -15,10 +13,8 @@ button_less_waypoints.click(function(){
 button_less_walking = $('#radio_marche');
 button_less_walking.click(function(){
     if ($(this).is(':not(:checked)')){
-        alert('fewer tansfers');
         less = google.maps.TransitRoutePreference.FEWER_TRANSFERS;
     }else{
-        alert('less walking');
         less = google.maps.TransitRoutePreference.LESS_WALKING;
     }
 });
@@ -211,7 +207,13 @@ function initMap() {
         var places =  searchBoxDepart.getPlaces(); //get the places found
 
         if (places.length == 0){
-            alert('Lieu ou adresse introuvable !')
+            //error message
+            var $toasttext = $('<div class="alert"> <span> Lieu ou adresse introuvable ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
+            Materialize.toast( $toasttext);
+            $( "#closebutton" ).click(function() {
+                $( ".toast" ).remove();
+            });
+
         }else if (places.length == 1){ // one place
             console.log(places[0].geometry.location.lng());
             setDirection(places[0].geometry.location, 'depart');
@@ -228,7 +230,12 @@ function initMap() {
         var places =  searchBoxArrivee.getPlaces(); //get the places found
 
         if (places.length == 0){
-            alert('Lieu ou adresse introuvable !')
+            //error message
+            var $toasttext = $('<div class="alert"> <span> Lieu ou adresse introuvable ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
+            Materialize.toast( $toasttext);
+            $( "#closebutton" ).click(function() {
+                $( ".toast" ).remove();
+            });
         }else if (places.length == 1){ // one place
             console.log(places[0].geometry.location);
             setDirection(places[0].geometry.location, 'arrivee');  //we put the place directly as the starting point
@@ -341,10 +348,6 @@ function setMarkers(theplaces, elem){
 }
 
 
-
-
-
-
 /**
  * Draw the direction
  *
@@ -353,7 +356,12 @@ function drawDirection(){
 
 
     if (!depart || !arrivee){
-        alert('Renseigner un lieu de départ et d\'arrivée ');
+        //error message
+        var $toasttext = $('<div class="alert"> <span> Veuillez renseigner les champs des adresses de <strong>départ</strong> et de <strong>destination</strong> ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
+        Materialize.toast( $toasttext);
+        $( "#closebutton" ).click(function() {
+            $( ".toast" ).remove();
+        });
         return false;
     }else{
         var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
@@ -443,7 +451,12 @@ function drawDirection(){
             }
 
         } else {
-            window.alert('La requête de direction a échoué pour la raison suivante : ' + status);
+            //error message
+            var $toasttext = $('<div class="alert"> <span> La requête de direction a échoué, veuillez faire une nouvelle recherche </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
+            Materialize.toast( $toasttext);
+            $( "#closebutton" ).click(function() {
+                $( ".toast" ).remove();
+            });
         }
 
     });
@@ -458,11 +471,16 @@ function drawDirection(){
  * Get the date and the time specified by the user in the form
  */
 function getDateTimeUser(){
+    // value of input date
     var date = document.getElementsByName('date1_submit')[0].value;
     var currDate = new Date();
 
+    // create timestamp
     var time = new Date(date);
+
+    // value of input hour
     time.setHours(document.getElementById('selecthour').value);
+    // value of input minutes
     time.setMinutes(document.getElementById('selectminute').value);
 
     //if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old dates
@@ -486,5 +504,6 @@ function getDateTimeUser(){
 
     console.log(time.toDateString());
 
+    // create timestamp for the departureTime option from the var Request, google map api ONLY accepts this formulation for departure Time and arrivalTime.
     return new Date(time.getTime());
 }
