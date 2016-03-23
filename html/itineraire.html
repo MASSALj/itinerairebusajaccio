@@ -107,12 +107,12 @@
 
 
                     <div class="input-field col s12 check1">
-                        <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked"/>
+                        <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked" value="FEWER_TRANSFERS"/>
                         <label for="radio_correspondance">Le moins de correspondance</label>
                     </div>
 
                     <div class="input-field col s12 check2">
-                        <input class="with-gap" name="radio_form" type="radio" id="radio_marche"  />
+                        <input class="with-gap" name="radio_form" type="radio" id="radio_marche" value="LESS_WALKING" />
                         <label for="radio_marche">Le moins de marche à pieds </label>
                     </div>
 
@@ -132,12 +132,11 @@
 
         </aside>
 
-        <div id="lesresultats"></div>
 
         <div class="card white resultSearch">
             <div class="headerResultSearch">
                 <h2>Résultat de la recherche</h2>
-                <i id="impression" class="material-icons">print</i>
+                <i id="impression" class="material-icons impression">print</i>
             </div>
              <div class="row">
                 <div class="col s9 results">
@@ -166,6 +165,7 @@
 </div>
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../lib/jsPDF/jspdf.js"></script>
+    <script type="text/javascript" src="../js/FileSaver.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
     <script type="text/javascript" src="../js/picker.time.js"></script>
