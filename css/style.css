@@ -25,6 +25,11 @@ html, body
 	display: none;
 }
 
+.resultButton
+{
+	display: inline-block;
+}
+
 h1
 {
 	color: #b39907;
@@ -38,6 +43,26 @@ h2
 	color: white;
 	font-size: 20px;
 	margin: 0;
+}
+
+h3
+{
+	color: #b39907;
+	font-size: 18px;
+	margin: 0;
+}
+
+.travelStep
+{
+	background-color: rgba(96, 148, 201, 0.1);
+	padding: 0.5%;
+}
+
+.transition
+{
+	width: 100%;
+	font-size: 20px;
+	text-align: center;
 }
 
 .loader
@@ -149,12 +174,37 @@ h2
 {
 	width: 100%;
 }
+.resultTransition
+{
+	display: block !important;
+	width: 100%;
+	text-align: center;
+}
+
+.results div
+{
+	margin: 0;
+}
+
+.results .material-icons
+{
+	color: #b39907;
+	display: inline-block !important;
+	margin-right: 0.5%;
+}
 
 #logo
 {
     height : 100%;
     width : auto;
 	max-width : 100%;
+}
+
+.busIcon
+{
+	border: 5%;
+	padding:0 0.75% 0 0.75%;
+	display: inline-block;
 }
 
 .resultSearch
@@ -164,6 +214,8 @@ h2
 	opacity: 0.9;
 	padding: 10px;
 	left: 1%;
+	min-height: 210px;
+	min-width: 650px;
 	width: 95%;
 	z-index: 99;
 }
@@ -171,6 +223,7 @@ h2
 .resultSearch .row
 {
 	height: 80%;
+	margin-bottom: 0 !important;
 }
 
 /*Modifications Materialize*/
