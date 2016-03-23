@@ -47,6 +47,8 @@ $(document).ready(function(){
 	    selectMonths: true, // Creates a dropdown to control month
 	    selectYears: 15, // Creates a dropdown of 15 years to control year
 	    firstDay: true, // first day of the week, True = Monday False= Sunday
+        format: 'dddd, dd mmmm, yyyy',
+        formatSubmit: 'yyyy-mm-dd',
 
 	    labelMonthNext: 'mois suivant',
 	    labelMonthPrev: 'mois précédent',
@@ -61,6 +63,12 @@ $(document).ready(function(){
 	    clear: 'effacer',
 	    close: 'Fermer'
 	});
+	
+	//timepicker options "http://trentrichardson.com/examples/timepicker/"
+	$("#timepicker").timepicker(
+		$.timepicker.regional['fr'],
+		{addSliderAccess: true, sliderAccessArgs: { touchonly: false }}
+	);
 });
 
 /*$('.timepicker').pickatime({

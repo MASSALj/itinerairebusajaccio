@@ -7,8 +7,20 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/timepicker.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/jquery-ui.min.css"  media="screen,projection"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/png" href="../img/logo-capa.jpg" />
+
+    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script type="text/javascript" src="../js/map.js"></script>
+    <script type="text/javascript" src="../js/picker.time.js"></script>
+    <script type="text/javascript" src="../js/picker.js"></script>
+    <script type="text/javascript" src="../js/site.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-timepicker.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-timepicker-fr.js"></script>
 </head>
 <body>
     <div class="progress loader">
@@ -46,73 +58,27 @@
                         </div>
                         <div>
                             <label for="date1" class="input-field">Date</label>
-                            <input id="date1" type="date" class="validate datepicker col s12" required>
+                            <input id="date1" name="date1" type="text" class="validate datepicker col s12" required>
                         </div>
+
 
                         <!--<div>
                             <label for="time1" class="input-field">Date</label>
                             <input id="time1" type="text" class="validate timepicker col s12">
                         </div> -->
                         <div>
-                            <!-- <label class="input-field" for="selecthour">Horaire</label>-->
-                             <select id="selecthour" class="input-field col s4" form="formRecherche">
-                                  <option value="" disabled selected>Heure</option>
-                                  <option value="05">5</option>
-                                  <option value="06">6</option>
-                                  <option value="07">7</option>
-                                  <option value="08">8</option>
-                                  <option value="09">9</option>
-                                  <option value="10">10</option>
-                                  <option value="11">11</option>
-                                  <option value="12">12</option>
-                                  <option value="13">13</option>
-                                  <option value="14">14</option>
-                                  <option value="15">15</option>
-                                  <option value="16">16</option>
-                                  <option value="17">17</option>
-                                  <option value="18">18</option>
-                                  <option value="19">19</option>
-                                  <option value="20">20</option>
-                                  <option value="21">21</option>
-                                  <option value="22">22</option>
-                                  <option value="23">23</option>
-                                  <option value="00">00</option>
-                                  <option value="01">1</option>
-                             </select>
-                          </div>
-
-                        <div class="col s1 heure">h</div>
-
-                          <div>
-                              <!--<label class="input-field" for="selectminute">Horaire</label>-->
-                            <select id="selectminute" class="input-field col s4" form="formRecherche">
-                                <option value="" disabled selected>Minutes</option>
-                                <option value="00">00</option>
-                                <option value="05">05</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="30">30</option>
-                                <option value="35">35</option>
-                                <option value="40">40</option>
-                                <option value="45">45</option>
-                                <option value="50">50</option>
-                                <option value="55">55</option>
-                            </select>
+ 	                    	<label for="timepicker" class="input-field">Heure</label>
+                        	<input name="timepicker" id="timepicker" type ="text" value="" />
                         </div>
 
-                        <div class="col s1 minute">min</div>
-
-
                     <div class="input-field col s12 check1">
-                        <input class="with-gap" name="correspondance" type="checkbox" id="correspondance"  />
-                        <label for="correspondance">Le moins de correspondance</label>
+                        <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked" value="FEWER_TRANSFERS"/>
+                        <label for="radio_correspondance">Le moins de correspondance</label>
                     </div>
 
                     <div class="input-field col s12 check2">
-                        <input class="with-gap" name="marche" type="checkbox" id="marche"  />
-                        <label for="marche">Le moins de marche à pieds </label>
+                        <input class="with-gap" name="radio_form" type="radio" id="radio_marche" value="LESS_WALKING" />
+                        <label for="radio_marche">Le moins de marche à pieds </label>
                     </div>
 
                 </div>
@@ -120,7 +86,7 @@
                 <div class="input-field col">
                     <p>
                         <div class="col s2 offset-s2">
-                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="submit" onclick="drawDirection(); return false;//initMap()">Submit</button>
+                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Rechercher</button>
                         </div>
                     </p>
                 </div>
@@ -131,11 +97,11 @@
 
         </aside>
 
-        <div id="lesresultats"></div>
 
         <div class="card white resultSearch">
             <div class="headerResultSearch">
                 <h2>Résultat de la recherche</h2>
+                <i id="impression" class="material-icons impression">print</i>
             </div>
              <div class="row resultContent">
                 <div class="col s9 results">
@@ -162,12 +128,6 @@
         </div>
     </footer>
 </div>
-    <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/map.js"></script>
-    <script type="text/javascript" src="../js/picker.time.js"></script>
-    <script type="text/javascript" src="../js/picker.js"></script>
-    <script type="text/javascript" src="../js/site.js"></script>
-    </div>
+</div>
 </body>
 </html>

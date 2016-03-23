@@ -204,9 +204,7 @@ function initMap() {
             setMarkers(places, 'searchBoxArrivee');  // puts the markers on every places found, the user will have to choose the wanted place
         }
     });
-
 }
-
 
 
 
@@ -403,6 +401,7 @@ function drawDirection(){
                 
                 if (route.legs[i].arrival_time) {summaryPanel.append('<p><i class="material-icons">access_time</i> Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
                 summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address+'</p>');
+
 
 
             }
