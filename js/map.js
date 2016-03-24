@@ -152,7 +152,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
-        zoom: 18
+        zoom: 18,
     });
 
 
@@ -204,7 +204,7 @@ function initMap() {
         if (places.length == 0){
             //error message
             var $toasttext = $('<div class="alert"> <span> Lieu ou adresse introuvable ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
-            Materialize.toast( $toasttext);
+            Materialize.toast( $toasttext,6500);
             $( "#closebutton" ).click(function() {
                 $( ".toast" ).remove();
             });
@@ -227,7 +227,7 @@ function initMap() {
         if (places.length == 0){
             //error message
             var $toasttext = $('<div class="alert"> <span> Lieu ou adresse introuvable ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
-            Materialize.toast( $toasttext);
+            Materialize.toast( $toasttext,6500);
             $( "#closebutton" ).click(function() {
                 $( ".toast" ).remove();
             });
@@ -349,7 +349,7 @@ function drawDirection(){
     if (!depart || !arrivee){
         //error message
         var $toasttext = $('<div class="alert"> <span> Veuillez renseigner les champs des adresses de <strong>départ</strong> et de <strong>destination</strong> ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
-        Materialize.toast( $toasttext);
+        Materialize.toast( $toasttext,6500);
         $( "#closebutton" ).click(function() {
             $( ".toast" ).remove();
         });
@@ -377,7 +377,7 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
-            //departureTime: Date,          // Foutre les critères de date et heure de depart
+            departureTime: getDateTimeUser(),          // Foutre les critères de date et heure de depart
             //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
             modes: [google.maps.TransitMode.BUS]
             //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
@@ -448,7 +448,7 @@ function drawDirection(){
         } else {
             //error message
             var $toasttext = $('<div class="alert"> <span> La requête de direction a échoué, veuillez faire une nouvelle recherche </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
-            Materialize.toast( $toasttext);
+            Materialize.toast( $toasttext,6500);
             $( "#closebutton" ).click(function() {
                 $( ".toast" ).remove();
             });
@@ -456,9 +456,6 @@ function drawDirection(){
 
     });
 }
-
-
-
 
 
 /**
@@ -493,8 +490,7 @@ function getDateTimeUser(){
         time.setMinutes(30);
     }
 
-    return time;
-
+    return time
     // create timestamp for the departureTime option from the var Request, google map api ONLY accepts this formulation for departure Time and arrivalTime.
     //return new Date(time.getTime());
 
