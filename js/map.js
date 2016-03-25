@@ -15,7 +15,6 @@ var searchBoxArrivee;
 
 
 
-
 //Enable search reinitialisation
 routeForm = $('.routeForm');
 resultSearch = $('.resultSearch');
@@ -29,6 +28,9 @@ newSearchButton.click(function(){
     lieu = [];
     initMap();
 });
+
+
+
 
 
 
@@ -51,15 +53,15 @@ modifSearchButton.click(function(){
 
 
 //Enable direction details printing
-var button_print = $('.impression');
-button_print.click(function() {
-
-    var win = window.open();
-    win.document.write($('.results').html());
-    win.print();
-    win.close();
-
-});
+//var button_print = $('.impression');
+//button_print.click(function() {
+//    alert('hey');
+//    var win = window.open();
+//    win.document.write($('.results').html());
+//    win.print();
+//    win.close();
+//
+//});
 
 
 
@@ -313,12 +315,17 @@ function setMarkers(theplaces, elem){
  */
 function drawDirection(){
     if (!depart || !arrivee){
+
         alert('Renseigner un lieu de départ et d\'arrivée ');
         return false;
+
     }else{
         var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
         resultSearch.fadeIn(500);
         routeForm.fadeOut(500);
+
+
+
         modifSearchButton.click(function(){
             google.maps.event.trigger(map, 'resize');
             routeForm.fadeIn(500);
@@ -326,11 +333,41 @@ function drawDirection(){
             summaryPanel.html('');
         });
 
+
+
+
+        //Enable direction details printing
+        var button_print = $('.impression');
+        button_print.click(function() {
+
+
+            var theresults = $('.results');
+
+            //$("#content_print").value = $('.results').html();
+
+            var material = document.getElementsByClassName('material-icons');
+            theresults.find(material).remove();
+            var win = window.open();
+            win.document.write(theresults.html());
+            win.print();
+            win.close();
+
+        });
+
+
     }
 
     var directionsDisplay = new google.maps.DirectionsRenderer({
         map: map
     });
+
+    var less;
+    //Get the option choosed by the user
+    if (document.getElementById('radio_marche').checked) {
+        less = document.getElementById('radio_marche').value;
+    }else{
+        less = document.getElementById('radio_correspondance').value;
+    }
 
     // Set destination, origin and travel mode.
     var request = {
@@ -338,10 +375,9 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
-            //departureTime: Date,          // Foutre les critères de date et heure de depart
-            //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
-            modes: [google.maps.TransitMode.BUS]
-            //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+            departureTime: getDateTimeUser(),
+            modes: [google.maps.TransitMode.BUS],
+            routingPreference: google.maps.TransitRoutePreference[$(less)]
 
         },
         optimizeWaypoints: true
@@ -355,19 +391,27 @@ function drawDirection(){
             // Display the route on the map.
             directionsDisplay.setDirections(response);
 
-            //console.log(response);
+
 
             var route = response.routes[0];
+
+            console.log(route.legs);
 
             // For each route, display summary information.
             var cpt=1;
             for (var i = 0; i <= route.legs.length-1; ++i) {
+                summaryPanel.append("<h3>De " + document.getElementById('depart').value + " vers " + document.getElementById('arrivee').value + "</h3><br />");
                 summaryPanel.append('<h3>Résumé : </h3><br />');
+
+                console.log(route.legs[i].departure_time.value.getDate());
+                console.log(route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear());
+
+                summaryPanel.append('<i class="material-icons">date_range</i>Date : ' + route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear() + "<br />");
                 if (route.legs[i].departure_time) { summaryPanel.append('<i class="material-icons">access_time</i>Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); } //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
-                summaryPanel.append('<i class="material-icons">my_location</i>Lieu de départ : ' + route.legs[i].start_address + '<br>');
+                summaryPanel.append('<i class="material-icons">my_location</i>Lieu de départ : ' + document.getElementById('depart').value + ", " +route.legs[i].start_address + '<br>');
                 summaryPanel.append('<i class="material-icons">transfer_within_a_station</i>Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
-                if (route.legs[i].arrival_time) {summaryPanel.append('<i class="material-icons">access_time</i>Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
-                summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
+                //if (route.legs[i].arrival_time) {summaryPanel.append('<i class="material-icons">access_time</i>Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
+                //summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
                 summaryPanel.append('<br /><h3>Instructions : </h3><br />');
 
@@ -399,8 +443,8 @@ function drawDirection(){
 
                 }
                 
-                if (route.legs[i].arrival_time) {summaryPanel.append('<p><i class="material-icons">access_time</i> Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
-                summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address+'</p>');
+                if (route.legs[i].arrival_time) {summaryPanel.append('<p><i class="material-icons">access_time</i> Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
+                summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + document.getElementById('arrivee').value + ", " + route.legs[i].end_address+'</p>');
 
 
 
