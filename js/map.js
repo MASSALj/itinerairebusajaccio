@@ -389,7 +389,8 @@ function drawDirection(){
             document.getElementById('date1').value = '';
             document.getElementById('timepicker').value = '';
             
-            lieu = [];
+            depart, arrivee = false;
+            
             initMap();
         });
 
