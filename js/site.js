@@ -18,7 +18,7 @@ $(document).ready(function(){
 		header.css({height: 0.1*displayHeight+'px',  minHeight: 0.1*768+'px'});
 		footer.css({height: 0.05*displayHeight+'px', minHeight: 0.05*768+'px'});
 		map.css({height: 0.85*displayHeight+'px', minHeight: 0.85*768+'px'});
-		resultSearch.css({height: 0.3*displayHeight+'px', top: 0.65*768+'px'});
+		resultSearch.css({height: 0.3*displayHeight+'px', top: 0.62*768+'px'});
 		h1.css('line-height', header.height()+'px');
 		headerResultSearch.css('line-height', 0.2*resultSearch.height()+'px');
 		logo.css({height: header.height()-10+'px', marginTop: '5px', marginBottom: '5px'});
@@ -31,7 +31,7 @@ $(document).ready(function(){
 			header.css({height: 0.1*displayHeight+'px',  minHeight: 0.1*768+'px'});
 			footer.css({height: 0.05*displayHeight+'px', minHeight: 0.05*768+'px'});
 			map.css({height: 0.85*displayHeight+'px', minHeight: 0.85*768+'px'});
-			resultSearch.css({height: 0.25*displayHeight+'px', top: 0.63*768+'px'});
+			resultSearch.css({height: 0.3*displayHeight+'px', top: 0.62*768+'px'});
 			h1.css('line-height', header.height()+'px');
 			headerResultSearch.css('line-height', 0.2*resultSearch.height()+'px');
 			logo.css({height: header.height()-10+'px', marginTop: '5px', marginBottom: '5px'});
