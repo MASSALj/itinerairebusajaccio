@@ -30,11 +30,9 @@ var arrivee; //Variable that will hold the ending point location
 
 
 
-
 //the searchbox that are going to be used
 var searchBoxDepart;
 var searchBoxArrivee;
-
 
 
 
@@ -59,6 +57,9 @@ newSearchButton.click(function(){
 
 
 
+
+
+
 //Enable research modification
 modifSearchButton = $('.modifSearchButton');
 modifSearchButton.click(function(){
@@ -75,15 +76,15 @@ modifSearchButton.click(function(){
 
 
 //Enable direction details printing
-var button_print = $('.impression');
-button_print.click(function() {
-
-    var win = window.open();
-    win.document.write($('.results').html());
-    win.print();
-    win.close();
-
-});
+//var button_print = $('.impression');
+//button_print.click(function() {
+//    alert('hey');
+//    var win = window.open();
+//    win.document.write($('.results').html());
+//    win.print();
+//    win.close();
+//
+//});
 
 
 
@@ -152,7 +153,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
-        zoom: 18,
+        zoom: 15
     });
 
 
@@ -210,12 +211,13 @@ function initMap() {
             });
 
         }else if (places.length == 1){ // one place
-            console.log(places[0].geometry.location.lng());
+            //console.log(places[0].geometry.location.lng());
             setDirection(places[0].geometry.location, 'depart');
             setMarkers(places, 'searchBoxDepart'); //puts the marker on the place
         }else{
             setMarkers(places, 'searchBoxDepart'); // puts the markers on every places found, the user will have to choose the wanted place
         }
+        map.setZoom(17);
     });
 
 
@@ -238,6 +240,7 @@ function initMap() {
         }else{
             setMarkers(places, 'searchBoxArrivee');  // puts the markers on every places found, the user will have to choose the wanted place
         }
+        map.setZoom(17);
     });
 }
 
@@ -347,17 +350,23 @@ function setMarkers(theplaces, elem){
  */
 function drawDirection(){
     if (!depart || !arrivee){
+
         //error message
         var $toasttext = $('<div class="alert"> <span> Veuillez renseigner les champs des adresses de <strong>départ</strong> et de <strong>destination</strong> ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
         Materialize.toast( $toasttext,6500);
         $( "#closebutton" ).click(function() {
             $( ".toast" ).remove();
         });
+
         return false;
+
     }else{
         var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
         resultSearch.fadeIn(500);
         routeForm.fadeOut(500);
+
+
+
         modifSearchButton.click(function(){
             google.maps.event.trigger(map, 'resize');
             routeForm.fadeIn(500);
@@ -365,11 +374,63 @@ function drawDirection(){
             summaryPanel.html('');
         });
 
+
+
+        //Enable search reinitialisation
+        routeForm = $('.routeForm');
+        resultSearch = $('.resultSearch');
+        newSearchButton = $('.newSearchButton');
+        newSearchButton.click(function(){
+            resultSearch.fadeOut(500);
+            routeForm.fadeIn(500);
+
+            document.getElementById('arrivee').value = '';
+            document.getElementById('depart').value = '';
+            document.getElementById('date1').value = '';
+            document.getElementById('timepicker').value = '';
+            
+            lieu = [];
+            initMap();
+        });
+
+
+
+
+
+
+
+        //Enable direction details printing
+        var button_print = $('.impression');
+        button_print.click(function() {
+
+
+            var theresults = $('.results');
+
+            //$("#content_print").value = $('.results').html();
+
+            var material = document.getElementsByClassName('material-icons');
+            theresults.find(material).remove();
+            var win = window.open();
+            win.document.write(theresults.html());
+            win.print();
+            win.close();
+
+        });
+
+
     }
 
     var directionsDisplay = new google.maps.DirectionsRenderer({
         map: map
     });
+
+    var less;
+    //Get the option choosed by the user
+    if (document.getElementById('radio_marche').checked) {
+        less = document.getElementById('radio_marche').value;
+    }else{
+        less = document.getElementById('radio_correspondance').value;
+    }
 
     // Set destination, origin and travel mode.
     var request = {
@@ -377,10 +438,10 @@ function drawDirection(){
         destination: arrivee,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
-            departureTime: getDateTimeUser(),          // Foutre les critères de date et heure de depart
-            //arrivalTime: Date,                              // foutre les critères de date et heure d'arrivee
-            modes: [google.maps.TransitMode.BUS]
-            //routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+
+            departureTime: getDateTimeUser(),
+            modes: [google.maps.TransitMode.BUS],
+            routingPreference: google.maps.TransitRoutePreference[$(less)]
 
         },
         optimizeWaypoints: true
@@ -394,19 +455,27 @@ function drawDirection(){
             // Display the route on the map.
             directionsDisplay.setDirections(response);
 
-            //console.log(response);
+
 
             var route = response.routes[0];
+
+            console.log(route.legs);
 
             // For each route, display summary information.
             var cpt=1;
             for (var i = 0; i <= route.legs.length-1; ++i) {
+                summaryPanel.append("<h3>De " + document.getElementById('depart').value + " vers " + document.getElementById('arrivee').value + "</h3><br />");
                 summaryPanel.append('<h3>Résumé : </h3><br />');
+
+                console.log(route.legs[i].departure_time.value.getDate());
+                console.log(route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear());
+
+                summaryPanel.append('<i class="material-icons">date_range</i>Date : ' + route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear() + "<br />");
                 if (route.legs[i].departure_time) { summaryPanel.append('<i class="material-icons">access_time</i>Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); } //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
-                summaryPanel.append('<i class="material-icons">my_location</i>Lieu de départ : ' + route.legs[i].start_address + '<br>');
+                summaryPanel.append('<i class="material-icons">my_location</i>Lieu de départ : ' + document.getElementById('depart').value + ", " +route.legs[i].start_address + '<br>');
                 summaryPanel.append('<i class="material-icons">transfer_within_a_station</i>Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
-                if (route.legs[i].arrival_time) {summaryPanel.append('<i class="material-icons">access_time</i>Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
-                summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
+                //if (route.legs[i].arrival_time) {summaryPanel.append('<i class="material-icons">access_time</i>Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
+                //summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
                 summaryPanel.append('<br /><h3>Instructions : </h3><br />');
 
@@ -438,8 +507,8 @@ function drawDirection(){
 
                 }
                 
-                if (route.legs[i].arrival_time) {summaryPanel.append('<p><i class="material-icons">access_time</i> Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); };
-                summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address+'</p>');
+                if (route.legs[i].arrival_time) {summaryPanel.append('<p><i class="material-icons">access_time</i> Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
+                summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + document.getElementById('arrivee').value + ", " + route.legs[i].end_address+'</p>');
 
 
 
@@ -490,8 +559,34 @@ function getDateTimeUser(){
         time.setMinutes(30);
     }
 
-    return time
+    return time;
     // create timestamp for the departureTime option from the var Request, google map api ONLY accepts this formulation for departure Time and arrivalTime.
     //return new Date(time.getTime());
+
+}
+
+
+/**
+ * Get return direction
+ *
+ */
+function showReturnDirection(){
+
+    //form values swapping
+    var x = document.getElementById('depart').value;
+    document.getElementById('depart').value = document.getElementById('arrivee').value;
+    document.getElementById('arrivee').value = x;
+
+    var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
+    summaryPanel.html('');
+
+    initMap();
+
+    //locations swapping
+    var t = arrivee; arrivee = depart; depart = t;
+
+
+    drawDirection();
+
 
 }
