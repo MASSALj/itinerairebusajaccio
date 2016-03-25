@@ -18,12 +18,12 @@ $(document).ready(function(){
 		header.css({height: 0.1*displayHeight+'px',  minHeight: 0.1*768+'px'});
 		footer.css({height: 0.05*displayHeight+'px', minHeight: 0.05*768+'px'});
 		map.css({height: 0.85*displayHeight+'px', minHeight: 0.85*768+'px'});
-		resultSearch.css({height: 0.25*displayHeight+'px', top: 0.69*768+'px'});
+		resultSearch.css({height: 0.3*displayHeight+'px', top: 0.65*768+'px'});
 		h1.css('line-height', header.height()+'px');
 		headerResultSearch.css('line-height', 0.2*resultSearch.height()+'px');
 		logo.css({height: header.height()-10+'px', marginTop: '5px', marginBottom: '5px'});
 		footerText.css('line-height', footer.height()+'px');
-		buttonRow.css({paddingTop: (buttonRow.height()-resultButton.height())/2+'px'});
+		buttonRow.css({paddingTop: (buttonRow.height()-resultButton.height())/3+'px'});
 
 		//When the dimension of the window changes 
 		$(window).resize(function(){

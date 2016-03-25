@@ -45,6 +45,11 @@ h2, .impression
 	margin: 0;
 }
 
+.impression
+{
+	text-align: right;
+}
+
 .impression:hover
 {
 	cursor: pointer;
