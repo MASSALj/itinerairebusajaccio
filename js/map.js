@@ -368,6 +368,7 @@ function drawDirection(){
 
 
         modifSearchButton.click(function(){
+            initMap();
             google.maps.event.trigger(map, 'resize');
             routeForm.fadeIn(500);
             resultSearch.fadeOut(500);
@@ -388,9 +389,11 @@ function drawDirection(){
             document.getElementById('depart').value = '';
             document.getElementById('date1').value = '';
             document.getElementById('timepicker').value = '';
+            document.getElementById('radio_correspondance').checked = true;
+            summaryPanel.html('');
             
-            depart, arrivee = false;
-            
+            depart = false; arrivee = false;
+
             initMap();
         });
 
@@ -406,13 +409,13 @@ function drawDirection(){
 
 
             var theresults = $('.results');
-
-            //$("#content_print").value = $('.results').html();
+            var content_print = $(".content_print");
+            document.getElementsByClassName("content_print")[0].innerHTML = document.getElementsByClassName("results")[0].innerHTML
 
             var material = document.getElementsByClassName('material-icons');
-            theresults.find(material).remove();
+            content_print.find(material).remove();
             var win = window.open();
-            win.document.write(theresults.html());
+            win.document.write(content_print.html());
             win.print();
             win.close();
 
@@ -561,8 +564,7 @@ function getDateTimeUser(){
     }
 
     return time;
-    // create timestamp for the departureTime option from the var Request, google map api ONLY accepts this formulation for departure Time and arrivalTime.
-    //return new Date(time.getTime());
+    // create timestamp for the departureTime option from the var Request, google map api ONLY accepts this formulation for departure Time
 
 }
 
