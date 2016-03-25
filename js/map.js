@@ -210,12 +210,13 @@ function initMap() {
             });
 
         }else if (places.length == 1){ // one place
-            console.log(places[0].geometry.location.lng());
+            //console.log(places[0].geometry.location.lng());
             setDirection(places[0].geometry.location, 'depart');
             setMarkers(places, 'searchBoxDepart'); //puts the marker on the place
         }else{
             setMarkers(places, 'searchBoxDepart'); // puts the markers on every places found, the user will have to choose the wanted place
         }
+        map.setZoom(17);
     });
 
 
@@ -238,6 +239,7 @@ function initMap() {
         }else{
             setMarkers(places, 'searchBoxArrivee');  // puts the markers on every places found, the user will have to choose the wanted place
         }
+        map.setZoom(17);
     });
 }
 
