@@ -5,22 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="../css/timepicker.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="../css/jquery-ui.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,print"/>
+    <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,print"/>
+    <link type="text/css" rel="stylesheet" href="../css/timepicker.css"  media="screen,print"/>
+    <link type="text/css" rel="stylesheet" href="../css/jquery-ui.min.css"  media="screen,print"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/png" href="../img/logo-capa.jpg" />
 
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/map.js"></script>
-    <script type="text/javascript" src="../js/picker.time.js"></script>
-    <script type="text/javascript" src="../js/picker.js"></script>
-    <script type="text/javascript" src="../js/site.js"></script>
     <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/map.js"></script>
+    <script type="text/javascript" src="../js/site.js"></script>
     <script type="text/javascript" src="../js/bootstrap-timepicker.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-timepicker-fr.js"></script>
+
 </head>
 <body>
     <div class="progress loader">
@@ -57,8 +56,8 @@
                             <label for="arrivee">Arrivée</label>
                         </div>
                         <div>
-                            <label for="date1" class="input-field">Date</label>
-                            <input id="date1" name="date1" type="text" class="validate datepicker col s12" required>
+                            <label for="date1" class="input-field validate">Date</label>
+                            <input id="date1" name="date1" type="text" class="datepicker col s12">
                         </div>
 
 
@@ -71,9 +70,11 @@
                         	<input name="timepicker" id="timepicker" type ="text" value="" />
                         </div>
 
+
                     <div class="input-field col s12 check1">
                         <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked" value="FEWER_TRANSFERS"/>
                         <label for="radio_correspondance">Le moins de correspondance</label>
+
                     </div>
 
                     <div class="input-field col s12 check2">
@@ -83,13 +84,13 @@
 
                 </div>
 
-                <div class="input-field col">
-                    <p>
-                        <div class="col s2 offset-s2">
+                <div class="input-field marginrowsubmit">
+                        <div class="col s12 offset-s1 marginsubmit">
                             <button class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Rechercher</button>
                         </div>
-                    </p>
                 </div>
+
+
                 </form>
 
             </div>
@@ -110,7 +111,10 @@
                         <a class="waves-effect waves-light btn col s12 newSearchButton resultButton"><i class="material-icons left">search</i>Nouvelle recherche</a><br /><br />
                     </div>
                     <div class="row buttonRow">
-                        <a class="waves-effect waves-light btn col s12 modifSearchButton resultButton"><i class="material-icons left">create</i>Modifier recherche</a>
+                        <a class="waves-effect waves-light btn col s12 modifSearchButton resultButton"><i class="material-icons left">create</i>Modifier recherche</a><br /><br />
+                    </div>
+                    <div class="row buttonRow">
+                        <a onclick="showReturnDirection()" class="waves-effect waves-light btn col s12 resultButton"><i class="material-icons left">swap_horiz</i>Chemin de retour</a>
                     </div>
                 </div>
             </div>
@@ -128,6 +132,21 @@
     </footer>
 </div>
 </div>
+
+    <noscript>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content textnoscript white-text">
+                        <h1 class="titre-noscript">ATTENTION !</h1>
+                        <p>Afin de pouvoir utiliser Google Maps, JavaScript doit être activé.</p>
+                        <p>Or, il semble que JavaScript est désactivé ou qu'il ne soit pas supporté par votre navigateur.</p>
+                        <p>Pour afficher Google Maps, activez JavaScript en modifiant les options de votre navigateur, puis rechargez la page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </noscript>
 
 </body>
 </html>

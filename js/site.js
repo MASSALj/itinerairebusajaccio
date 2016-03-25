@@ -13,7 +13,7 @@ $(document).ready(function(){
 		var buttonRow = $('.buttonRow'), resultButton = $('.resultButton'), routeForm = $('.routeForm'), page = $('#page'), headerResultSearch = $('.headerResultSearch h2'), h1 = $('h1'), resultSearch = $('.resultSearch'), logo = $('.brand-logo'), header = $('.page-header'), footer = $('.page-footer'), footerText = $('.page-footer .container'), map = $('#map'), displayHeight = $(window).height();
 		loader.fadeOut(200);
 		$('section').append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap"></script>');
-		page.delay(100).fadeIn(1000)
+		page.delay(100).fadeIn(1000);
 
 		header.css({height: 0.1*displayHeight+'px',  minHeight: 0.1*768+'px'});
 		footer.css({height: 0.05*displayHeight+'px', minHeight: 0.05*768+'px'});
@@ -71,59 +71,4 @@ $(document).ready(function(){
 	);
 });
 
-/*$('.timepicker').pickatime({
-
-    closeOnSelect: true,
-    closeOnClear: true,
-
-    min: [5,00],
-    max: [1,00]
-});*/
-
-//vérification formulaire
-
-/*$('#formRecherche').validate({
-	rules: {
-		depart: {
-			required: true,
-		},
-		arrivee: {
-			required: true,
-		},
-		date1: {
-			required: true,
-		},
-		selecthour: {
-			required: true,
-		},
-		selectMinute: {
-			required: true,
-		},
-	},
-	//For custom messages
-	messages: {
-		depart:{
-			required: "Enter a depart",
-		},
-	},
-	errorElement : 'div',
-	errorPlacement: function(error, element) {
-		var placement = $(element).data('error');
-		if (placement) {
-			$(placement).append(error)
-		} else {
-			error.insertAfter(element);
-		}
-	}
-});*/
-
-/*function addDepart() {
-	var depart = document.getElementById('selecthour');
-	for (var i = 0; i < 24; i++) {
-		for (var j = 0; j < 60; j += 15) {
-			var x = i < 10 ? '0' + i : i;
-			var y = j < 10 ? '0' + j : j;
-			depart.innerHTML += '<option>' + x + ':' + y + '</option>';
-		}
-	}
-}*/
+$('.picker__footer').addClass("col s12");
