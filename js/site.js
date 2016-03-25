@@ -10,7 +10,7 @@ $(document).ready(function(){
 	loader.css({width: 0.5*displayWidth, height: 0.005*displayWidth, left:0.25*displayWidth, top: 0.4975*displayHeight});
 
 	$(window).load(function(){
-		var buttonRow = $('.buttonRow'), resultButton = $('.resultButton'), routeForm = $('.routeForm'), page = $('#page'), headerResultSearch = $('.headerResultSearch h2'), h1 = $('h1'), resultSearch = $('.resultSearch'), logo = $('.brand-logo'), header = $('.page-header'), footer = $('.page-footer'), footerText = $('.page-footer .container'), map = $('#map'), displayHeight = $(window).height();
+		var buttonRow = $('.buttonRow'), resultButton = $('.resultButton'), routeForm = $('.routeForm'), page = $('#page'), headerResultSearch = $('.headerResultSearch h2, .impression'), h1 = $('h1'), resultSearch = $('.resultSearch'), logo = $('.brand-logo'), header = $('.page-header'), footer = $('.page-footer'), footerText = $('.page-footer .container'), map = $('#map'), displayHeight = $(window).height();
 		loader.fadeOut(200);
 		$('section').append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIsOi_yjA_mo6kpMkDMYwOolP3s5Thtk&libraries=places&callback=initMap"></script>');
 		page.delay(100).fadeIn(1000)

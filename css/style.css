@@ -38,11 +38,16 @@ h1
 	margin: 0;
 }
 
-h2
+h2, .impression
 {
 	color: white;
 	font-size: 20px;
 	margin: 0;
+}
+
+.impression:hover
+{
+	cursor: pointer;
 }
 
 h3
@@ -201,6 +206,11 @@ h3
 .results div
 {
 	margin: 0;
+}
+
+.resultSearch .row
+{
+
 }
 
 .results .material-icons
