@@ -153,7 +153,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
-        zoom: 15
+        zoom: 13
     });
 
 
@@ -171,7 +171,7 @@ function initMap() {
         new google.maps.LatLng(41.898944, 8.828748)
     );
 
-    map.fitBounds(defaultBounds); //The map fits now in the bounds
+    //map.fitBounds(defaultBounds); //The map fits now in the bounds
 
     var elem_depart = document.getElementById('depart');
     var elem_arrivee = document.getElementById('arrivee');
