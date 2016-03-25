@@ -9,6 +9,7 @@ button_less_waypoints.click(function(){
 });
 
 
+
 //HANDLES THE 'FEWER WALKING' OPTION
 button_less_walking = $('#radio_marche');
 button_less_walking.click(function(){
@@ -29,62 +30,10 @@ var arrivee; //Variable that will hold the ending point location
 
 
 
-
 //the searchbox that are going to be used
 var searchBoxDepart;
 var searchBoxArrivee;
 
-
-
-
-
-//Enable search reinitialisation
-routeForm = $('.routeForm');
-resultSearch = $('.resultSearch');
-newSearchButton = $('.newSearchButton');
-newSearchButton.click(function(){
-    resultSearch.fadeOut(500);
-    routeForm.fadeIn(500);
-
-    document.getElementById('arrivee').value = '';
-    document.getElementById('depart').value = '';
-    lieu = [];
-    initMap();
-});
-
-
-
-
-
-
-
-
-
-//Enable research modification
-modifSearchButton = $('.modifSearchButton');
-modifSearchButton.click(function(){
-    initMap();
-    routeForm.fadeIn(500);
-    resultSearch.fadeOut(500);
-    //resultSearch.html('');
-
-});
-
-
-
-
-
-
-//Enable direction details printing
-//var button_print = $('.impression');
-//button_print.click(function() {
-//    alert('hey');
-//    var win = window.open();
-//    win.document.write($('.results').html());
-//    win.print();
-//    win.close();
-//
-//});
 
 
 
@@ -153,7 +102,7 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), { // the google map instanciation
         center: {lat: 41.9257502, lng: 8.7399893},  //centered on Ajaccio
-        zoom: 13
+        zoom: 14
     });
 
 
@@ -424,9 +373,11 @@ function drawDirection(){
 
     }
 
+
     var directionsDisplay = new google.maps.DirectionsRenderer({
         map: map
     });
+
 
     var less;
     //Get the option choosed by the user
@@ -435,6 +386,7 @@ function drawDirection(){
     }else{
         less = document.getElementById('radio_correspondance').value;
     }
+
 
     // Set destination, origin and travel mode.
     var request = {
@@ -459,11 +411,8 @@ function drawDirection(){
             // Display the route on the map.
             directionsDisplay.setDirections(response);
 
-
-
             var route = response.routes[0];
 
-            console.log(route.legs);
 
             // For each route, display summary information.
             var cpt=1;
@@ -471,15 +420,10 @@ function drawDirection(){
                 summaryPanel.append("<h3>De " + document.getElementById('depart').value + " vers " + document.getElementById('arrivee').value + "</h3><br />");
                 summaryPanel.append('<h3>Résumé : </h3><br />');
 
-                console.log(route.legs[i].departure_time.value.getDate());
-                console.log(route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear());
-
                 summaryPanel.append('<i class="material-icons">date_range</i>Date : ' + route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear() + "<br />");
                 if (route.legs[i].departure_time) { summaryPanel.append('<i class="material-icons">access_time</i>Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); } //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
                 summaryPanel.append('<i class="material-icons">my_location</i>Lieu de départ : ' + document.getElementById('depart').value + ", " +route.legs[i].start_address + '<br>');
                 summaryPanel.append('<i class="material-icons">transfer_within_a_station</i>Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
-                //if (route.legs[i].arrival_time) {summaryPanel.append('<i class="material-icons">access_time</i>Heure d\'arrivée : ' + route.legs[i].arrival_time.text + '<br>'); }
-                //summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + route.legs[i].end_address + '<br>');
 
                 summaryPanel.append('<br /><h3>Instructions : </h3><br />');
 
@@ -531,6 +475,9 @@ function drawDirection(){
 }
 
 
+
+
+
 /**
  * Get the date and the time specified by the user in the form
  */
@@ -551,8 +498,7 @@ function getDateTimeUser(){
 
     time.setHours(heure);
     time.setMinutes(minutes);
-//    time.setHours(document.getElementById('selecthour').value);
-//    time.setMinutes(document.getElementById('selectminute').value);
+
 
     if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old date
     if (time.getTime() < currDate.getTime()){ time.setTime(currDate.getTime()); } // handles old time
@@ -570,7 +516,7 @@ function getDateTimeUser(){
 
 
 /**
- * Get return direction
+ * Get returning direction
  *
  */
 function showReturnDirection(){
@@ -590,6 +536,5 @@ function showReturnDirection(){
 
 
     drawDirection();
-
 
 }
