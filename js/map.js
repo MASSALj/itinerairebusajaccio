@@ -217,6 +217,7 @@ function initMap() {
         }else{
             setMarkers(places, 'searchBoxDepart'); // puts the markers on every places found, the user will have to choose the wanted place
         }
+        map.setZoom(17);
     });
 
 
@@ -239,6 +240,7 @@ function initMap() {
         }else{
             setMarkers(places, 'searchBoxArrivee');  // puts the markers on every places found, the user will have to choose the wanted place
         }
+        map.setZoom(17);
     });
 }
 
