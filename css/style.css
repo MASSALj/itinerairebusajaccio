@@ -308,6 +308,8 @@ nav .brand-logo{
 
 .picker__frame {
     min-width: 27%;
+    margin-top: 50px;
+
 }
 .picker { outline: none; } /* Optional feature */
 /* Header - Day of the week */
@@ -445,4 +447,18 @@ button.close {
     z-index: 1;
     margin-left: 14%;
     margin-top: 20%;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #d3d3d3;
+    background: #6094c9 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x !important;
+    font-weight: normal;
+    color: #555;
+}
+
+.ui-widget-header {
+    border: 1px solid #aaa;
+    background: #6094c9 url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x !important;
+    color: #222;
+    font-weight: bold;
 }

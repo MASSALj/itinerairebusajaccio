@@ -409,6 +409,7 @@ function drawDirection(){
     // Pass the directions request to the directions service.
     var directionsService = new google.maps.DirectionsService();
     directionsService.route(request, function(response, status) {
+    	console.log(response+"____"+status);
         if (status == google.maps.DirectionsStatus.OK) {
             // Display the route on the map.
             directionsDisplay.setDirections(response);
@@ -421,8 +422,8 @@ function drawDirection(){
             for (var i = 0; i <= route.legs.length-1; ++i) {
                 summaryPanel.append("<h3>De " + document.getElementById('depart').value + " vers " + document.getElementById('arrivee').value + "</h3><br />");
                 summaryPanel.append('<h3>Résumé : </h3><br />');
-
-                summaryPanel.append('<i class="material-icons">date_range</i>Date : ' + route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear() + "<br />");
+                
+                if (route.legs[i].departure_time) {summaryPanel.append('<i class="material-icons">date_range</i>Date : ' + route.legs[i].departure_time.value.getDate() + "/" + route.legs[i].departure_time.value.getMonth() + "/" + route.legs[i].departure_time.value.getFullYear() + "<br />");}
                 if (route.legs[i].departure_time) { summaryPanel.append('<i class="material-icons">access_time</i>Heure de départ : ' + route.legs[i].departure_time.text + '<br>'); } //'Heure de départ : ' + route.legs[i].departure_time.text + '<br>';
                 summaryPanel.append('<i class="material-icons">my_location</i>Lieu de départ : ' + document.getElementById('depart').value + ", " +route.legs[i].start_address + '<br>');
                 summaryPanel.append('<i class="material-icons">transfer_within_a_station</i>Distance du trajet : ' + route.legs[i].distance.text + '<br><br>');
@@ -487,33 +488,42 @@ function getDateTimeUser(){
 
     // value of input date
     var date = document.getElementsByName('date1_submit')[0].value;
-
-    var currDate = new Date();
-
-    // create timestamp
-    var time = new Date(date);
-
-//    console.log($("#timepicker").val());
     var heureChoisie = $("#timepicker").val().split(":");
-    var heure = heureChoisie[0];
-    var minutes = heureChoisie[1];
-
-    time.setHours(heure);
-    time.setMinutes(minutes);
-
+    var currDate = new Date();
+    
+    if(date != ""){
+    	// create timestamp
+    	var time = new Date(date);
+    }else {
+    	var time = currDate;
+    }
+    if(heureChoisie != "" && heureChoisie.length == 2){
+    	var heure = heureChoisie[0];
+    	var minutes = heureChoisie[1];
+    	
+    	time.setHours(heure);
+    	time.setMinutes(minutes);
+    }else {
+    	currHours = currDate.getHours();
+    	currMinutes = currDate.getMinutes();
+    	time.setHours(currHours);
+    	time.setMinutes(currMinutes);
+    }
+    
+//    time.setHours(document.getElementById('selecthour').value);
+//    time.setMinutes(document.getElementById('selectminute').value);
 
     if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old date
-    if (time.getTime() < currDate.getTime()){ time.setTime(currDate.getTime()); } // handles old time
+//    if (time.getTime() < currDate.getTime()){ time.setTime(currDate.getTime()); } // handles old time
 
     //handles hours below 6:30
     if (time.getHours() < 6 || (time.getHours() == 6 && time.getMinutes() < 30 )){
         time.setHours(6);
         time.setMinutes(30);
     }
-
+    
     return time;
     // create timestamp for the departureTime option from the var Request, google map api ONLY accepts this formulation for departure Time
-
 }
 
 
