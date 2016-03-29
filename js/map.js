@@ -298,6 +298,8 @@ function setMarkers(theplaces, elem){
  *
  */
 function drawDirection(){
+
+
     if (!depart || !arrivee){
 
         //error message
