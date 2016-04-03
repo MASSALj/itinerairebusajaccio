@@ -339,6 +339,7 @@ function drawDirection(){
             document.getElementById('date1').value = '';
             document.getElementById('timepicker').value = '';
             document.getElementById('radio_correspondance').checked = true;
+            document.getElementById('check_rapide').checked = false;
             summaryPanel.html('');
             
             depart = false; arrivee = false;
@@ -388,6 +389,10 @@ function drawDirection(){
     }
 
 
+    var short;
+    //Get shortest route option
+    short = document.getElementById('check_rapide').checked ? true : false;
+
     // Set destination, origin and travel mode.
     var request = {
         origin: depart,
@@ -397,10 +402,10 @@ function drawDirection(){
 
             departureTime: getDateTimeUser(),
             modes: [google.maps.TransitMode.BUS],
-            routingPreference: google.maps.TransitRoutePreference[$(less)]
+            routingPreference: google.maps.TransitRoutePreference[less]
 
         },
-        optimizeWaypoints: true
+        optimizeWaypoints: short
 
     };
 
@@ -544,7 +549,7 @@ function showReturnDirection(){
     //locations swapping
     var t = arrivee; arrivee = depart; depart = t;
 
-
+    //draw returning direction
     drawDirection();
 
 }
