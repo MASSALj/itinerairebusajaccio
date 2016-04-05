@@ -20,6 +20,7 @@
     <script type="text/javascript" src="../js/bootstrap-timepicker.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-timepicker-fr.js"></script>
 
+
 </head>
 <body>
     <div class="progress loader">
@@ -43,7 +44,7 @@
 
                 <h2 class=" col s12 titre-form"> Rechercher un trajet</h2>
 
-                <form id="formRecherche" action="" method="post">
+                <form id="formRecherche" action="" method="post" onsubmit="doNothing()">
 
                     <div class="col s12">
                         <div class="input-field">
@@ -80,6 +81,11 @@
                     <div class="input-field col s12 check2">
                         <input class="with-gap" name="radio_form" type="radio" id="radio_marche" value="LESS_WALKING" />
                         <label for="radio_marche">Le moins de marche à pieds </label>
+                    </div>
+
+                    <div class="input-field col s12 check1">
+                        <input class="with-gap" type="checkbox" id="check_rapide" value="TRUE" />
+                        <label for="check_rapide">Trajet le plus rapide</label>
                     </div>
 
                 </div>

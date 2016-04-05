@@ -1,27 +1,3 @@
-// HANDLES THE 'FEWER TRANSFERS' OPTION
-button_less_waypoints = $('#radio_correspondance');
-button_less_waypoints.click(function(){
-    if ($(this).is(':not(:checked)')){
-        less = google.maps.TransitRoutePreference.LESS_WALKING;
-    }else{
-        less = google.maps.TransitRoutePreference.FEWER_TRANSFERS;
-    }
-});
-
-
-
-//HANDLES THE 'FEWER WALKING' OPTION
-button_less_walking = $('#radio_marche');
-button_less_walking.click(function(){
-    if ($(this).is(':not(:checked)')){
-        less = google.maps.TransitRoutePreference.FEWER_TRANSFERS;
-    }else{
-        less = google.maps.TransitRoutePreference.LESS_WALKING;
-    }
-});
-
-
-
 var map;  //The Google Map
 var depart; //Variable that will hold the starting point location
 var arrivee; //Variable that will hold the ending point location
@@ -30,7 +6,7 @@ var arrivee; //Variable that will hold the ending point location
 
 
 
-//the searchbox that are going to be used
+//the searchboxes that are going to be used
 var searchBoxDepart;
 var searchBoxArrivee;
 
@@ -38,24 +14,24 @@ var searchBoxArrivee;
 
 
 
-
-
 /**
- * Add starting point
+ * Add starting point from the user's selection
  * @param google_window The opened infoWindow
  * @param google_element the div element containing the name, the position, and the index of the place
+ * @return none
  */
 function addDepart(google_window, google_element){
 
-    var x = google_element.previousSibling.innerHTML.split(",");
+    var x = google_element.previousSibling.innerHTML.split(","); //splits the hidden div containing the location details
     document.getElementById("depart").value = x[0];
 
+    var laplace;
+
+    //get places from the right searchbox used
     if (x[4] == 'searchBoxDepart'){ var laplace =  searchBoxDepart.getPlaces(); } else { var laplace =  searchBoxArrivee.getPlaces(); }
 
-    //var laplace =  searchBoxDepart.getPlaces();
-
     laplace.forEach(function(place, j) {
-        if (j == x[3]){
+        if (j == x[3]){ //number of the place choosed
             setDirection(place.geometry.location, 'depart');
             google_window.fadeOut(500);
         }
@@ -68,22 +44,24 @@ function addDepart(google_window, google_element){
 
 
 
-
 /**
- * Add ending point
+ * Add ending point from the user's selection
  * @param google_window The opened infoWindow
  * @param google_element the div element containing the name, the position, and the index of the place
+ * @return none
  */
 function addDestination(google_window, google_element){
 
-    var x = google_element.previousSibling.previousSibling.previousSibling.innerHTML.split(",");
+    var x = google_element.previousSibling.previousSibling.previousSibling.innerHTML.split(","); //splits the hidden div containing the location details
     document.getElementById("arrivee").value = x[0];
 
     var laplace;
+
+    //get places from the right searchbox used
     if (x[4] == 'searchBoxDepart'){ laplace =  searchBoxDepart.getPlaces(); } else { laplace =  searchBoxArrivee.getPlaces(); }
 
     laplace.forEach(function(place, j) {
-        if (j == x[3]){
+        if (j == x[3]){ //number of the place choosed
             setDirection(place.geometry.location, 'arrivee');
             google_window.fadeOut(500);
         }
@@ -97,6 +75,7 @@ function addDestination(google_window, google_element){
 
 /**
  * Displays the google map and turns the two inputs into Google maps SearchBoxes
+ * @return none
  */
 function initMap() {
 
@@ -127,7 +106,7 @@ function initMap() {
 
 
     var options = {
-        bounds: map.getBounds()
+        bounds: map.getBounds() //bounds based on the map's bounds
     };
 
 
@@ -197,11 +176,13 @@ function initMap() {
 
 
 
+
 /**
- * Set starting or ending point
+ * Set starting or ending point depending on the parameter
  *
  * @param location Lat and Lng
- * @param str départ ou arrivée
+ * @param str 'départ' or 'arrivée'
+ * @return none
  */
 function setDirection(location, str){
 
@@ -215,10 +196,11 @@ function setDirection(location, str){
 
 
 /**
- * Puts the markers on the places
+ * Puts the marker(s) on the map
  *
- * @param theplaces
- * @param elem The input text which made the search
+ * @param theplaces The place(s) found
+ * @param elem The input text which used to make the search
+ * @return none
  */
 function setMarkers(theplaces, elem){
 
@@ -237,7 +219,7 @@ function setMarkers(theplaces, elem){
         var bounds = new google.maps.LatLngBounds();
         theplaces.forEach(function(place, k) {
 
-            console.log('les endroits trouvés : \n' + place.name);
+            //icon creation
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
@@ -246,10 +228,8 @@ function setMarkers(theplaces, elem){
                 scaledSize: new google.maps.Size(25, 25)
             };
 
-
-            var lemark;
-
-            lemark = new google.maps.Marker({
+            //marker creation
+            var lemark = new google.maps.Marker({
                 map: map,
                 icon: icon,
                 title: place.name,
@@ -257,22 +237,23 @@ function setMarkers(theplaces, elem){
             });
 
             markers.push(lemark);
-            //console.log(typeof place.geometry.location);
+
 
             var nom = place.name;
             var longitude = place.geometry.location.lng();
             var latitude = place.geometry.location.lat();
 
-            //var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>" + nom + "," + longitude + "," + latitude + "</div><a id='infodepart1' onclick='addDepart($(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
+            //content of the infowindow
             var contentString = "<p><b>" + place.name + "</b></p><p>" + place.formatted_address + "</p><div hidden>" + nom + "," + longitude + "," + latitude + "," + k + "," + elem + "</div><a id='infodepart1' onclick='addDepart($(this).parent().parent().parent().parent(), this)'>Définir comme point de départ</a><br /><a id='infodestination1' onclick='addDestination($(this).parent().parent().parent().parent(), this)'>Définir comme point de destination</a></p>";
 
 
-
+            //infowindow
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
 
 
+            //the infowindow will pop-up when clicking on the marker
             lemark.addListener('click', function () {
                 map.setZoom(16);
                 map.setCenter(lemark.getPosition());
@@ -293,14 +274,18 @@ function setMarkers(theplaces, elem){
 }
 
 
+
+
+
+
 /**
- * Draw the direction
- *
+ * Draw the direction onsubmit of the form, direction details will be shown on the div result
+ * @return none
  */
 function drawDirection(){
 
 
-    if (!depart || !arrivee){
+    if (!depart || !arrivee){ //no locations defined
 
         //error message
         var $toasttext = $('<div class="alert"> <span> Veuillez renseigner les champs des adresses de <strong>départ</strong> et de <strong>destination</strong> ! </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
@@ -312,12 +297,14 @@ function drawDirection(){
         return false;
 
     }else{
-        var summaryPanel = $('.results'), resultSearch = $('.resultSearch'), routeForm = $('.routeForm'), modifSearchButton = $('.modifSearchButton');
-        resultSearch.fadeIn(500);
-        routeForm.fadeOut(500);
+
+        var summaryPanel = $('.results');
+        var resultSearch = $('.resultSearch');
+        var routeForm = $('.routeForm');
+        var modifSearchButton = $('.modifSearchButton');
 
 
-
+        //Enable search modification
         modifSearchButton.click(function(){
             initMap();
             google.maps.event.trigger(map, 'resize');
@@ -329,8 +316,6 @@ function drawDirection(){
 
 
         //Enable search reinitialisation
-        routeForm = $('.routeForm');
-        resultSearch = $('.resultSearch');
         newSearchButton = $('.newSearchButton');
         newSearchButton.click(function(){
             resultSearch.fadeOut(500);
@@ -341,15 +326,13 @@ function drawDirection(){
             document.getElementById('date1').value = '';
             document.getElementById('timepicker').value = '';
             document.getElementById('radio_correspondance').checked = true;
+            document.getElementById('check_rapide').checked = false;
             summaryPanel.html('');
             
             depart = false; arrivee = false;
 
             initMap();
         });
-
-
-
 
 
 
@@ -390,6 +373,10 @@ function drawDirection(){
     }
 
 
+    var short;
+    //Get shortest route option
+    short = document.getElementById('check_rapide').checked ? true : false;
+
     // Set destination, origin and travel mode.
     var request = {
         origin: depart,
@@ -399,10 +386,10 @@ function drawDirection(){
 
             departureTime: getDateTimeUser(),
             modes: [google.maps.TransitMode.BUS],
-            routingPreference: google.maps.TransitRoutePreference[$(less)]
+            routingPreference: google.maps.TransitRoutePreference[less]
 
         },
-        optimizeWaypoints: true
+        optimizeWaypoints: short
 
     };
 
@@ -463,9 +450,13 @@ function drawDirection(){
 
 
 
+                resultSearch.fadeIn(500); // display the direction detail
+                routeForm.fadeOut(500); // hide form
+
             }
 
         } else {
+
             //error message
             var $toasttext = $('<div class="alert"> <span> La requête de direction a échoué, veuillez faire une nouvelle recherche </span> <button id="closebutton" type="button" class="close" data-dismiss="alert">×</button> </div> ');
             Materialize.toast( $toasttext,6500);
@@ -483,6 +474,7 @@ function drawDirection(){
 
 /**
  * Get the date and the time specified by the user in the form
+ * @return none
  */
 function getDateTimeUser(){
 
@@ -509,9 +501,7 @@ function getDateTimeUser(){
     	time.setHours(currHours);
     	time.setMinutes(currMinutes);
     }
-    
-//    time.setHours(document.getElementById('selecthour').value);
-//    time.setMinutes(document.getElementById('selectminute').value);
+
 
     if (time.getDate() < currDate.getDate()){ time.setDate(currDate.getDate()); } // handles old date
 //    if (time.getTime() < currDate.getTime()){ time.setTime(currDate.getTime()); } // handles old time
@@ -528,8 +518,8 @@ function getDateTimeUser(){
 
 
 /**
- * Get returning direction
- *
+ * Switches the two locations specified by the user and showes returning direction
+ * @return none
  */
 function showReturnDirection(){
 
@@ -546,7 +536,7 @@ function showReturnDirection(){
     //locations swapping
     var t = arrivee; arrivee = depart; depart = t;
 
-
+    //draw returning direction
     drawDirection();
 
 }
