@@ -27,7 +27,6 @@
         <div class="indeterminate"></div>
     </div>
 <div id="site">
-    <div id="page">
     <header class="page-header">
         <nav>
             <div class="nav-wrapper white">
@@ -40,14 +39,16 @@
     <section>
         <aside>
 
-            <div class="row card-panel routeForm">
+            <div class="card-panel routeForm">
 
-                <h2 class=" col s12 titre-form"> Rechercher un trajet</h2>
+                <h2 class="titre-form"> Rechercher un trajet</h2>
 
                 <form id="formRecherche" action="" method="post" onsubmit="doNothing()">
 
                     <div class="col s12">
+
                         <div class="input-field ">
+
                             <input id="depart" type="text" class="validate" placeholder="point de départ" required>
                             <label for="depart">Départ</label>
                         </div>
@@ -67,31 +68,25 @@
                         	<input name="timepicker" id="timepicker" type ="text" value="" />
                         </div>
 
-
-                    <div class="input-field check1 radio1">
-                        <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked" value="FEWER_TRANSFERS"/>
-                        <label for="radio_correspondance">Le moins de correspondance</label>
-
-                    </div>
-
-                    <div class="input-field check2 radio2">
-                        <input class="with-gap" name="radio_form" type="radio" id="radio_marche" value="LESS_WALKING" />
-                        <label for="radio_marche">Le moins de marche à pieds </label>
-                    </div>
-
-                    <div class="input-field col s12 check1 ">
-                        <input class="with-gap" type="checkbox" id="check_rapide" value="TRUE" />
-                        <label class="checkmargintrajet" for="check_rapide">Trajet le plus rapide</label>
-                    </div>
-
-                </div>
-
-                <div class="input-field marginrowsubmit">
-                        <div class="col s12 offset-s1 marginsubmit">
-                            <button class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Rechercher</button>
+                        <div class="input-field check1 radio1">
+                            <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked" value="FEWER_TRANSFERS"/>
+                            <label for="radio_correspondance">Le moins de correspondance</label>
                         </div>
-                </div>
 
+                        <div class="input-field check2 radio2">
+                            <input class="with-gap" name="radio_form" type="radio" id="radio_marche" value="LESS_WALKING" />
+                            <label for="radio_marche">Le moins de marche à pieds </label>
+                        </div>
+
+
+                        <div class="input-field check1">
+                            <input class="with-gap" type="checkbox" id="check_rapide" value="TRUE" />
+                            <label class="checkmargintrajet" for="check_rapide">Trajet le plus rapide</label>
+                        </div>
+
+                        <button class="btn waves-effect waves-light inputsubmit" type="submit" name="Rechercher" onclick="drawDirection(); return false;//initMap()">Rechercher</button>
+
+                    </div>
 
                 </form>
 
@@ -134,7 +129,6 @@
             </div>
         </div>
     </footer>
-</div>
 </div>
 
     <noscript>
