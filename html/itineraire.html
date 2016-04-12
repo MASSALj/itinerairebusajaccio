@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"  media="screen,print"/>
-    <link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,print"/>
+    <link type="text/css" rel="stylesheet" href="../css/style.css"/>
     <link type="text/css" rel="stylesheet" href="../css/timepicker.css"  media="screen,print"/>
-    <link type="text/css" rel="stylesheet" href="../css/jquery-ui.min.css"  media="screen,print"/>
+    <link type="text/css" rel="stylesheet" href="../css/jquery-ui.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/png" href="../img/logo-capa.jpg" />
 
@@ -47,45 +47,41 @@
                 <form id="formRecherche" action="" method="post" onsubmit="doNothing()">
 
                     <div class="col s12">
-                        <div class="input-field">
+                        <div class="input-field ">
                             <input id="depart" type="text" class="validate" placeholder="point de départ" required>
                             <label for="depart">Départ</label>
                         </div>
 
-                        <div class="input-field">
+                        <div class="input-field ">
                             <input  id="arrivee" type="text" class="validate" placeholder="destination" required>
                             <label for="arrivee">Arrivée</label>
                         </div>
-                        <div>
+
+                        <div class=" divdate">
                             <label for="date1" class="input-field validate">Date</label>
                             <input id="date1" name="date1" type="text" class="datepicker col s12">
                         </div>
 
-
-                        <!--<div>
-                            <label for="time1" class="input-field">Date</label>
-                            <input id="time1" type="text" class="validate timepicker col s12">
-                        </div> -->
-                        <div>
+                        <div class="divtime">
  	                    	<label for="timepicker" class="input-field">Heure</label>
                         	<input name="timepicker" id="timepicker" type ="text" value="" />
                         </div>
 
 
-                    <div class="input-field col s12 check1">
+                    <div class="input-field check1 radio1">
                         <input class="with-gap" name="radio_form" type="radio" id="radio_correspondance" checked="checked" value="FEWER_TRANSFERS"/>
                         <label for="radio_correspondance">Le moins de correspondance</label>
 
                     </div>
 
-                    <div class="input-field col s12 check2">
+                    <div class="input-field check2 radio2">
                         <input class="with-gap" name="radio_form" type="radio" id="radio_marche" value="LESS_WALKING" />
                         <label for="radio_marche">Le moins de marche à pieds </label>
                     </div>
 
-                    <div class="input-field col s12 check1">
+                    <div class="input-field col s12 check1 ">
                         <input class="with-gap" type="checkbox" id="check_rapide" value="TRUE" />
-                        <label for="check_rapide">Trajet le plus rapide</label>
+                        <label class="checkmargintrajet" for="check_rapide">Trajet le plus rapide</label>
                     </div>
 
                 </div>

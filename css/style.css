@@ -8,15 +8,50 @@
         display:block;
         clear:both;
     }
+
+    h1{
+        display: none;
+    }
+
+    .routeForm {
+        position: static !important;
+        width: auto !important;
+        margin-left: 0% !important;
+        margin-top: 0% !important;
+
+    }
+
+    .divdate{
+        float: left;
+        width: 45%;
+    }
+
+    .divtime{
+        float: right;
+        width: 45%;
+    }
+
+    .radio1{
+        float: left;
+        width: 50%;
+    }
+
+    .radio2{
+        float: right;
+        width: 50%;
+    }
+
+    .row .col.offset-s1 {
+        margin-left: 0% !important; ;
+        padding-left: 27% !important;
+    }
 }
 
-html, body 
-{ 
-	min-width: 1024px;
+html,body
+{
 	min-height: 768px !important;
-	margin: 0; 
-	padding: 0; 
-	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 #page
@@ -95,12 +130,12 @@ h3
 	padding: 5px;
 }
 
-.routeForm
-{
-	position: absolute;
-    z-index:1;
-    margin-left:1%;
-    margin-top:80px;
+
+.routeForm {
+    position: absolute;
+    z-index: 1;
+    margin-left: 1%;
+    margin-top: 80px;
     min-height: 500px;
     min-width: 200px;
     width: 23%;
@@ -234,7 +269,7 @@ h3
 
 .busIcon
 {
-	border: 5%;
+	/*border: 5%;*/
 	padding:0 0.75% 0 0.75%;
 	display: inline-block;
 }
@@ -460,5 +495,17 @@ button.close {
     border: 1px solid #aaa;
     background: #6094c9 url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x !important;
     color: #222;
+    font-weight: bold;
+}
+
+.checkmargintrajet{
+    margin-left: 3.5px;
+}
+
+.ui-priority-secondary, .ui-widget-content .ui-priority-secondary, .ui-widget-header .ui-priority-secondary {
+    opacity: 1 !important;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button {
     font-weight: bold;
 }

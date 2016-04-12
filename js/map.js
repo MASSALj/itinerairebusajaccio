@@ -291,8 +291,11 @@ function drawDirection(){
         Materialize.toast( $toasttext,6500);
         $( "#closebutton" ).click(function() {
             $( ".toast" ).remove();
+            $( "#toast-container" ).remove();
         });
-
+        if(!$( "#toast-container").length){
+            $( "div").delay(6500).remove(".alert");
+        }
         return false;
 
     }else{
