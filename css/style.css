@@ -191,13 +191,13 @@ h3
 .input-field
 {
     height: 12.5%;
-    margin: 0 0 1.25% 0;
+    /*margin: 0 0 1.25% 0;*/
     display: block !important;
 }
 
 .input-field input, .input-field label
 {
-    margin: 0 !important;
+    /*margin: 0 !important;*/
 }
 
 /* label focus color */
