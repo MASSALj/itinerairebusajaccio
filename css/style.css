@@ -111,6 +111,7 @@ h2, .impression
 .impression
 {
 	text-align: right;
+    margin: auto;
 }
 
 .impression:hover
@@ -147,8 +148,12 @@ h3
 {
 	height: 20%;
 	background-color: #6094c9;
-	margin: -10px -10px 1% -10px;
-	padding: 0 5px 0 5px;
+	margin-bottom: 1%;
+}
+
+.headerResultSearch h2
+{
+    margin: auto;
 }
 
 .headerRouteForm
@@ -271,6 +276,10 @@ h3
     background-color: #b39907;
 }
 
+.buttonContent
+{
+    height: 100%;
+}
 
 #map
 {
@@ -291,7 +300,13 @@ h3
 
 .resultSearch .row
 {
+    display: flex;
+}
 
+.resultSearch .btn
+{
+    height: 32%;
+    margin-bottom: 1%;
 }
 
 .results .material-icons
@@ -319,20 +334,20 @@ h3
 .resultSearch
 {
 	display: none;
-	position:absolute;
-	opacity: 0.9;
-	padding: 10px;
-	left: 1%;
-	min-height: 210px;
-	min-width: 650px;
-	width: 95%;
+	height: 30%;
+	width: 100%;
 	z-index: 99;
+}
+
+.headerResultSearch .row
+{
+	height: 100% !important;
 }
 
 .resultSearch .row
 {
-	height: 80%;
-	margin-bottom: 0 !important;
+    height: 65%;
+    margin-bottom: 0 !important;
 }
 
 /*Modifications Materialize*/
@@ -526,6 +541,11 @@ button.close {
     z-index: 1;
     margin-left: 14%;
     margin-top: 20%;
+}
+
+.card
+{
+    margin-top: 0 !important;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {

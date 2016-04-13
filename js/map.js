@@ -310,6 +310,7 @@ function drawDirection(){
         modifSearchButton.click(function(){
             initMap();
             google.maps.event.trigger(map, 'resize');
+            $('#map').css('height', '100%');
             routeForm.fadeIn(500);
             resultSearch.fadeOut(500);
             summaryPanel.html('');
@@ -320,6 +321,7 @@ function drawDirection(){
         //Enable search reinitialisation
         newSearchButton = $('.newSearchButton');
         newSearchButton.click(function(){
+            $('#map').css('height', '100%');
             resultSearch.fadeOut(500);
             routeForm.fadeIn(500);
 
@@ -451,7 +453,7 @@ function drawDirection(){
                 summaryPanel.append('<i class="material-icons">pin_drop</i>Lieu d\'arrivée : ' + document.getElementById('arrivee').value + ", " + route.legs[i].end_address+'</p>');
 
 
-
+                $('#map').css('height', '70%');
                 resultSearch.fadeIn(500); // display the direction detail
                 routeForm.fadeOut(500); // hide form
 
