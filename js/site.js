@@ -14,30 +14,6 @@ $(document).ready(function(){
 		loader.fadeOut(200);
 		$('section').append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB99iQwVsKF-QqDPM0Xj47XedR8Xda6U4E&libraries=places&callback=initMap"></script>');
 		page.delay(100).fadeIn(1000);
-
-		/*header.css({height: 0.1*displayHeight+'px',  minHeight: 0.1*768+'px'});
-		footer.css({height: 0.05*displayHeight+'px', minHeight: 0.05*768+'px'});
-		map.css({height: 0.85*displayHeight+'px', minHeight: 0.85*768+'px'});
-		resultSearch.css({height: 0.3*displayHeight+'px', top: 0.62*768+'px'});
-		h1.css('line-height', header.height()+'px');
-		headerResultSearch.css('line-height', 0.2*resultSearch.height()+'px');
-		logo.css({height: header.height()-10+'px', marginTop: '5px', marginBottom: '5px'});
-		footerText.css('line-height', footer.height()+'px');
-		buttonRow.css({paddingTop: (buttonRow.height()-resultButton.height())/3+'px'});*/
-
-		//When the dimension of the window changes 
-		$(window).resize(function(){
-			var buttonRow = $('.buttonRow'), resultButton = $('.resultButton'),routeForm = $('.routeForm'), page = $('#page'), headerResultSearch = $('.headerResultSearch h2'), h1 = $('h1'), resultSearch = $('.resultSearch'), logo = $('.brand-logo'), header = $('.page-header'), footer = $('.page-footer'), footerText = $('.page-footer .container'), map = $('#map'), displayHeight = $(window).height();
-			/*header.css({height: 0.1*displayHeight+'px',  minHeight: 0.1*768+'px'});
-			footer.css({height: 0.05*displayHeight+'px', minHeight: 0.05*768+'px'});
-			map.css({height: 0.85*displayHeight+'px', minHeight: 0.85*768+'px'});
-			resultSearch.css({height: 0.3*displayHeight+'px', top: 0.62*768+'px'});
-			h1.css('line-height', header.height()+'px');
-			headerResultSearch.css('line-height', 0.2*resultSearch.height()+'px');
-			logo.css({height: header.height()-10+'px', marginTop: '5px', marginBottom: '5px'});
-			footerText.css('line-height', footer.height()+'px');
-			buttonRow.css({paddingTop: (buttonRow.height()-resultButton.height())/2+'px'});*/
-		});
 	});
 
 	//datepicker materielize options
